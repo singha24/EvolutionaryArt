@@ -6,6 +6,8 @@ import javax.swing.SwingUtilities;
 
 
 public class Art extends JFrame {
+	
+	private static BioMorph m = new BioMorph();
 
 	public Art() {
 

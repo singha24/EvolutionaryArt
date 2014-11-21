@@ -1,27 +1,29 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.JPanel;
 
 
 public class BioMorph extends JPanel {
 
 	private Random rand = new Random();
+	private Graphics2D g2d;
 
 	public void doDrawing(Graphics g, int a, int b, int c, int d) {
 
-		Graphics2D g2d = (Graphics2D) g;
-		
+		g2d = (Graphics2D) g;
 		g2d.setColor(generateColour()); 
 		g2d.drawLine(a, b, c, d);
+		
 		//g2d.setColor(generateColour()); commenting this out means that the symmetric lines are the same colour 
-	} 
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		for(int l=0; l<5; l++){
 			
 			int h = generateInt();
@@ -35,7 +37,7 @@ public class BioMorph extends JPanel {
 	}    
 
 	public int generateInt(){
-		int i = rand.nextInt((300 - 100) + 1) + 100;
+		int i = rand.nextInt((500 - 150) + 1) + 150;
 		return i;
 	}
 	
@@ -43,7 +45,7 @@ public class BioMorph extends JPanel {
 		float r = rand.nextFloat();
 		float g = rand.nextFloat();
 		float b = rand.nextFloat();
-		Color rand = new Color(r,g,b);
-		return rand;
+		Color colour = new Color(r,g,b);
+		return colour;
 	}
 }
