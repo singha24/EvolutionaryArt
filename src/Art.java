@@ -6,8 +6,6 @@ import javax.swing.SwingUtilities;
 
 
 public class Art extends JFrame {
-	
-	private static BioMorph m = new BioMorph();
 
 	public Art() {
 
@@ -34,6 +32,7 @@ public class Art extends JFrame {
 
 				Art lines = new Art();
 				lines.setVisible(true);
+				lines.setResizable(false);
 			}
 		});
 	}
