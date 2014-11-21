@@ -5,55 +5,34 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
-class Surface extends JPanel {
-    
-    private void doDrawing(Graphics g) {
-
-        Graphics2D g2d = (Graphics2D) g;
-
-        g2d.drawLine(30, 30, 200, 30);
-        g2d.drawLine(200, 30, 30, 200);
-        g2d.drawLine(30, 200, 200, 200);
-        g2d.drawLine(200, 200, 30, 30);
-
-   } 
-
-    @Override
-    public void paintComponent(Graphics g) {
-        
-        super.paintComponent(g);
-        doDrawing(g);
-    }    
-}
-
 public class Art extends JFrame {
 
-    public Art() {
+	public Art() {
 
-        initUI();
-    }
-    
-    private void initUI() {
-        
-        setTitle("Lines");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        add(new Surface());
-        
-        setSize(350, 250);
-        setLocationRelativeTo(null);        
-    }
+		initUI();
+	}
 
-    public static void main(String[] args) {
+	private void initUI() {
 
-        SwingUtilities.invokeLater(new Runnable() {
+		setTitle("Get on or get 0");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            @Override
-            public void run() {
-                
-                Art lines = new Art();
-                lines.setVisible(true);
-            }
-        });
-    }
+		add(new BioMorph());
+
+		setSize(800, 600);
+		setLocationRelativeTo(null);        
+	}
+
+	public static void main(String[] args) {
+
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+
+				Art lines = new Art();
+				lines.setVisible(true);
+			}
+		});
+	}
 }
