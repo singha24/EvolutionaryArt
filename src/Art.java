@@ -25,15 +25,9 @@ public class Art extends JFrame {
 
 	public static void main(String[] args) {
 
-		SwingUtilities.invokeLater(new Runnable() {
+		Art lines = new Art();
+		lines.setVisible(true);
+		lines.setResizable(false);
 
-			@Override
-			public void run() {
-
-				Art lines = new Art();
-				lines.setVisible(true);
-				lines.setResizable(false);
-			}
-		});
 	}
 }

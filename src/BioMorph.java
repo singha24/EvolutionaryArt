@@ -20,9 +20,9 @@ public class BioMorph extends JPanel {
 		//g2d.setColor(generateColour()); commenting this out means that the symmetric lines are the same colour 
 	}
 
-	@Override
+	//@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		//super.paintComponent(g);
 		
 		for(int l=0; l<5; l++){
 			
