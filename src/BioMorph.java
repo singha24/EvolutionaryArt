@@ -14,9 +14,9 @@ public class BioMorph extends JPanel {
 
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g2d.setColor(generateColour());
+		g2d.setColor(generateColour()); 
 		g2d.drawLine(a, b, c, d);
-		g2d.setColor(generateColour());
+		//g2d.setColor(generateColour()); commenting this out means that the symmetric lines are the same colour 
 	} 
 
 	@Override
