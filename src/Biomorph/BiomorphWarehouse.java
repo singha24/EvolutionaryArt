@@ -1,19 +1,20 @@
+package Biomorph;
 import java.util.ArrayList;
 
 
 public class BiomorphWarehouse {
 	
-	ArrayList<BioMorph> tempBiomorphs; 
-	ArrayList<BioMorph> parentBiomorphs;
+	ArrayList<Biomorph> tempBiomorphs; 
+	ArrayList<Biomorph> parentBiomorphs;
 	
 	public void BiomorphWareouse(){
 		
-		tempBiomorphs = new ArrayList<BioMorph>();
-		parentBiomorphs = new ArrayList<BioMorph>();
+		tempBiomorphs = new ArrayList<Biomorph>();
+		parentBiomorphs = new ArrayList<Biomorph>();
 		
 	}
 	
-	public void storeTempBiomorph(BioMorph b){
+	public void storeTempBiomorph(Biomorph b){
 		Boolean stored = false;
 		while(!stored){
 			for(int i = 0; i < 7; i++){
@@ -39,7 +40,7 @@ public class BiomorphWarehouse {
 		}*/
 	}
 	
-	public Boolean storeParentBiomorph(BioMorph b){
+	public Boolean storeParentBiomorph(Biomorph b){
 		/*Boolean stored = false;
 		while(!stored){
 			for(int i = 0; i < parentBiomorphs.length; i++){

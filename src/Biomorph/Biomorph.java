@@ -1,3 +1,4 @@
+package Biomorph;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -6,7 +7,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 
-public class BioMorph extends JPanel {
+public class Biomorph extends JPanel {
 
 	private Random rand = new Random();
 	private Graphics2D g2d;
