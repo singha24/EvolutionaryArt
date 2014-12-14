@@ -21,12 +21,19 @@ public class Controller {
 	}
 
 	public boolean saveBiomorph(Biomorph b){
+		bioStorage.addBioMorph(b);
 		return false;
 	}
+	
+	
 	
 	public Biomorph displayBiomorph(){
 		Biomorph b = bioStorage.getBiomorph();
 		return b;
+	}
+	
+	public void saveTempBiomorph(Biomorph b){
+		bioStorage.addTempBiomorph(b);
 	}
 
 }

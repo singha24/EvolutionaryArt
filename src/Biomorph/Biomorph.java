@@ -11,6 +11,7 @@ public class Biomorph extends JPanel {
 
 	private Random rand = new Random();
 	private Graphics2D g2d;
+	private int[] genes;
 
 	public void doDrawing(Graphics g, int a, int b, int c, int d) {
 
@@ -48,5 +49,14 @@ public class Biomorph extends JPanel {
 		float b = rand.nextFloat();
 		Color colour = new Color(r,g,b);
 		return colour;
+	}
+	
+	public void saveBiomorph(){
+		//TODO
+	}
+	
+	public int[] getGenes(){
+		return genes; 
+		//TODO
 	}
 }
