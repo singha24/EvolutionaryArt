@@ -8,18 +8,25 @@ import javax.swing.JPanel;
 
 
 public class Biomorph extends JPanel {
+	
+	private static final int GENES_NUMBER = 4;
 
-	private Random rand = new Random();
+	private Random random = new Random();
 	private Graphics2D g2d;
 	private int[] genes;
+	
+	public Biomorph(){
+		genes = new int[GENES_NUMBER];
+		
+	}
+	
 
-	public void doDrawing(Graphics g, int a, int b, int c, int d) {
+	public void doDrawing(Graphics g, int a, int b, int c, int d, Color color) {
 
 		g2d = (Graphics2D) g;
-		g2d.setColor(generateColour()); 
+		g2d.setColor(color); 
 		g2d.drawLine(a, b, c, d);
 		
-		//g2d.setColor(generateColour()); commenting this out means that the symmetric lines are the same colour 
 	}
 
 	//@Override
@@ -32,23 +39,24 @@ public class Biomorph extends JPanel {
 			int i = generateInt();
 			int j = generateInt();
 			int k = generateInt();
+			Color color = generateColour();
+			doDrawing(g,h,i,j,k,color);
+			doDrawing(g,k,j,i,h, color);
 			
-			doDrawing(g,h,i,j,k);
-			doDrawing(g,k,j,i,h);
 		}
 	}    
 
 	public int generateInt(){
-		int i = rand.nextInt((500 - 150) + 1) + 150;
-		return i;
+		int ran = random.nextInt(350) + 150;
+		return ran;
 	}
 	
 	public Color generateColour(){
-		float r = rand.nextFloat();
-		float g = rand.nextFloat();
-		float b = rand.nextFloat();
-		Color colour = new Color(r,g,b);
-		return colour;
+		float r = random.nextFloat();
+		float g = random.nextFloat();
+		float b = random.nextFloat();
+		return new Color(r,g,b);
+		
 	}
 	
 	public void saveBiomorph(){

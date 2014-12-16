@@ -31,6 +31,7 @@ public class Art extends JFrame {
 		Art lines = new Art();
 		lines.setVisible(true);
 		lines.setResizable(false);
+		
 
 	}
 }

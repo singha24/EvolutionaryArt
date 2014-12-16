@@ -7,12 +7,14 @@ public class BiomorphWarehouse {
 	
 	ArrayList<Biomorph> tempBiomorphs; 
 	ArrayList<Biomorph> parentBiomorphs;
-	
+	Biomorph[] temp;
+	int tempCount;
 	public void BiomorphWareouse(){
 		
 		tempBiomorphs = new ArrayList<Biomorph>();
 		parentBiomorphs = new ArrayList<Biomorph>();
-		
+		temp = new Biomorph[8];
+		tempCount=0;
 	}
 	
 	/**
@@ -20,20 +22,39 @@ public class BiomorphWarehouse {
 	 * @return a true or false value depending if the 
 	 */
 	private Boolean storeTempBiomorph(Biomorph b){
-		Boolean stored = false;
-		while(!stored){
-			for(int i = 0; i < 7; i++){
-				if(tempBiomorphs.get(i) == null){
-					tempBiomorphs.add(b);
-					stored = true;
-				}else if(i == 7){
-					System.err.println("Only 8 Biomorph's can be temp stored at a time");
-					return false;
-				}
-			}
+	
+//		if(tempCount < 9){
+//			temp[tempCount] = b;
+//			tempCount++;
+//			return true;
+//		}
+//		return false;
+		
+		
+		
+		//if arrayList
+		if(tempBiomorphs.size() > 8){
+			return false;
+		}else{
 			
+			tempBiomorphs.add(b);
+			return true;
 		}
-		return true;
+		
+//		Boolean stored = false;
+//		while(!stored){
+//			for(int i = 0; i < 7; i++){
+//				if(tempBiomorphs.get(i) == null){
+//					tempBiomorphs.add(b);
+//					stored = true;
+//				}else if(i == 7){
+//					System.err.println("Only 8 Biomorph's can be temp stored at a time");
+//					return false;
+//				}
+//			}
+//			
+//		}
+//		return true;
 							//If you want to use an array
 							/*Boolean stored = false;
 							while(!stored){
