@@ -29,13 +29,17 @@ public class Controller {
 		// TODO
 	}
 
-	private void displayBiomorph() {
+	private void displayBiomorph(Biomorph b) {
 		// render.displayBiomorph(bioStorage.getParent());
 
 	}
 
 	public void saveTempBiomorph(Biomorph b) {
 		bioStorage.addTempBiomorph(b);
+	}
+	
+	public Biomorph getBioMorphValues(){
+		return bioCreate.getChild();
 	}
 
 	/**
