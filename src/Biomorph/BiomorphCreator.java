@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class BiomorphCreator {
 	
-	private Random rand = new Random();
+	private Random rand; 
 	private Biomorph bioMorph;
 	private Evolve evo;
 	
 	public BiomorphCreator(){
-		
+		 rand = new Random();
 	}
 	
 	public void createChild(){
