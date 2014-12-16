@@ -20,7 +20,7 @@ public class Art extends JFrame {
 		setTitle("Get on or get 0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		add(new Biomorph());
+		//add(new Biomorph());
 
 		setSize(800, 600);
 		setLocationRelativeTo(null);        

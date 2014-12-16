@@ -4,36 +4,47 @@ import Biomorph.BiomorphWarehouse;
 import Biomorph.GUI;
 import Output.Renderer;
 
-
 public class Controller {
 
-	private BiomorphCreator bioCreate = new BiomorphCreator();
-	private BiomorphWarehouse bioStorage = new BiomorphWarehouse();
-	private Renderer render = new Renderer();
-	private GUI gui = new GUI();
+	private BiomorphCreator bioCreate;
+	private BiomorphWarehouse bioStorage;
+	private Renderer render;
+	private GUI gui;;
 
-	public Controller(){
+	public Controller() {
+		bioCreate = new BiomorphCreator();
+		bioStorage = new BiomorphWarehouse();
+		render = new Renderer();
+		gui = new GUI();
+
+		// Create the two random parent biomorph's
+		createStartUpBiomorphs();
+	}
+
+	public void createBiomorph() {
+		// TODO
+	}
+
+	public boolean saveBiomorph(Biomorph b) {
+		// TODO
+	}
+
+	private void displayBiomorph() {
+		// render.displayBiomorph(bioStorage.getParent());
 
 	}
 
-	public void createBiomorph(){
-
-	}
-
-	public boolean saveBiomorph(Biomorph b){
-		bioStorage.addBioMorph(b);
-		return false;
-	}
-	
-	
-	
-	public Biomorph displayBiomorph(){
-		Biomorph b = bioStorage.getBiomorph();
-		return b;
-	}
-	
-	public void saveTempBiomorph(Biomorph b){
+	public void saveTempBiomorph(Biomorph b) {
 		bioStorage.addTempBiomorph(b);
 	}
 
+	/**
+	 * Creates the two random parent bioMorphs and stores them in the parent
+	 * array in the biomorph warehouse
+	 */
+	private void createStartUpBiomorphs() {
+		for (int i = 0; i <= 2; i++) {
+			bioStorage.addParentBiomorph(bioCreate.generateRandomBiomorph());
+		}
+	}
 }

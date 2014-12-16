@@ -7,21 +7,35 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 
-public class Biomorph extends JPanel {
+public class Biomorph{
 	
-	private static final int GENES_NUMBER = 4;
+		//private Graphics2D g2d;
+		private static int geneLimit = 4;
+		
+		private int[] genes;
 
-	private Random random = new Random();
-	private Graphics2D g2d;
-	private int[] genes;
-	
-	public Biomorph(){
-		genes = new int[GENES_NUMBER];
+		public Biomorph(){
+			this.genes = createRandomGenes();
+		}
+		
+		public int[] getGenes(){
+			return genes;
+		}
+		
+		private int[] createRandomGenes(){
+			Random rand = new Random();
+			int[] genes = new int[geneLimit];
+			
+			for(int i = 0; i <geneLimit; i++){
+			genes[i] = rand.nextInt((500 - 150) + 1) + 150;
+			}
+			return genes;
+		}
 		
 	}
 	
 
-	public void doDrawing(Graphics g, int a, int b, int c, int d, Color color) {
+	/*public void doDrawing(Graphics g, int a, int b, int c, int d, Color color) {
 
 		g2d = (Graphics2D) g;
 		g2d.setColor(color); 
@@ -66,5 +80,4 @@ public class Biomorph extends JPanel {
 	public int[] getGenes(){
 		return genes; 
 		//TODO
-	}
-}
+	}*/

@@ -2,16 +2,22 @@ package Biomorph;
 
 import java.util.Random;
 
-public class BiomorphCreator {
+public class BiomorphCreator extends Evolve {
 	
-	private Random rand; 
-	private Biomorph bioMorph;
-	private Evolve evo;
+	int geneLimit;
 	
 	public BiomorphCreator(){
-		 rand = new Random();
+		geneLimit = 20;
 	}
 	
+	public void createChild(Biomorph m, Biomorph d){
+		//TODO
+	}
+	
+	public Biomorph generateRandomBiomorph(){
+		return new Biomorph();
+	}
+
 	public void createChild(){
 		//TODO
 	}
