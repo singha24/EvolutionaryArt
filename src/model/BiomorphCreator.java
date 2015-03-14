@@ -22,6 +22,7 @@ public class BiomorphCreator {
 	private Random rand;
 	
 	private Biomorph biomorph;
+	private BioWarehouse warehouse = new BioWarehouse();
 	
 	
 	/**
@@ -53,17 +54,20 @@ public class BiomorphCreator {
 	 * @return Biomorph object with random genes values
 	 */
 	public Biomorph generateRandomBiomorph(){		
-		return new Biomorph(createRandomGenes());
+		Biomorph b = new Biomorph(createRandomGenes());
+		warehouse.addBioMorph(b);
+		return b;
 	}
 	
 	public Biomorph extendRandomBiomorph(){
-		return new Biomorph(extendBiomorph());
+		Biomorph b = warehouse.getBiomorph(0);
+		return new Biomorph(extendBiomorph(b));
 	}
 	
-	public int[] extendBiomorph(){
-		int[] genes = biomorph.getGenes();
+	public int[] extendBiomorph(Biomorph b){
+		int[] genes = b.getGenes();
 		for(int i = 0; i < genes.length; i++){
-			genes[i] += rand.nextInt((175) + 75); //add values to current biomorph genes.
+			genes[i] += rand.nextInt((350) + 150); //add values to current biomorph genes.
 		}
 		return genes;
 		

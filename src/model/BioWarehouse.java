@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class BioWarehouse {
 	
-	private ArrayList<Biomorph> biomorphs = new ArrayList<Biomorph>();
+	private ArrayList<Biomorph> biomorphs;
+	
+	public BioWarehouse(){
+		biomorphs = new ArrayList();
+	}
 	
 	public Biomorph getBiomorph(int i){
 		Biomorph bio = null;
