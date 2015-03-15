@@ -23,7 +23,7 @@ import controller.Controller;
 public class GUI extends JFrame {
 
 	// Renderer variable to hold render object
-	private Renderer biomorph;
+	private Renderer biomorph; 
 	private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
 
@@ -45,6 +45,12 @@ public class GUI extends JFrame {
 	public GUI(Renderer biomorph) {
 		this.biomorph = biomorph;
 		initUI();
+	}
+	
+	public void update(Renderer biomorph){
+		this.biomorph = biomorph;
+		validate();
+		repaint();
 	}
 
 	/**

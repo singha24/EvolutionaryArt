@@ -29,7 +29,7 @@ public class Controller {
 	public void evolve() {
 		try {
 			render = new Renderer(bioCreate.extendRandomBiomorph().getGenes());
-			gui = new GUI(render);
+			gui.update(render);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			System.out.println("\nYeahh");

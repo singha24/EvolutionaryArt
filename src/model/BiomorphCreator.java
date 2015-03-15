@@ -16,6 +16,8 @@ public class BiomorphCreator {
 	 */
 	private static final int GENE_LIMIT= 13;
 	
+	private static final int SEED = 42;
+	
 	//variable to hold the geneLimit
 	private int geneLimit;
 	// A random number generator used for randomising the genes 
@@ -43,7 +45,7 @@ public class BiomorphCreator {
 		int[] genes = new int[geneLimit];
 		// Get random number and store it onto array
 		for(int i = 0; i < genes.length; i++){
-		genes[i] = rand.nextInt(350) + 150;
+		genes[i] = rand.nextInt(SEED);
 		}
 		return genes;
 	}
@@ -65,10 +67,20 @@ public class BiomorphCreator {
 	}
 	
 	public int[] extendBiomorph(Biomorph b){
-		int[] genes = b.getGenes();
-		for(int i = 0; i < genes.length; i++){
-			genes[i] += rand.nextInt((350) + 150); //add values to current biomorph genes.
+		int[] genes = warehouse.getBiomorph(0).getGenes(); //temporary
+		System.out.println("original");
+		for(int i = 0; i<genes.length; i++){
+			System.out.println(genes[i]);
 		}
+		System.out.println("------");
+		System.out.println("modified");
+		for(int i = 0; i < genes.length; i++){
+			genes[i] += 1; //add values to current biomorph genes.
+		}
+		for(int i = 0; i<genes.length; i++){
+			System.out.println(genes[i]);
+		}
+		System.out.println("---end----");
 		return genes;
 		
 	}
