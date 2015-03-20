@@ -91,8 +91,8 @@ public class GUI extends JFrame {
 		evolve.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				Controller c = new Controller();
-				c.evolve();
+			
+				Controller.evolve();
 			}
 		});
 

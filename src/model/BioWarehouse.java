@@ -11,11 +11,9 @@ public class BioWarehouse {
 	}
 	
 	public Biomorph getBiomorph(int i){
-		Biomorph bio = null;
-		for(int j = 0; j <= biomorphs.size(); j++){
-			bio = biomorphs.get(i);
-		}
-		return bio;
+		
+			return biomorphs.get(i);
+		
 	}
 	
 	public void addBioMorph(Biomorph b){

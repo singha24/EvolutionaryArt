@@ -11,9 +11,9 @@ import view.*;
  */
 public class Controller {
 
-	private BiomorphCreator bioCreate;
-	private Renderer render;
-	private GUI gui;
+	private static BiomorphCreator bioCreate;
+	private static Renderer render;
+	private static GUI gui;
 
 	/**
 	 * Create and initialise all the object needed to run the prototype
@@ -26,7 +26,7 @@ public class Controller {
 
 	}
 
-	public void evolve() {
+	public static void evolve() {
 		try {
 			render = new Renderer(bioCreate.extendRandomBiomorph().getGenes());
 			gui.update(render);
