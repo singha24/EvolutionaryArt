@@ -75,8 +75,8 @@ public class BiomorphCreator {
 		System.out.println("------");
 		System.out.println("modified");
 		Random ran = new Random();
-		for(int i = 0; i < genes.length; i = i+  ran.nextInt(10)){
-			genes[i] += 2; //add values to current biomorph genes.
+		for(int i = 0; i < genes.length; i +=   ran.nextInt(10)){
+			genes[i] += 5; //add values to current biomorph genes.
 		}
 		for(int i = 0; i<genes.length; i++){
 			System.out.println(genes[i]);

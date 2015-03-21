@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.BiomorphCreator;
 import controller.Controller;
 
 /**
@@ -24,6 +25,7 @@ public class GUI extends JFrame {
 
 	// Renderer variable to hold render object
 	private Renderer biomorph; 
+	private BiomorphCreator bioCreator;
 	private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
 
@@ -42,12 +44,18 @@ public class GUI extends JFrame {
 	 * 
 	 * @param biomorph
 	 */
-	public GUI(Renderer biomorph) {
+	public GUI(Renderer biomorph, BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
+		this.bioCreator = bioCreator;
 		initUI();
 	}
+	public void evolve() {
+		biomorph = new Renderer(bioCreator.extendRandomBiomorph().getGenes());
+		update(biomorph);
 	
-	public void update(Renderer biomorph){
+}
+	
+	private void update(Renderer biomorph){
 		this.biomorph = biomorph;
 		validate();
 		repaint();
@@ -92,7 +100,7 @@ public class GUI extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 			
-				Controller.evolve();
+				evolve();
 			}
 		});
 

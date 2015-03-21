@@ -11,9 +11,9 @@ import view.*;
  */
 public class Controller {
 
-	private static BiomorphCreator bioCreate;
-	private static Renderer render;
-	private static GUI gui;
+	private BiomorphCreator bioCreate;
+	private Renderer render;
+	private GUI gui;
 
 	/**
 	 * Create and initialise all the object needed to run the prototype
@@ -22,19 +22,10 @@ public class Controller {
 
 		bioCreate = new BiomorphCreator();
 		render = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
-		gui = new GUI(render);
+		gui = new GUI(render, bioCreate);
 
 	}
 
-	public static void evolve() {
-		try {
-			render = new Renderer(bioCreate.extendRandomBiomorph().getGenes());
-			gui.update(render);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.out.println("\nYeahh");
-		}
-	}
 
 	/**
 	 * The Main method creates controller object which Outputs the biomorph onto
