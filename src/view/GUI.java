@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,9 +26,11 @@ public class GUI extends JFrame {
 
 	// Renderer variable to hold render object
 	private Renderer biomorph; 
+	private Renderer parent2;
 	private BiomorphCreator bioCreator;
 	private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
+	private JPanel parentTwoPanel = new JPanel();
 
 	private JButton evolve = new JButton("Evolve");
 	private JButton upload = new JButton("Upload");
@@ -44,8 +47,9 @@ public class GUI extends JFrame {
 	 * 
 	 * @param biomorph
 	 */
-	public GUI(Renderer biomorph, BiomorphCreator bioCreator) {
+	public GUI(Renderer biomorph, Renderer parent2, BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
+		this.parent2 = parent2;
 		this.bioCreator = bioCreator;
 		initUI();
 	}
@@ -83,14 +87,16 @@ public class GUI extends JFrame {
 
 		temporaryBiomorphPanel.setLayout(tempBiomorphGrid); 
 		for (int i = 1; i <= 8; i++) {
-			temporaryBiomorphPanel.add(new JButton("paceholder " + i));
+			//temporaryBiomorphPanel.add(biomorph);
 		}
 
+		panel.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
 		panel.add(upload, BorderLayout.NORTH);
 		panel.add(save, BorderLayout.CENTER);
 		panel.add(print, BorderLayout.NORTH);
 		generate.add(evolve); // add the generate button to its own panel
 
+		add(parent2, BorderLayout.CENTER);
 		add(panel, BorderLayout.WEST);
 		add(generate, BorderLayout.PAGE_END);
 		add(biomorph, BorderLayout.CENTER);
@@ -99,7 +105,6 @@ public class GUI extends JFrame {
 		evolve.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-			
 				evolve();
 			}
 		});

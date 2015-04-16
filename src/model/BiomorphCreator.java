@@ -74,21 +74,33 @@ public class BiomorphCreator {
 	
 	public int[] extendBiomorph(Biomorph b){
 		int[] genes = warehouse.getBiomorph(0).getGenes(); //temporary
+		
 		System.out.println("original");
 		for(int i = 0; i<genes.length; i++){
 			System.out.println(genes[i]);
 		}
+		
 		System.out.println("------");
 		System.out.println("modified");
+		
 		Random ran = new Random();
+		
 		for(int i = 0; i < genes.length; i +=   ran.nextInt(10)){
 			genes[i] += 5; //add values to current biomorph genes.
 		}
+		
 		for(int i = 0; i<genes.length; i++){
 			System.out.println(genes[i]);
 		}
+		
 		System.out.println("---end----");
+		Biomorph a = new Biomorph(genes);
+		warehouse.addBioMorph(a);
 		return genes;
+		
+	}
+	
+	public void algor(){
 		
 	}
 	
