@@ -45,8 +45,14 @@ public class BiomorphCreator {
 		int[] genes = new int[geneLimit];
 		// Get random number and store it onto array
 		for(int i = 0; i < genes.length; i++){
+			
 		genes[i] = rand.nextInt(SEED);
+		
 		}
+//		genes[0]=0;
+//		genes[2]=0;
+//		genes[4]=0;
+//		genes[6]=0;
 		return genes;
 	}
 	
