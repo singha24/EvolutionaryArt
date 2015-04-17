@@ -45,7 +45,9 @@ public class BiomorphCreator {
 		int[] genes = new int[geneLimit];
 		// Get random number and store it onto array
 		for(int i = 0; i < genes.length; i++){
+			
 		genes[i] = rand.nextInt(SEED);
+		
 		}
 		return genes;
 	}
@@ -76,7 +78,13 @@ public class BiomorphCreator {
 		System.out.println("modified");
 		Random ran = new Random();
 		for(int i = 0; i < genes.length; i +=   ran.nextInt(10)){
-			genes[i] += 5; //add values to current biomorph genes.
+			if(genes[i] <= 42){
+			genes[i] += 5;
+			}else if(genes[i] > 42) {
+				genes[i] -= 5;
+				
+			}
+					 //add values to current genes of biomorph genes.
 		}
 		for(int i = 0; i<genes.length; i++){
 			System.out.println(genes[i]);
