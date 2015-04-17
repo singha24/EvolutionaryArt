@@ -1,16 +1,21 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.DimensionUIResource;
 
 import model.BiomorphCreator;
-import controller.Controller;
 
 /**
  * GUI creates Graphical User interface by extending JFrame
@@ -24,7 +29,10 @@ import controller.Controller;
 public class GUI extends JFrame {
 
 	// Renderer variable to hold render object
+	private JPanel container = new JPanel();
 	private Renderer biomorph; 
+	private Renderer biomorphTwo;
+	private Renderer[] tempBiomorphs;
 	private BiomorphCreator bioCreator;
 	private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
@@ -44,11 +52,14 @@ public class GUI extends JFrame {
 	 * 
 	 * @param biomorph
 	 */
-	public GUI(Renderer biomorph, BiomorphCreator bioCreator) {
+	public GUI(Renderer biomorph, Renderer biomorphTwo, Renderer[] temp, BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
+		this.biomorphTwo = biomorphTwo;
 		this.bioCreator = bioCreator;
+		this.tempBiomorphs = temp;
 		initUI();
 	}
+	
 	public void evolve() {
 		biomorph = new Renderer(bioCreator.extendRandomBiomorph().getGenes());
 		update(biomorph);
@@ -65,25 +76,20 @@ public class GUI extends JFrame {
 	 * Create GUI (JFrame)
 	 */
 	private void initUI() {
-		// set title
+		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
+		biomorph.setLayout(new FlowLayout(FlowLayout.LEFT));
+		//biomorphTwo = 
+		biomorphTwo.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		
 		setTitle("Evolutionary Art");
-
-		// set the exit
+		setLayout(new BorderLayout());	
+		setPreferredSize(new Dimension(1280, 720));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// set layout
-		setLayout(new BorderLayout());
-
-		// set the size of JFrame
-		setSize(1280, 720);
-		setLocationRelativeTo(null);
-		// set visibility to true
-		setVisible(true);
-		// resize to falls
-		setResizable(false);
-
+		
 		temporaryBiomorphPanel.setLayout(tempBiomorphGrid); 
-		for (int i = 1; i <= 8; i++) {
-			temporaryBiomorphPanel.add(new JButton("paceholder " + i));
+		for (int i = 0; i <tempBiomorphs.length; i++) {
+			temporaryBiomorphPanel.add(tempBiomorphs[i]);
 		}
 
 		panel.add(upload, BorderLayout.NORTH);
@@ -91,10 +97,24 @@ public class GUI extends JFrame {
 		panel.add(print, BorderLayout.NORTH);
 		generate.add(evolve); // add the generate button to its own panel
 
+		container.add(biomorph);
+		
+		container.add(biomorphTwo);
+		
 		add(panel, BorderLayout.WEST);
 		add(generate, BorderLayout.PAGE_END);
-		add(biomorph, BorderLayout.CENTER);
+		add(container, BorderLayout.CENTER);
 		add(temporaryBiomorphPanel, BorderLayout.EAST);
+		
+		
+		
+		setResizable(true);
+		pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
+		
+		
+		
 		
 		evolve.addActionListener(new ActionListener() {
 			
