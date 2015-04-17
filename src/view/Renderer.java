@@ -51,32 +51,42 @@ public class Renderer extends JPanel {
 				displayBiomorph(g, genes[0],genes[1],genes[2],genes[3],color);
 				displayBiomorph(g, genes[2],genes[1],genes[0],genes[3],color);
 				
+				for(int i = 4; i < 8; i+=2){
+					displayBiomorph(g, genes[i],genes[i+1],genes[i+2],genes[i+3],color);
+					x1 =genes[i+2]-genes[i];
+					y1 =  genes[i+3] - genes[i+1];
+					int px2 = x2;
+					int py2 = y2;
+					x2 = x2 -x1;
+					y2 = y2 +y1;
+					displayBiomorph(g, px2,py2,x2,y2,color);
+						
+					}
 				
-				
-				displayBiomorph(g, genes[2],genes[3],genes[4],genes[5],color);
-				int x1 =genes[4]-genes[2] ;
-				int y1 =  genes[5] - genes[3];
-				int x2 = genes[0] -x1;
-				int y2 = genes[3] +y1;
-				displayBiomorph(g, genes[0],genes[3],x2,y2,color);
-				displayBiomorph(g, genes[4],genes[5],genes[6],genes[7],color);
-				x1 = genes[6] - genes[4];
-				y1 =  genes[7] - genes[5];
-				int x3 = x2 -x1;
-				int y3 = y2 +y1;
-				displayBiomorph(g, x2,y2,x3,y3,color);
-				displayBiomorph(g, genes[6],genes[7],genes[8],genes[9],color);
-				x1 = genes[8] - genes[6];
-				y1 =  genes[9] - genes[7];
-				int x4 = x3 -x1;
-				int y4 = y3 +y1;
-				displayBiomorph(g, x3,y3,x4,y4,color);
-				displayBiomorph(g, genes[8],genes[9],genes[10],genes[11],color);
-				x1 = genes[10] - genes[8];
-				y1 =  genes[11] - genes[9];
-				int x5 = x4 -x1;
-				int y5 = y4 +y1;
-				displayBiomorph(g, x4,y4,x5,y5,color);  
+				// displayBiomorph(g, genes[2],genes[3],genes[4],genes[5],color);
+				// int x1 =genes[4]-genes[2] ;
+				// int y1 =  genes[5] - genes[3];
+				// int x2 = genes[0] -x1;
+				// int y2 = genes[3] +y1;
+				// displayBiomorph(g, genes[0],genes[3],x2,y2,color);
+				// displayBiomorph(g, genes[4],genes[5],genes[6],genes[7],color);
+				// x1 = genes[6] - genes[4];
+				// y1 =  genes[7] - genes[5];
+				// int x3 = x2 -x1;
+				// int y3 = y2 +y1;
+				// displayBiomorph(g, x2,y2,x3,y3,color);
+				// displayBiomorph(g, genes[6],genes[7],genes[8],genes[9],color);
+				// x1 = genes[8] - genes[6];
+				// y1 =  genes[9] - genes[7];
+				// int x4 = x3 -x1;
+				// int y4 = y3 +y1;
+				// displayBiomorph(g, x3,y3,x4,y4,color);
+				// displayBiomorph(g, genes[8],genes[9],genes[10],genes[11],color);
+				// x1 = genes[10] - genes[8];
+				// y1 =  genes[11] - genes[9];
+				// int x5 = x4 -x1;
+				// int y5 = y4 +y1;
+				// displayBiomorph(g, x4,y4,x5,y5,color);  
 		
 	}
 	
