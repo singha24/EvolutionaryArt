@@ -2,15 +2,15 @@ package view;
 
 import java.awt.AWTException;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
@@ -47,7 +47,7 @@ public class GUI extends JFrame implements Printable {
 	private BiomorphCreator bioCreator;
 	private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
-	
+
 	private final double INCH = 72;
 
 	private JButton evolve = new JButton("Evolve");
@@ -82,22 +82,25 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	public void export(JPanel biomorph, boolean print) throws AWTException {
+
+		// working
+		BufferedImage bi = new Robot().createScreenCapture(new Rectangle(
+				biomorph.getLocationOnScreen().x, biomorph
+						.getLocationOnScreen().y, biomorph.getWidth(), biomorph
+						.getHeight()));
+
 		/*
-		 * //working BufferedImage image = new Robot().createScreenCapture(new
-		 * Rectangle(biomorph.getLocationOnScreen().x,
-		 * biomorph.getLocationOnScreen().y, biomorph.getWidth(),
-		 * biomorph.getHeight()));
-		 * 
 		 * File outputfile = new File("image.jpg"); try { ImageIO.write(image,
 		 * "png", outputfile); } catch (IOException e) { // catch block
 		 * e.printStackTrace(); }
 		 */
-		int w = biomorph.getWidth();
-		int h = biomorph.getHeight();
-		BufferedImage bi = new BufferedImage(w, h,
-				BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = bi.createGraphics();
-		paint(g);
+		/*
+		 * int w = biomorph.getWidth(); int h = biomorph.getHeight();
+		 * BufferedImage bi = new BufferedImage(w, h,
+		 BufferedImage.TYPE_INT_ARGB);*/
+		 Graphics2D g = bi.createGraphics();
+		 paint(g);
+		 
 		if (!print) {
 			JFileChooser f = new JFileChooser();
 			f.setDialogTitle("Save Biomorph");
@@ -115,7 +118,7 @@ public class GUI extends JFrame implements Printable {
 						"Biomorph successfully saved to:\n"
 								+ f.getSelectedFile().getPath());
 			}
-		}else{
+		} else {
 			PrinterJob printJob = PrinterJob.getPrinterJob();
 
 			printJob.setPrintable(this);
@@ -212,33 +215,31 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	public int print(Graphics g, PageFormat pageFormat, int page) {
-		
+
 		Graphics2D g2d = (Graphics2D) g;
-		
+
 		// --- Validate the page number, we only print the first page
 		if (page == 0) { // --- Create a graphic2D object a set the default
 							// parameters
 			g2d = (Graphics2D) g;
-			//g.setColor(Color.black);
+			// g.setColor(Color.black);
 
 			// --- Translate the origin to be (0,0)
-			g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-			
+			g2d.translate(pageFormat.getImageableX(),
+					pageFormat.getImageableY());
+
 			paint(g2d);
 
 			// --- Print the vertical lines
-			/*for (i = 0; i < pageFormat.getWidth(); i += INCH / 2) {
-				line.setLine(i, 0, i, pageFormat.getHeight());
-				g2d.draw(line);
-			}
+			/*
+			 * for (i = 0; i < pageFormat.getWidth(); i += INCH / 2) {
+			 * line.setLine(i, 0, i, pageFormat.getHeight()); g2d.draw(line); }
+			 * 
+			 * // --- Print the horizontal lines for (i = 0; i <
+			 * pageFormat.getHeight(); i += INCH / 2) { line.setLine(0, i,
+			 * pageFormat.getWidth(), i); g2d.draw(line); }
+			 */
 
-			// --- Print the horizontal lines
-			for (i = 0; i < pageFormat.getHeight(); i += INCH / 2) {
-				line.setLine(0, i, pageFormat.getWidth(), i);
-				g2d.draw(line);
-			}*/
-
-			
 			return (PAGE_EXISTS);
 		} else
 			return (NO_SUCH_PAGE);
