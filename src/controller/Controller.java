@@ -1,7 +1,13 @@
 package controller;
 
-import model.*;
-import view.*;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+
+import model.BioWarehouse;
+import model.BiomorphCreator;
+import view.GUI;
+import view.Renderer;
 
 /**
  * Controller class is the Main source for which everything is created.
@@ -27,12 +33,6 @@ public class Controller {
 		Renderer parent2 = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 		gui = new GUI(render, parent2, bioCreate);
 
-	}
-	
-	public Biomorph getBiomorph(int i){
-		Biomorph biomorph = warehouse.getBiomorph(i);
-		
-		return biomorph;
 	}
 
 
