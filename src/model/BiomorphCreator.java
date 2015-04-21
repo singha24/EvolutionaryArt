@@ -14,9 +14,9 @@ public class BiomorphCreator {
 	/*
 	 * limit for the genes needed for the biomorph.
 	 */
-	private static final int GENE_LIMIT= 13;
+	public static final int GENE_LIMIT= 13;
 	
-	private static final int SEED = 42;
+	public static final int SEED = 42;
 	
 	//variable to hold the geneLimit
 	private int geneLimit;

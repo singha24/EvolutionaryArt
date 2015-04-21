@@ -1,7 +1,10 @@
 package controller;
 
-import java.util.ArrayList;
+import java.awt.Graphics2D;
 
+import javax.swing.JPanel;
+
+import model.BioWarehouse;
 import model.BiomorphCreator;
 import view.GUI;
 import view.Renderer;
@@ -19,6 +22,8 @@ public class Controller {
 	private Renderer bioTwo;
 	private Renderer[] temp = new Renderer[8];
 	private GUI gui;
+	private Save save;
+	private BioWarehouse warehouse;
 
 	/**
 	 * Create and initialise all the object needed to run the prototype
@@ -27,18 +32,18 @@ public class Controller {
 		
 	}
 	
+	public void initiliseHelpers(){
+		warehouse = new BioWarehouse();
+		bioCreate = new BiomorphCreator();
+		save = new Save();
+	}
+	
+	
 	public void generateParents(){
 		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 		bioTwo = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 	}
 	
-	public void initiliseGui(){
-		gui = new GUI(bioOne, bioTwo, temp, bioCreate);
-	}
-	
-	public void initiliseCreator(){
-		bioCreate = new BiomorphCreator();
-	}
 	
 	public void createTempBiomorphs(){
 		for(int i = 0; i<temp.length; i++){
@@ -57,6 +62,14 @@ public class Controller {
 		}
 		return counter;
 	}
+	
+	public void export(JPanel biomorph){
+		save.convertToImage(biomorph);
+	}
+	
+	public void initGUI(){
+		gui = new GUI(bioOne, bioTwo, temp, bioCreate);
+	}
 
 
 	/**
@@ -69,10 +82,10 @@ public class Controller {
 
 		Controller control = new Controller();
 		
-		control.initiliseCreator();
+		control.initiliseHelpers();
 		control.generateParents();
 		control.createTempBiomorphs();
-		control.initiliseGui();
+		control.initGUI();
 
 	}
 
