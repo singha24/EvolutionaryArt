@@ -54,6 +54,7 @@ public class GUI extends JFrame implements Printable {
 	private JButton upload = new JButton("Upload");
 	private JButton save = new JButton("Save");
 	private JButton print = new JButton("Print");
+	//private JButton biomorphDisplay = new JButton();
 
 	// Gridlayout for temp biomorphs
 	private JPanel temporaryBiomorphPanel = new JPanel();
@@ -78,6 +79,7 @@ public class GUI extends JFrame implements Printable {
 	public void evolve() {
 		biomorph = new Renderer(bioCreator.extendRandomBiomorph().getGenes());
 		update(biomorph);
+		//biomorphDisplay.add(biomorph);
 
 	}
 
@@ -138,6 +140,7 @@ public class GUI extends JFrame implements Printable {
 
 	private void update(Renderer biomorph) {
 		this.biomorph = biomorph;
+		this.biomorph.setSize(100, 100);
 		validate();
 		repaint();
 	}
@@ -150,7 +153,7 @@ public class GUI extends JFrame implements Printable {
 		biomorph.setLayout(new FlowLayout(FlowLayout.LEFT));
 		// biomorphTwo =
 		biomorphTwo.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
+		//biomorphDisplay.setSize(200, 200);
 		setTitle("Evolutionary Art");
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1280, 720));
@@ -161,7 +164,7 @@ public class GUI extends JFrame implements Printable {
 		for (int i = 0; i < tempBiomorphs.length; i++) {
 			temporaryBiomorphPanel.add(tempBiomorphs[i]);
 		}
-
+		//add(biomorphDisplay, BorderLayout.CENTER);
 		panel.add(upload, BorderLayout.NORTH);
 		panel.add(save, BorderLayout.CENTER);
 		panel.add(print, BorderLayout.NORTH);

@@ -57,7 +57,8 @@ public class Renderer extends JPanel {
 
 	private void drawLines(Graphics g, int genes[]) {
 		// Color for the lines
-		Color color = new Color(genes[12]);
+		g.translate(50, 50);
+		Color color = new Color(genes[21], genes[22], genes[23]);
 		// starting lines
 		displayBiomorph(g, genes[0], genes[1], genes[2], genes[3], color);
 		displayBiomorph(g, genes[2], genes[1], genes[0], genes[3], color);
@@ -69,7 +70,7 @@ public class Renderer extends JPanel {
 		int y2 = genes[3] + y1;
 		displayBiomorph(g, genes[0], genes[3], x2, y2, color);
 
-		for (int i = 4; i < 10; i += 2) {
+		for (int i = 4; i < genes.length-6; i += 2) {
 			displayBiomorph(g, genes[i], genes[i + 1], genes[i + 2],
 					genes[i + 3], color);
 			x1 = genes[i + 2] - genes[i];

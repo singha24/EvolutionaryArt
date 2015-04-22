@@ -14,7 +14,7 @@ public class BiomorphCreator {
 	/*
 	 * limit for the genes needed for the biomorph.
 	 */
-	public static final int GENE_LIMIT= 13;
+	public static final int GENE_LIMIT= 24;
 	
 	public static final int SEED = 42;
 	
@@ -45,8 +45,12 @@ public class BiomorphCreator {
 		int[] genes = new int[geneLimit];
 		// Get random number and store it onto array
 		for(int i = 0; i < genes.length; i++){
-			
+			if(i <21){
 		genes[i] = rand.nextInt(SEED);
+			}
+			else{
+				genes[i] = rand.nextInt(255);
+			}
 		
 		}
 //		genes[0]=0;
@@ -86,11 +90,21 @@ public class BiomorphCreator {
 		Random ran = new Random();
 		
 		for(int i = 0; i < genes.length; i +=   ran.nextInt(10)){
+			if(i<21){
 			if(genes[i] <= 42){
 			genes[i] += 5;
 			}else if(genes[i] > 42) {
 				genes[i] -= 5;
 				
+			}
+			}else{
+				
+				if(genes[i] <= 250){
+					genes[i] += 5;
+					}else if(genes[i] > 5) {
+						genes[i] -= 5;
+						
+					}
 			}
 					 //add values to current genes of biomorph genes.
 		}
