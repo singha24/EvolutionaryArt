@@ -79,7 +79,7 @@ public class GUI extends JFrame implements Printable {
 
 	public void evolve() {
 		int[] newGenes = bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes())).getGenes();
-		bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
+		//bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
 		//biomorphTwo.setGenes(newGenes);
 		update(biomorph);
 		//biomorphDisplay.add(biomorph);
