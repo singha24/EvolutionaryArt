@@ -69,7 +69,7 @@ public void setGenes(int[] genes){
 		//For positioning the biomorph
 		g.translate(50, 50);
 		//Color for the lines
-		Color color = new Color(genes[21], genes[22], genes[23]);
+		Color color = new Color(genes[genes.length-3], genes[genes.length-2], genes[genes.length-1]);
 		// starting lines
 		displayBiomorph(g, genes[0], genes[1], genes[2], genes[3], color);
 		displayBiomorph(g, genes[2], genes[1], genes[0], genes[3], color);

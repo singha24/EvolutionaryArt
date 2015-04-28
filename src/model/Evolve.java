@@ -45,7 +45,7 @@ public final class Evolve {
 				
 				genes[i] = genesValue;
 			
-			if(i<21){
+			if(i<genes.length-3){
 				
 				
 				if(genes[i] > 50){
