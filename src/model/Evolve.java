@@ -59,6 +59,7 @@ public final class Evolve {
 				}else{
 					
 					if(genes[i] > 255){
+						rdm = random.nextInt(7) - 3;
 						genes[i] = 255;
 						}else if(genes[i] < 0) {
 							genes[i] = 0;
