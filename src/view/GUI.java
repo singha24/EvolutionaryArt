@@ -29,6 +29,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import model.Biomorph;
 import model.BiomorphCreator;
@@ -231,6 +232,15 @@ public class GUI extends JFrame implements Printable {
 
 			}
 		});
+		
+		//shorcuts
+		save.setAccelerator(KeyStroke.getKeyStroke(
+		        java.awt.event.KeyEvent.VK_S, 
+		        java.awt.Event.CTRL_MASK));
+		
+		print.setAccelerator(KeyStroke.getKeyStroke(
+		        java.awt.event.KeyEvent.VK_P, 
+		        java.awt.Event.CTRL_MASK));
 
 		save.addActionListener(new ActionListener() {
 
