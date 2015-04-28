@@ -142,8 +142,5 @@ public class BiomorphCreator {
 		
 	}
 	
-	public void algor(){
-		
-	}
 	
 }

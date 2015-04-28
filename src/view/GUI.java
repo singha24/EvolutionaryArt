@@ -94,13 +94,24 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	public void evolve() {
-		int[] newGenes = bioCreator.extendRandomBiomorph(
-				new Biomorph(biomorph.getGenes())).getGenes();
+     // TODO: working on to avoid aliasing	
+		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+		int[] newGenes = new int[biomorph.getGenes().length];
+		for (int i = 0; i < biomorph.getGenes().length; i++){
+		newGenes[i] =  biomorph.getGenes()[i];
+		}
+		
 		// bioCreator.extendRandomBiomorph(new
 		// Biomorph(biomorphTwo.getGenes()));
 		// biomorphTwo.setGenes(newGenes);
 		update(biomorph);
 		// biomorphDisplay.add(biomorph);
+		
+		//test for the array aliasing
+//		for(int i = 0; i < newGenes.length;i++)
+//			newGenes[i] = 20;
+//		for(int print: newGenes)
+//			System.out.println("TEST"+print);
 
 	}
 
@@ -334,7 +345,7 @@ public class GUI extends JFrame implements Printable {
 		JDialog dialog = optionPane.createDialog(this, "Change complexity");
 		dialog.setVisible(true);
 		if(optionPane.getInputValue() == JOptionPane.UNINITIALIZED_VALUE){
-			optionPane.setInputValue(new Integer(50)); //default position on slider.
+			optionPane.setInputValue(50); //default position on slider.
 		}else{
 			bioCreator.setGeneLimit((Integer) optionPane.getInputValue());
 		}

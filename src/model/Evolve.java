@@ -38,28 +38,31 @@ public final class Evolve {
 		
 		for (int i = 0; i < genes.length; i +=  random.nextInt(10)){
 			
-				int rdm = random.nextInt(7) - 3;
+				int rdm;
 				//int genesToMutate = random.nextInt(genes.length);
 				//System.out.println(rdm);
-				int genesValue = genes[i] + (rdm);
-				genes[i] = genesValue;
-				
-				genes[i] = genesValue;
+				int genesValue;
 			
 			if(i<genes.length-3){
 				
-				
+				rdm = random.nextInt(7) - 3;
+				genesValue = genes[i] + (rdm);
+				genes[i] = genesValue;
 				if(genes[i] > 50){
+					
 					genes[i] = 50;
+					
 					}else if(genes[i] < 0) {
 						genes[i] = 0;
 						
 					}
 				
 				}else{
-					
+						rdm = random.nextInt(35) - 17;
+						genesValue = genes[i] + (rdm);
+						genes[i] = genesValue;
 					if(genes[i] > 255){
-						rdm = random.nextInt(7) - 3;
+						
 						genes[i] = 255;
 						}else if(genes[i] < 0) {
 							genes[i] = 0;
