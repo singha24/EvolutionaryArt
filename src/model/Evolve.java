@@ -17,6 +17,7 @@ public final class Evolve {
 	public static int[] evolve(Biomorph biomorph){
 		
 		return algorithm(biomorph.getGenes());
+		
 	}
 	
 	/**
