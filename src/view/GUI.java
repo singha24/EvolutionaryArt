@@ -22,6 +22,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -31,7 +32,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.KeyStroke;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -64,10 +68,17 @@ public class GUI extends JFrame implements Printable {
 	private JMenu preferences;
 
 	private JMenuItem save;
-	private JMenuItem complexity;
+	//private JMenuItem complexity;
 	private JMenuItem print;
 	private JMenuItem upload;
 	private JMenuItem exit;
+
+	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
+																	// value
+			0, // min
+			100, // max
+			1);// step
+	private JSpinner spinner = new JSpinner(spinnerModel);
 
 	private final double INCH = 72;
 
@@ -96,10 +107,14 @@ public class GUI extends JFrame implements Printable {
 	public void evolve() {
 		int[] newGenes = bioCreator.extendRandomBiomorph(
 				new Biomorph(biomorph.getGenes())).getGenes();
+		int[] newGenesTwo = bioCreator.extendRandomBiomorph(
+				new Biomorph(biomorphTwo.getGenes())).getGenes();
 		// bioCreator.extendRandomBiomorph(new
 		// Biomorph(biomorphTwo.getGenes()));
 		// biomorphTwo.setGenes(newGenes);
 		update(biomorph);
+		update(biomorphTwo);
+
 		// biomorphDisplay.add(biomorph);
 
 	}
@@ -161,8 +176,6 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	private void update(Renderer biomorph) {
-		// this.biomorph = biomorph;
-		// this.biomorph.setSize(100, 100);
 		validate();
 		repaint();
 	}
@@ -195,9 +208,9 @@ public class GUI extends JFrame implements Printable {
 		preferences.setMnemonic('P');
 		menu.add(preferences);
 
-		complexity = new JMenuItem("Complexity");
-		complexity.setMnemonic(KeyEvent.VK_C);
-		complexity.setActionCommand("Complexity");
+		//complexity = new JMenuItem("Complexity");
+		//complexity.setMnemonic(KeyEvent.VK_C);
+		//complexity.setActionCommand("Complexity");
 
 		upload = new JMenuItem("Upload");
 		upload.setMnemonic(KeyEvent.VK_U);
@@ -216,13 +229,19 @@ public class GUI extends JFrame implements Printable {
 		file.add(save);
 		file.add(print);
 		file.add(exit);
-		preferences.add(complexity);
+		//preferences.add(complexity);
+		
+		container.add(biomorph);
+		container.add(biomorphTwo);
+
+		spinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				System.out.println(spinner.getValue());
+			}
+		});
 
 		generate.add(evolve); // add the generate button to its own panel
-
-		container.add(biomorph);
-
-		container.add(biomorphTwo);
+		generate.add(spinner);
 
 		add(menu, BorderLayout.NORTH);
 		add(generate, BorderLayout.PAGE_END);
@@ -234,13 +253,13 @@ public class GUI extends JFrame implements Printable {
 		setLocationRelativeTo(null);
 		setVisible(true);
 
-		complexity.addActionListener(new ActionListener() {
+		//complexity.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				complexitySlider();
+			//public void actionPerformed(ActionEvent e) {
+				//complexitySlider();
 
-			}
-		});
+			//}
+		//});
 
 		print.addActionListener(new ActionListener() {
 
@@ -268,8 +287,9 @@ public class GUI extends JFrame implements Printable {
 		evolve.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-
-				evolve();
+				for (int i = 0; i <= getSpinnerValue(); i++) {
+					evolve();
+				}
 			}
 		});
 
@@ -287,11 +307,14 @@ public class GUI extends JFrame implements Printable {
 
 		print.setAccelerator(KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
-		
-		complexity.setAccelerator(KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
-		
 
+		//complexity.setAccelerator(KeyStroke.getKeyStroke(
+				//java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
+
+	}
+
+	public int getSpinnerValue() {
+		return (Integer) spinner.getValue();
 	}
 
 	public int print(Graphics g, PageFormat pageFormat, int page) {
@@ -325,6 +348,11 @@ public class GUI extends JFrame implements Printable {
 			return (NO_SUCH_PAGE);
 	}
 
+	private void showSpinnerDemo() {
+		// headerLabel.setText("Control in action: JSpinner");
+
+	}
+
 	public void complexitySlider() {
 		JOptionPane optionPane = new JOptionPane();
 		JSlider slider = getSlider(optionPane);
@@ -333,13 +361,14 @@ public class GUI extends JFrame implements Printable {
 		optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
 		JDialog dialog = optionPane.createDialog(this, "Change complexity");
 		dialog.setVisible(true);
-		if(optionPane.getInputValue() == JOptionPane.UNINITIALIZED_VALUE){
-			optionPane.setInputValue(new Integer(50)); //default position on slider.
-		}else{
+		if (optionPane.getInputValue() == JOptionPane.UNINITIALIZED_VALUE) {
+			optionPane.setInputValue(new Integer(50)); // default position on
+														// slider.
+		} else {
 			bioCreator.setGeneLimit((Integer) optionPane.getInputValue());
 		}
 		bioCreator.setGeneLimit((Integer) optionPane.getInputValue());
-		//System.out.println("Input: " + optionPane.getInputValue());
+		System.out.println("NEW GENE : " + bioCreator.getGeneLimit());
 	}
 
 	static JSlider getSlider(final JOptionPane optionPane) {

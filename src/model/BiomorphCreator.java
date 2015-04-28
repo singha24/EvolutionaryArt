@@ -14,9 +14,9 @@ public class BiomorphCreator {
 	/*
 	 * limit for the genes needed for the biomorph.
 	 */
-	public int GENE_LIMIT = 24;
+	public int GENE_LIMIT;
 	
-	public static final int LIMIT_FOR_GENES_VALUE = 50;
+	public static final int LIMIT_FOR_GENES = 50;
 	
 	//variable to hold the geneLimit
 	private int geneLimit;
@@ -31,8 +31,11 @@ public class BiomorphCreator {
 	 * Constructor to initialise the fields
 	 */
 	public BiomorphCreator(){
-		this.geneLimit = getGeneLimit();
 		rand = new Random();
+		if(getGeneLimit() == 0){
+			setGeneLimit(initGeneLimit());
+		}
+		this.geneLimit = getGeneLimit();
 	}
 	
 	
@@ -46,7 +49,7 @@ public class BiomorphCreator {
 		// Get random number and store it onto array
 		for(int i = 0; i < genes.length; i++){
 			if(i < genes.length-3){
-		genes[i] = rand.nextInt(LIMIT_FOR_GENES_VALUE);
+		genes[i] = rand.nextInt(LIMIT_FOR_GENES);
 			}
 			else{
 				genes[i] = rand.nextInt(255);
@@ -59,6 +62,11 @@ public class BiomorphCreator {
 //		genes[4]=0;
 //		genes[6]=0;
 		return genes;
+	}
+	
+	public int initGeneLimit(){
+		return rand.nextInt(((LIMIT_FOR_GENES)*2 - (LIMIT_FOR_GENES)/2) + 1) + (LIMIT_FOR_GENES)/2;
+		
 	}
 	
 	public int getGeneLimit(){
@@ -139,10 +147,6 @@ public class BiomorphCreator {
 		//Biomorph a = new Biomorph(newGenes);
 		//warehouse.addBioMorph(a);
 		return newGenes;
-		
-	}
-	
-	public void algor(){
 		
 	}
 	
