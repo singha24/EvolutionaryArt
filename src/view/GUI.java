@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
@@ -23,6 +24,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -47,14 +51,23 @@ public class GUI extends JFrame implements Printable {
 	private BiomorphCreator bioCreator;
 	private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
+	private JPanel topPanel = new JPanel();
+
+	private JMenuBar menu = new JMenuBar();
+	private JMenu file;
+
+	private JMenuItem save;
+	private JMenuItem print;
+	private JMenuItem upload;
+	private JMenuItem exit;
 
 	private final double INCH = 72;
 
 	private JButton evolve = new JButton("Evolve");
-	private JButton upload = new JButton("Upload");
-	private JButton save = new JButton("Save");
-	private JButton print = new JButton("Print");
-	//private JButton biomorphDisplay = new JButton();
+	// private JButton upload = new JButton("Upload");
+	// private JButton save = new JButton("Save");
+	// private JButton print = new JButton("Print");
+	// private JButton biomorphDisplay = new JButton();
 
 	// Gridlayout for temp biomorphs
 	private JPanel temporaryBiomorphPanel = new JPanel();
@@ -79,7 +92,7 @@ public class GUI extends JFrame implements Printable {
 	public void evolve() {
 		biomorph = new Renderer(bioCreator.extendRandomBiomorph().getGenes());
 		update(biomorph);
-		//biomorphDisplay.add(biomorph);
+		// biomorphDisplay.add(biomorph);
 
 	}
 
@@ -99,10 +112,11 @@ public class GUI extends JFrame implements Printable {
 		/*
 		 * int w = biomorph.getWidth(); int h = biomorph.getHeight();
 		 * BufferedImage bi = new BufferedImage(w, h,
-		 BufferedImage.TYPE_INT_ARGB);*/
-		 Graphics2D g = bi.createGraphics();
-		 paint(g);
-		 
+		 * BufferedImage.TYPE_INT_ARGB);
+		 */
+		Graphics2D g = bi.createGraphics();
+		paint(g);
+
 		if (!print) {
 			JFileChooser f = new JFileChooser();
 			f.setDialogTitle("Save Biomorph");
@@ -153,7 +167,7 @@ public class GUI extends JFrame implements Printable {
 		biomorph.setLayout(new FlowLayout(FlowLayout.LEFT));
 		// biomorphTwo =
 		biomorphTwo.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		//biomorphDisplay.setSize(200, 200);
+		// biomorphDisplay.setSize(200, 200);
 		setTitle("Evolutionary Art");
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1280, 720));
@@ -164,17 +178,36 @@ public class GUI extends JFrame implements Printable {
 		for (int i = 0; i < tempBiomorphs.length; i++) {
 			temporaryBiomorphPanel.add(tempBiomorphs[i]);
 		}
-		//add(biomorphDisplay, BorderLayout.CENTER);
-		panel.add(upload, BorderLayout.NORTH);
-		panel.add(save, BorderLayout.CENTER);
-		panel.add(print, BorderLayout.NORTH);
+
+		file = new JMenu("File");
+		file.setMnemonic('F');
+		menu.add(file);
+
+		upload = new JMenuItem("Upload");
+		upload.setMnemonic(KeyEvent.VK_U);
+		upload.setActionCommand("Upload");
+
+		save = new JMenuItem("Save");
+		save.setActionCommand("Save");
+
+		print = new JMenuItem("Print");
+		print.setActionCommand("Print");
+
+		exit = new JMenuItem("Exit");
+		exit.setActionCommand("Exit");
+
+		file.add(upload);
+		file.add(save);
+		file.add(print);
+		file.add(exit);
+
 		generate.add(evolve); // add the generate button to its own panel
 
 		container.add(biomorph);
 
 		container.add(biomorphTwo);
 
-		add(panel, BorderLayout.WEST);
+		add(menu, BorderLayout.NORTH);
 		add(generate, BorderLayout.PAGE_END);
 		add(container, BorderLayout.CENTER);
 		add(temporaryBiomorphPanel, BorderLayout.EAST);
@@ -212,6 +245,14 @@ public class GUI extends JFrame implements Printable {
 			public void actionPerformed(ActionEvent e) {
 
 				evolve();
+			}
+		});
+		
+		exit.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+				
 			}
 		});
 
