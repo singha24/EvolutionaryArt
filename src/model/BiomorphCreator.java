@@ -67,56 +67,69 @@ public class BiomorphCreator {
 	 */
 	public Biomorph generateRandomBiomorph(){		
 		Biomorph b = new Biomorph(createRandomGenes());
-		warehouse.addBioMorph(b);
+		//warehouse.addBioMorph(b);
 		return b;
 	}
 	
-	public Biomorph extendRandomBiomorph(){
-		Biomorph b = warehouse.getBiomorph(0);
-		return new Biomorph(extendBiomorph(b));
+	public Biomorph extendRandomBiomorph(Biomorph bio){
+//		Biomorph b = warehouse.getBiomorph(0);
+//		Biomorph b1 = warehouse.getBiomorph(1);
+//		extendBiomorph(b1);
+		return new Biomorph(extendBiomorph(bio));
 	}
 	
 	public int[] extendBiomorph(Biomorph b){
-		int[] genes = warehouse.getBiomorph(0).getGenes(); //temporary
-		
+		int[] genes = b.getGenes(); //temporary
 		System.out.println("original");
 		for(int i = 0; i<genes.length; i++){
 			System.out.println(genes[i]);
-		}
+				}
+		 int[] newGenes = Evolve.algorithm(genes);
+		 //int[] genes1 = warehouse.getBiomorph(1).getGenes(); //temporary
+			System.out.println("original");
+//			for(int i = 0; i<genes1.length; i++){
+//				System.out.println(genes1[i]);
+//					}
+//			 Evolve.algorithm(genes1);
 		
-		System.out.println("------");
-		System.out.println("modified");
-		
-		Random ran = new Random();
-		
-		for(int i = 0; i < genes.length; i +=   ran.nextInt(10)){
-			if(i<21){
-			if(genes[i] <= 42){
-			genes[i] += 5;
-			}else if(genes[i] > 42) {
-				genes[i] -= 5;
-				
-			}
-			}else{
-				
-				if(genes[i] <= 250){
-					genes[i] += 5;
-					}else if(genes[i] > 5) {
-						genes[i] -= 5;
-						
-					}
-			}
-					 //add values to current genes of biomorph genes.
-		}
-		
+//		System.out.println("original");
+//		for(int i = 0; i<genes.length; i++){
+//			System.out.println(genes[i]);
+//		}
+//		
+//		System.out.println("------");
+//		System.out.println("modified");
+//		
+//		Random ran = new Random();
+//		//TODO: IT SHRINKS BECAUSE VALUES GET TO 40s 
+//		for(int i = 0; i < genes.length; i +=   ran.nextInt(10)){
+//			if(i<21){
+//			if(genes[i] <= 42){
+//			genes[i] += 5 ;
+//			}else if(genes[i] > 42) {
+//				genes[i] -= 5;
+//				
+//			}
+//			}else{
+//				
+//				if(genes[i] <= 250){
+//					genes[i] += 5;
+//					}else if(genes[i] > 5) {
+//						genes[i] -= 5;
+//						
+//					}
+//			}
+//					 //add values to current genes of biomorph genes.
+//		}
+//		
 		for(int i = 0; i<genes.length; i++){
-			System.out.println(genes[i]);
+			System.out.println("saved GENES: "+newGenes[i]);
 		}
-		
-		System.out.println("---end----");
-		Biomorph a = new Biomorph(genes);
-		warehouse.addBioMorph(a);
-		return genes;
+//		
+//		System.out.println("---end----");
+		//Biomorph a = new Biomorph(newGenes);
+		//warehouse.addBioMorph(a);
+		return newGenes;
 		
 	}
 	

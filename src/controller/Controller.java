@@ -46,9 +46,9 @@ public class Controller {
 	
 	
 	public void createTempBiomorphs(){
-		for(int i = 0; i<temp.length; i++){
-			temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
-		}
+//		for(int i = 0; i < temp.length; i++){
+//			temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
+//		}
 	}
 	
 	public Renderer[] getTempBiomorphs(){
