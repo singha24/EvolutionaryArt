@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class EvolutionModel {
 	private BiomorphCreator bioCreate = new BiomorphCreator();
-	private static final int GENE_LIMIT = BiomorphCreator.GENE_LIMIT;
+	private int GENE_LIMIT = bioCreate.getGeneLimit();
 	private static final int SEED = BiomorphCreator.SEED;
 	private int[] parent1 = new int[GENE_LIMIT];
 	private int[] parent2 = new int[GENE_LIMIT];

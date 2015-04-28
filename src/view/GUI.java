@@ -22,6 +22,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -29,7 +30,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.KeyStroke;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import model.Biomorph;
 import model.BiomorphCreator;
@@ -57,8 +61,10 @@ public class GUI extends JFrame implements Printable {
 
 	private JMenuBar menu = new JMenuBar();
 	private JMenu file;
+	private JMenu preferences;
 
 	private JMenuItem save;
+	private JMenuItem complexity;
 	private JMenuItem print;
 	private JMenuItem upload;
 	private JMenuItem exit;
@@ -66,10 +72,6 @@ public class GUI extends JFrame implements Printable {
 	private final double INCH = 72;
 
 	private JButton evolve = new JButton("Evolve");
-	// private JButton upload = new JButton("Upload");
-	// private JButton save = new JButton("Save");
-	// private JButton print = new JButton("Print");
-	// private JButton biomorphDisplay = new JButton();
 
 	// Gridlayout for temp biomorphs
 	private JPanel temporaryBiomorphPanel = new JPanel();
@@ -92,9 +94,11 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	public void evolve() {
-		int[] newGenes = bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes())).getGenes();
-		//bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
-		//biomorphTwo.setGenes(newGenes);
+		int[] newGenes = bioCreator.extendRandomBiomorph(
+				new Biomorph(biomorph.getGenes())).getGenes();
+		// bioCreator.extendRandomBiomorph(new
+		// Biomorph(biomorphTwo.getGenes()));
+		// biomorphTwo.setGenes(newGenes);
 		update(biomorph);
 		// biomorphDisplay.add(biomorph);
 
@@ -157,8 +161,8 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	private void update(Renderer biomorph) {
-		//this.biomorph = biomorph;
-		//this.biomorph.setSize(100, 100);
+		// this.biomorph = biomorph;
+		// this.biomorph.setSize(100, 100);
 		validate();
 		repaint();
 	}
@@ -179,20 +183,28 @@ public class GUI extends JFrame implements Printable {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		temporaryBiomorphPanel.setLayout(tempBiomorphGrid);
-//		for (int i = 0; i < tempBiomorphs.length; i++) {
-//			temporaryBiomorphPanel.add(tempBiomorphs[i]);
-//		}
+		// for (int i = 0; i < tempBiomorphs.length; i++) {
+		// temporaryBiomorphPanel.add(tempBiomorphs[i]);
+		// }
 
 		file = new JMenu("File");
 		file.setMnemonic('F');
 		menu.add(file);
 
+		preferences = new JMenu("Preferences");
+		preferences.setMnemonic('P');
+		menu.add(preferences);
+
+		complexity = new JMenuItem("Complexity");
+		complexity.setMnemonic(KeyEvent.VK_C);
+		complexity.setActionCommand("Complexity");
+
 		upload = new JMenuItem("Upload");
 		upload.setMnemonic(KeyEvent.VK_U);
 		upload.setActionCommand("Upload");
 
-		save = new JMenuItem("Save");
-		save.setActionCommand("Save");
+		save = new JMenuItem("Export");
+		save.setActionCommand("Export");
 
 		print = new JMenuItem("Print");
 		print.setActionCommand("Print");
@@ -204,6 +216,7 @@ public class GUI extends JFrame implements Printable {
 		file.add(save);
 		file.add(print);
 		file.add(exit);
+		preferences.add(complexity);
 
 		generate.add(evolve); // add the generate button to its own panel
 
@@ -214,12 +227,20 @@ public class GUI extends JFrame implements Printable {
 		add(menu, BorderLayout.NORTH);
 		add(generate, BorderLayout.PAGE_END);
 		add(container, BorderLayout.CENTER);
-		//add(temporaryBiomorphPanel, BorderLayout.EAST);
+		// add(temporaryBiomorphPanel, BorderLayout.EAST);
 
 		setResizable(true);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+
+		complexity.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				complexitySlider();
+
+			}
+		});
 
 		print.addActionListener(new ActionListener() {
 
@@ -232,15 +253,6 @@ public class GUI extends JFrame implements Printable {
 
 			}
 		});
-		
-		//shorcuts
-		save.setAccelerator(KeyStroke.getKeyStroke(
-		        java.awt.event.KeyEvent.VK_S, 
-		        java.awt.Event.CTRL_MASK));
-		
-		print.setAccelerator(KeyStroke.getKeyStroke(
-		        java.awt.event.KeyEvent.VK_P, 
-		        java.awt.Event.CTRL_MASK));
 
 		save.addActionListener(new ActionListener() {
 
@@ -260,14 +272,25 @@ public class GUI extends JFrame implements Printable {
 				evolve();
 			}
 		});
-		
+
 		exit.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
-				
+
 			}
 		});
+
+		// shorcuts
+		save.setAccelerator(KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK));
+
+		print.setAccelerator(KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
+		
+		complexity.setAccelerator(KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
+		
 
 	}
 
@@ -300,6 +323,40 @@ public class GUI extends JFrame implements Printable {
 			return (PAGE_EXISTS);
 		} else
 			return (NO_SUCH_PAGE);
+	}
+
+	public void complexitySlider() {
+		JOptionPane optionPane = new JOptionPane();
+		JSlider slider = getSlider(optionPane);
+		optionPane.setMessage(new Object[] { "Complexity: ", slider });
+		optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
+		optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
+		JDialog dialog = optionPane.createDialog(this, "Change complexity");
+		dialog.setVisible(true);
+		if(optionPane.getInputValue() == JOptionPane.UNINITIALIZED_VALUE){
+			optionPane.setInputValue(new Integer(50)); //default position on slider.
+		}else{
+			bioCreator.setGeneLimit((Integer) optionPane.getInputValue());
+		}
+		bioCreator.setGeneLimit((Integer) optionPane.getInputValue());
+		//System.out.println("Input: " + optionPane.getInputValue());
+	}
+
+	static JSlider getSlider(final JOptionPane optionPane) {
+		JSlider slider = new JSlider();
+		slider.setMajorTickSpacing(10);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		ChangeListener changeListener = new ChangeListener() {
+			public void stateChanged(ChangeEvent changeEvent) {
+				JSlider theSlider = (JSlider) changeEvent.getSource();
+				if (!theSlider.getValueIsAdjusting()) {
+					optionPane.setInputValue(new Integer(theSlider.getValue()));
+				}
+			}
+		};
+		slider.addChangeListener(changeListener);
+		return slider;
 	}
 
 	/*
