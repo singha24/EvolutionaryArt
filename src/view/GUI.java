@@ -26,6 +26,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import model.Biomorph;
 import model.BiomorphCreator;
 
 /**
@@ -77,7 +78,9 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	public void evolve() {
-		biomorph = new Renderer(bioCreator.extendRandomBiomorph().getGenes());
+		int[] newGenes = bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes())).getGenes();
+		bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
+		//biomorphTwo.setGenes(newGenes);
 		update(biomorph);
 		//biomorphDisplay.add(biomorph);
 
@@ -139,8 +142,8 @@ public class GUI extends JFrame implements Printable {
 	}
 
 	private void update(Renderer biomorph) {
-		this.biomorph = biomorph;
-		this.biomorph.setSize(100, 100);
+		//this.biomorph = biomorph;
+		//this.biomorph.setSize(100, 100);
 		validate();
 		repaint();
 	}
@@ -161,9 +164,9 @@ public class GUI extends JFrame implements Printable {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		temporaryBiomorphPanel.setLayout(tempBiomorphGrid);
-		for (int i = 0; i < tempBiomorphs.length; i++) {
-			temporaryBiomorphPanel.add(tempBiomorphs[i]);
-		}
+//		for (int i = 0; i < tempBiomorphs.length; i++) {
+//			temporaryBiomorphPanel.add(tempBiomorphs[i]);
+//		}
 		//add(biomorphDisplay, BorderLayout.CENTER);
 		panel.add(upload, BorderLayout.NORTH);
 		panel.add(save, BorderLayout.CENTER);
@@ -177,7 +180,7 @@ public class GUI extends JFrame implements Printable {
 		add(panel, BorderLayout.WEST);
 		add(generate, BorderLayout.PAGE_END);
 		add(container, BorderLayout.CENTER);
-		add(temporaryBiomorphPanel, BorderLayout.EAST);
+		//add(temporaryBiomorphPanel, BorderLayout.EAST);
 
 		setResizable(true);
 		pack();

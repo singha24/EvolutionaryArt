@@ -54,10 +54,21 @@ public class Renderer extends JPanel {
 		g2d.drawLine(x1, y1, x2, y2);
 		//g2d = (Graphics2D) g;
 	}
+	
+	public int[] getGenes(){
+		
+		return genes;
+	}
+	
+public void setGenes(int[] genes){
+		
+		this.genes = genes;
+	}
 
 	private void drawLines(Graphics g, int genes[]) {
-		// Color for the lines
+		//For positioning the biomorph
 		g.translate(50, 50);
+		//Color for the lines
 		Color color = new Color(genes[21], genes[22], genes[23]);
 		// starting lines
 		displayBiomorph(g, genes[0], genes[1], genes[2], genes[3], color);
