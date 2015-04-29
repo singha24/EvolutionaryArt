@@ -62,7 +62,7 @@ public class Renderer extends JPanel {
 		return genes;
 	}
 	
-public void setGenes(int[] genes){
+	public void setGenes(int[] genes){
 		
 		this.genes = genes;
 	}

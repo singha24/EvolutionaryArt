@@ -129,61 +129,6 @@ public class GUI extends JFrame implements Printable {
 		
 	}
 
-	public void export(JPanel biomorph, boolean print) throws AWTException {
-
-		// working
-		BufferedImage bi = new Robot().createScreenCapture(new Rectangle(
-				biomorph.getLocationOnScreen().x, biomorph
-						.getLocationOnScreen().y, biomorph.getWidth(), biomorph
-						.getHeight()));
-
-		/*
-		 * File outputfile = new File("image.jpg"); try { ImageIO.write(image,
-		 * "png", outputfile); } catch (IOException e) { // catch block
-		 * e.printStackTrace(); }
-		 */
-		/*
-		 * int w = biomorph.getWidth(); int h = biomorph.getHeight();
-		 * BufferedImage bi = new BufferedImage(w, h,
-		 * BufferedImage.TYPE_INT_ARGB);
-		 */
-		Graphics2D g = bi.createGraphics();
-		paint(g);
-
-		if (!print) {
-			JFileChooser f = new JFileChooser();
-			f.setDialogTitle("Save Biomorph");
-			f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			f.showSaveDialog(null);
-
-			if (f.getSelectedFile() != null) {
-				File outputfile = new File(f.getSelectedFile().getPath());
-				try {
-					ImageIO.write(bi, "PNG", outputfile);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				JOptionPane.showMessageDialog(this,
-						"Biomorph successfully saved to:\n"
-								+ f.getSelectedFile().getPath());
-			}
-		} else {
-			PrinterJob printJob = PrinterJob.getPrinterJob();
-
-			printJob.setPrintable(this);
-
-			if (printJob.printDialog()) {
-				try {
-					printJob.print();
-				} catch (Exception PrintException) {
-					PrintException.printStackTrace();
-				}
-			}
-			Graphics bm = (Graphics2D) g;
-			print(bm, printJob.defaultPage(), 1);
-		}
-
-	}
 
 	private void update() {
 		validate();
@@ -275,7 +220,7 @@ public class GUI extends JFrame implements Printable {
 
 			public void actionPerformed(ActionEvent e) {
 				try {
-					export(biomorph, true);
+					Export.saveAndPrint(biomorph, true, GUI.this);
 				} catch (AWTException e1) {
 					e1.printStackTrace();
 				}
@@ -287,7 +232,7 @@ public class GUI extends JFrame implements Printable {
 
 			public void actionPerformed(ActionEvent save) {
 				try {
-					export(biomorph, false);
+					Export.saveAndPrint(biomorph, false, GUI.this);
 				} catch (AWTException e) {
 					e.printStackTrace();
 				}
