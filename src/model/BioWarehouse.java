@@ -27,9 +27,18 @@ public class BioWarehouse {
 		return counter;
 	}
 	
-	public void addBioMorph(Biomorph b){
-		biomorphs.add(b);
+	public void saveBioMorph(Biomorph bio){
+		int[] copyGenes = new int[bio.getGenesLenth()];
+		
+		for(int i = 0; i < bio.getGenesLenth(); i++){
+			
+			copyGenes[i] = bio.getGenes()[i];
+			
+		}
+		Biomorph biomorph = new Biomorph(copyGenes);
+		biomorphs.add(biomorph);
 	}
+	
 	
 	public void storeG2D(Graphics2D g2d){
 		this.g2d.add(g2d);

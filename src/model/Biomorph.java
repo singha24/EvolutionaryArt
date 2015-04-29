@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * A Biomorph has genes which are used to render an image.
  * 
@@ -7,8 +9,12 @@ package model;
  * @author Manjit Bansal
  * @version  14 Dec 2014
  */
-public class Biomorph{
+public class Biomorph implements Serializable {
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		private int[] genes;
 
 		/**
@@ -25,6 +31,11 @@ public class Biomorph{
 		 */
 		public int[] getGenes(){
 			return genes;
+		}
+		
+		public int getGenesLenth(){
+			
+			return genes.length;
 		}
 		
 	}

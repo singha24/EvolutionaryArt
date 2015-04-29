@@ -113,11 +113,11 @@ public class GUI extends JFrame implements Printable {
 		newGenes[i] =  biomorph.getGenes()[i];
 		}
 
+
 		// bioCreator.extendRandomBiomorph(new
 		// Biomorph(biomorphTwo.getGenes()));
-		// biomorphTwo.setGenes(newGenes);
-		update(biomorph);
-		update(biomorphTwo);
+		 biomorphTwo.setGenes(newGenes);
+		update();
 
 		// biomorphDisplay.add(biomorph);
 		
@@ -126,7 +126,7 @@ public class GUI extends JFrame implements Printable {
 //			newGenes[i] = 20;
 //		for(int print: newGenes)
 //			System.out.println("TEST"+print);
-
+		
 	}
 
 	public void export(JPanel biomorph, boolean print) throws AWTException {
@@ -185,7 +185,7 @@ public class GUI extends JFrame implements Printable {
 
 	}
 
-	private void update(Renderer biomorph) {
+	private void update() {
 		validate();
 		repaint();
 	}
