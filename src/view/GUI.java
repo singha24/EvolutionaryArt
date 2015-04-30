@@ -123,7 +123,7 @@ public class GUI extends JFrame implements Printable {
 
 		// bioCreator.extendRandomBiomorph(new
 		// Biomorph(biomorphTwo.getGenes()));
-		 biomorphTwo.setGenes(newGenes);
+		 //biomorphTwo.setGenes(newGenes);
 		update();
 
 		//biomorphDisplay.add(biomorph);
@@ -337,6 +337,8 @@ public class GUI extends JFrame implements Printable {
 
 		//preferences.add(complexity);
 		main_biomorph.add(biomorph);
+		//child_1.add(biomorphTwo, BorderLayout.CENTER);
+		//child_2.add(biomorphTwo);
 		
 		
 
@@ -462,46 +464,5 @@ public class GUI extends JFrame implements Printable {
 			return (NO_SUCH_PAGE);
 	}
 
-	/*public void complexitySlider() {
-		JOptionPane optionPane = new JOptionPane();
-		JSlider slider = getSlider(optionPane);
-		optionPane.setMessage(new Object[] { "Complexity: ", slider });
-		optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-		optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
-		JDialog dialog = optionPane.createDialog(this, "Change complexity");
-		dialog.setVisible(true);
-
-		if(optionPane.getInputValue() == JOptionPane.UNINITIALIZED_VALUE){
-			optionPane.setInputValue(50); //default position on slider.
-		}else{
-
-		if (optionPane.getInputValue() == JOptionPane.UNINITIALIZED_VALUE) {
-			optionPane.setInputValue(new Integer(50)); // default position on
-														// slider.
-		} else {
-
-			bioCreator.setGeneLimit((Integer) optionPane.getInputValue());
-		}
-		bioCreator.setGeneLimit((Integer) optionPane.getInputValue());
-		System.out.println("NEW GENE : " + bioCreator.getGeneLimit());
-	}
-	}*/
-
-	/*static JSlider getSlider(final JOptionPane optionPane) {
-		JSlider slider = new JSlider();
-		slider.setMajorTickSpacing(10);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		ChangeListener changeListener = new ChangeListener() {
-			public void stateChanged(ChangeEvent changeEvent) {
-				JSlider theSlider = (JSlider) changeEvent.getSource();
-				if (!theSlider.getValueIsAdjusting()) {
-					optionPane.setInputValue(new Integer(theSlider.getValue()));
-				}
-			}
-		};
-		slider.addChangeListener(changeListener);
-		return slider;
-	}*/
 
 }
