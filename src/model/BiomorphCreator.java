@@ -16,7 +16,7 @@ public class BiomorphCreator {
 	 */
 	public int GENE_LIMIT;
 	
-	public static final int LIMIT_FOR_GENES = 50;
+	public static final int LIMIT_FOR_GENES = 30;
 	
 	//variable to hold the geneLimit
 	private int geneLimit;
@@ -84,9 +84,10 @@ public class BiomorphCreator {
 	 */
 	public Biomorph generateRandomBiomorph(){		
 		Biomorph b = new Biomorph(createRandomGenes());
-		//warehouse.addBioMorph(b);
+		//warehouse.saveBioMorph(b);
 		return b;
 	}
+	
 	
 	public Biomorph extendRandomBiomorph(Biomorph bio){
 //		Biomorph b = warehouse.getBiomorph(0);
@@ -149,5 +150,6 @@ public class BiomorphCreator {
 		return newGenes;
 		
 	}
+
 	
 }

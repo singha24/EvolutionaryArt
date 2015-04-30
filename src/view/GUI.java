@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterJob;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -154,11 +153,12 @@ public class GUI extends JFrame implements Printable {
 			f.setDialogTitle("Save Biomorph");
 			f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			f.showSaveDialog(null);
-			
+
 			if (f.getSelectedFile() != null) {
 				File outputfile = new File(f.getSelectedFile().getPath());
 				try {
-					//bi = ChangeImageResolution.writeImage(outputFile, bi, newMetadata);
+					// bi = ChangeImageResolution.writeImage(outputFile, bi,
+					// newMetadata);
 					ImageIO.write(bi, "PNG", outputfile);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -386,63 +386,4 @@ public class GUI extends JFrame implements Printable {
 		return slider;
 	}
 
-	public byte[] writeCustomData(BufferedImage buffImg, String key,
-			String value) throws Exception {
-
-		ImageWriter writer = ImageIO.getImageWritersByFormatName("png").next();
-
-		ImageWriteParam writeParam = writer.getDefaultWriteParam();
-		ImageTypeSpecifier typeSpecifier = ImageTypeSpecifier
-				.createFromBufferedImageType(BufferedImage.TYPE_INT_RGB);
-
-		// adding metadata
-		IIOMetadata metadata = writer.getDefaultImageMetadata(typeSpecifier,
-				writeParam);
-
-		IIOMetadataNode textEntry = new IIOMetadataNode("tEXtEntry");
-		textEntry.setAttribute("keyword", key);
-		textEntry.setAttribute("value", value);
-
-		IIOMetadataNode text = new IIOMetadataNode("tEXt");
-		text.appendChild(textEntry);
-
-		IIOMetadataNode root = new IIOMetadataNode("javax_imageio_png_1.0");
-		root.appendChild(text);
-
-		metadata.mergeTree("javax_imageio_png_1.0", root);
-
-		// writing the data
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageOutputStream stream = ImageIO.createImageOutputStream(baos);
-		writer.setOutput(stream);
-		writer.write(metadata, new IIOImage(buffImg, null, metadata),
-				writeParam);
-		stream.close();
-
-		return baos.toByteArray();
-	}
-
-	/*
-	 * public String readCustomData(byte[] imageData, String key)throws
-	 * IOException {
-	 * 
-	 * ImageReader imageReader =
-	 * ImageIO.getImageReadersByFormatName("png").next();
-	 * 
-	 * imageReader.setInput(ImageIO .createImageInputStream(new
-	 * ByteArrayInputStream(imageData)), true);
-	 * 
-	 * // read metadata of first image IIOMetadata metadata =
-	 * imageReader.getImageMetadata(0);
-	 * 
-	 * // this cast helps getting the contents PNGMetadata pngmeta =
-	 * (PNGMetadata) metadata; NodeList childNodes =
-	 * pngmeta.getStandardTextNode().getChildNodes();
-	 * 
-	 * for (int i = 0; i < childNodes.getLength(); i++) { Node node = (Node)
-	 * childNodes.item(i); String keyword =
-	 * node.getAttributes().getNamedItem("keyword") .getNodeValue(); String
-	 * value = node.getAttributes().getNamedItem("value") .getNodeValue(); if
-	 * (key.equals(keyword)) { return value; } } return null; }
-	 */
 }
