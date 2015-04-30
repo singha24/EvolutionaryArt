@@ -41,7 +41,6 @@ public class Controller {
 	
 	public void generateParents(){
 		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
-		bioTwo = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 	}
 	
 	
@@ -68,7 +67,7 @@ public class Controller {
 	}
 	
 	public void initGUI(){
-		gui = new GUI(bioOne, bioTwo, temp, bioCreate);
+		gui = new GUI(bioOne, temp, bioCreate);
 	}
 
 

@@ -16,7 +16,7 @@ public class BiomorphCreator {
 	 */
 	public int GENE_LIMIT;
 	
-	public static final int LIMIT_FOR_GENES = 30;
+	public static final int LIMIT_FOR_GENES = 50;
 	
 	//variable to hold the geneLimit
 	private int geneLimit;

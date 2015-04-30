@@ -69,7 +69,7 @@ public class Renderer extends JPanel {
 
 	private void drawLines(Graphics g, int genes[]) {
 		//For positioning the biomorph
-		g.translate(50, 50);
+		//g.translate(13, 25);
 		//Color for the lines
 		Color color = new Color(genes[genes.length-3], genes[genes.length-2], genes[genes.length-1]);
 		// starting lines
