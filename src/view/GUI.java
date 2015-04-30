@@ -16,13 +16,20 @@ import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterJob;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageTypeSpecifier;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.metadata.IIOMetadata;
+import javax.imageio.metadata.IIOMetadataNode;
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -39,6 +46,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import controller.ChangeImageResolution;
 import model.Biomorph;
 import model.BiomorphCreator;
 
@@ -68,10 +76,12 @@ public class GUI extends JFrame implements Printable {
 	private JMenu preferences;
 
 	private JMenuItem save;
-	//private JMenuItem complexity;
+	// private JMenuItem complexity;
 	private JMenuItem print;
 	private JMenuItem upload;
 	private JMenuItem exit;
+
+	private IIOMetadata metadata;
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -139,20 +149,21 @@ public class GUI extends JFrame implements Printable {
 		 */
 		Graphics2D g = bi.createGraphics();
 		paint(g);
-
 		if (!print) {
 			JFileChooser f = new JFileChooser();
 			f.setDialogTitle("Save Biomorph");
 			f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			f.showSaveDialog(null);
-
+			
 			if (f.getSelectedFile() != null) {
 				File outputfile = new File(f.getSelectedFile().getPath());
 				try {
+					//bi = ChangeImageResolution.writeImage(outputFile, bi, newMetadata);
 					ImageIO.write(bi, "PNG", outputfile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+
 				JOptionPane.showMessageDialog(this,
 						"Biomorph successfully saved to:\n"
 								+ f.getSelectedFile().getPath());
@@ -208,9 +219,9 @@ public class GUI extends JFrame implements Printable {
 		preferences.setMnemonic('P');
 		menu.add(preferences);
 
-		//complexity = new JMenuItem("Complexity");
-		//complexity.setMnemonic(KeyEvent.VK_C);
-		//complexity.setActionCommand("Complexity");
+		// complexity = new JMenuItem("Complexity");
+		// complexity.setMnemonic(KeyEvent.VK_C);
+		// complexity.setActionCommand("Complexity");
 
 		upload = new JMenuItem("Upload");
 		upload.setMnemonic(KeyEvent.VK_U);
@@ -229,8 +240,8 @@ public class GUI extends JFrame implements Printable {
 		file.add(save);
 		file.add(print);
 		file.add(exit);
-		//preferences.add(complexity);
-		
+		// preferences.add(complexity);
+
 		container.add(biomorph);
 		container.add(biomorphTwo);
 
@@ -252,14 +263,6 @@ public class GUI extends JFrame implements Printable {
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-
-		//complexity.addActionListener(new ActionListener() {
-
-			//public void actionPerformed(ActionEvent e) {
-				//complexitySlider();
-
-			//}
-		//});
 
 		print.addActionListener(new ActionListener() {
 
@@ -308,8 +311,8 @@ public class GUI extends JFrame implements Printable {
 		print.setAccelerator(KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
 
-		//complexity.setAccelerator(KeyStroke.getKeyStroke(
-				//java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
+		// complexity.setAccelerator(KeyStroke.getKeyStroke(
+		// java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
 
 	}
 
@@ -348,11 +351,6 @@ public class GUI extends JFrame implements Printable {
 			return (NO_SUCH_PAGE);
 	}
 
-	private void showSpinnerDemo() {
-		// headerLabel.setText("Control in action: JSpinner");
-
-	}
-
 	public void complexitySlider() {
 		JOptionPane optionPane = new JOptionPane();
 		JSlider slider = getSlider(optionPane);
@@ -388,57 +386,63 @@ public class GUI extends JFrame implements Printable {
 		return slider;
 	}
 
+	public byte[] writeCustomData(BufferedImage buffImg, String key,
+			String value) throws Exception {
+
+		ImageWriter writer = ImageIO.getImageWritersByFormatName("png").next();
+
+		ImageWriteParam writeParam = writer.getDefaultWriteParam();
+		ImageTypeSpecifier typeSpecifier = ImageTypeSpecifier
+				.createFromBufferedImageType(BufferedImage.TYPE_INT_RGB);
+
+		// adding metadata
+		IIOMetadata metadata = writer.getDefaultImageMetadata(typeSpecifier,
+				writeParam);
+
+		IIOMetadataNode textEntry = new IIOMetadataNode("tEXtEntry");
+		textEntry.setAttribute("keyword", key);
+		textEntry.setAttribute("value", value);
+
+		IIOMetadataNode text = new IIOMetadataNode("tEXt");
+		text.appendChild(textEntry);
+
+		IIOMetadataNode root = new IIOMetadataNode("javax_imageio_png_1.0");
+		root.appendChild(text);
+
+		metadata.mergeTree("javax_imageio_png_1.0", root);
+
+		// writing the data
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageOutputStream stream = ImageIO.createImageOutputStream(baos);
+		writer.setOutput(stream);
+		writer.write(metadata, new IIOImage(buffImg, null, metadata),
+				writeParam);
+		stream.close();
+
+		return baos.toByteArray();
+	}
+
 	/*
-	 * public byte[] writeCustomData(BufferedImage buffImg, String key, String
-	 * value) throws Exception { ImageWriter writer =
-	 * ImageIO.getImageWritersByFormatName("png").next();
+	 * public String readCustomData(byte[] imageData, String key)throws
+	 * IOException {
 	 * 
-	 * ImageWriteParam writeParam = writer.getDefaultWriteParam();
-	 * ImageTypeSpecifier typeSpecifier =
-	 * ImageTypeSpecifier.createFromBufferedImageType
-	 * (BufferedImage.TYPE_INT_ARGB);
-	 * 
-	 * //adding metadata IIOMetadata metadata =
-	 * writer.getDefaultImageMetadata(typeSpecifier, writeParam);
-	 * 
-	 * IIOMetadataNode textEntry = new IIOMetadataNode("tEXtEntry");
-	 * textEntry.setAttribute("keyword", key); textEntry.setAttribute("value",
-	 * value);
-	 * 
-	 * IIOMetadataNode text = new IIOMetadataNode("tEXt");
-	 * text.appendChild(textEntry);
-	 * 
-	 * IIOMetadataNode root = new IIOMetadataNode("javax_imageio_png_1.0");
-	 * root.appendChild(text);
-	 * 
-	 * metadata.mergeTree("javax_imageio_png_1.0", root);
-	 * 
-	 * //writing the data ByteArrayOutputStream baos = new
-	 * ByteArrayOutputStream(); ImageOutputStream stream =
-	 * ImageIO.createImageOutputStream(baos); writer.setOutput(stream);
-	 * writer.write(metadata, new IIOImage(buffImg, null, metadata),
-	 * writeParam); stream.close();
-	 * 
-	 * return baos.toByteArray(); }
-	 * 
-	 * public String readCustomData(byte[] imageData, String key) throws
-	 * IOException{ ImageReader imageReader =
+	 * ImageReader imageReader =
 	 * ImageIO.getImageReadersByFormatName("png").next();
 	 * 
-	 * imageReader.setInput(ImageIO.createImageInputStream(new
+	 * imageReader.setInput(ImageIO .createImageInputStream(new
 	 * ByteArrayInputStream(imageData)), true);
 	 * 
 	 * // read metadata of first image IIOMetadata metadata =
 	 * imageReader.getImageMetadata(0);
 	 * 
-	 * //this cast helps getting the contents PNGMetadata pngmeta =
+	 * // this cast helps getting the contents PNGMetadata pngmeta =
 	 * (PNGMetadata) metadata; NodeList childNodes =
 	 * pngmeta.getStandardTextNode().getChildNodes();
 	 * 
-	 * for (int i = 0; i < childNodes.getLength(); i++) { Node node =
+	 * for (int i = 0; i < childNodes.getLength(); i++) { Node node = (Node)
 	 * childNodes.item(i); String keyword =
-	 * node.getAttributes().getNamedItem("keyword").getNodeValue(); String value
-	 * = node.getAttributes().getNamedItem("value").getNodeValue();
-	 * if(key.equals(keyword)){ return value; } } return null; }
+	 * node.getAttributes().getNamedItem("keyword") .getNodeValue(); String
+	 * value = node.getAttributes().getNamedItem("value") .getNodeValue(); if
+	 * (key.equals(keyword)) { return value; } } return null; }
 	 */
 }

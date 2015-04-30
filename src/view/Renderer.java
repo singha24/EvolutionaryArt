@@ -1,13 +1,14 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Checkbox;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import javax.swing.Box;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 /**
@@ -45,31 +46,31 @@ public class Renderer extends JPanel {
 	public void displayBiomorph(Graphics g, int x1, int y1, int x2, int y2,
 			Color color) {
 
-		
 		g2d = (Graphics2D) g;
 		// g2d.rotate(Math.toRadians(20));
 		g2d.setColor(color);
 		// Can be used for the thickness of the lines
 		// g2d.setStroke(new BasicStroke(2));
 		g2d.drawLine(x1, y1, x2, y2);
-		//g2d = (Graphics2D) g;
+		// g2d = (Graphics2D) g;
 	}
-	
-	public int[] getGenes(){
-		
+
+	public int[] getGenes() {
+
 		return genes;
 	}
-	
-public void setGenes(int[] genes){
-		
+
+	public void setGenes(int[] genes) {
+
 		this.genes = genes;
 	}
 
 	private void drawLines(Graphics g, int genes[]) {
-		//For positioning the biomorph
+		// For positioning the biomorph
 		g.translate(50, 50);
-		//Color for the lines
-		Color color = new Color(genes[genes.length-3], genes[genes.length-2], genes[genes.length-1]);
+		// Color for the lines
+		Color color = new Color(genes[genes.length - 3],
+				genes[genes.length - 2], genes[genes.length - 1]);
 		// starting lines
 		displayBiomorph(g, genes[0], genes[1], genes[2], genes[3], color);
 		displayBiomorph(g, genes[2], genes[1], genes[0], genes[3], color);
@@ -81,7 +82,7 @@ public void setGenes(int[] genes){
 		int y2 = genes[3] + y1;
 		displayBiomorph(g, genes[0], genes[3], x2, y2, color);
 
-		for (int i = 4; i < genes.length-6; i += 2) {
+		for (int i = 4; i < genes.length - 6; i += 2) {
 			displayBiomorph(g, genes[i], genes[i + 1], genes[i + 2],
 					genes[i + 3], color);
 			x1 = genes[i + 2] - genes[i];
@@ -103,8 +104,10 @@ public void setGenes(int[] genes){
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
+		int w = this.getWidth();
+		int h = this.getHeight();
 		drawLines(g, genes);
-		
+
 	}
 
 }
