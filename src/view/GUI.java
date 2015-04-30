@@ -3,6 +3,7 @@ package view;
 import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -36,6 +37,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -45,6 +47,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import controller.Controller;
 import model.Biomorph;
 import model.BiomorphCreator;
 
@@ -61,25 +64,28 @@ public class GUI extends JFrame implements Printable {
 
 	// Renderer variable to hold render object
 	private JFrame main_frame;
-	//private JPanel container = new JPanel();
+	// private JPanel container = new JPanel();
 	private Renderer biomorph;
 	private Renderer biomorphTwo;
 	private Renderer[] tempBiomorphs;
 	private BiomorphCreator bioCreator;
-	//private JPanel panel = new JPanel(); // panel for upload, save or print
+	// private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
-	//private JPanel topPanel = new JPanel();
-	
+	// private JPanel topPanel = new JPanel();
+
+	private JTextField sysLog = new JTextField(100);
 
 	private JMenuBar menu;
 	private JMenu file;
 	private JMenu preferences;
+	private JMenu system;
 
-	//private JMenuItem complexity;
+	// private JMenuItem complexity;
 	private JMenuItem save;
 	private JMenuItem print;
 	private JMenuItem upload;
 	private JMenuItem exit;
+	private JMenuItem viewSysLog;
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -93,17 +99,16 @@ public class GUI extends JFrame implements Printable {
 	private JButton evolve = new JButton("Evolve");
 
 	// Gridlayout for temp biomorphs
-	//private JPanel temporaryBiomorphPanel = new JPanel();
-	//private GridLayout tempBiomorphGrid = new GridLayout(4, 2); // 4 rows, 2
-																// columns
+	// private JPanel temporaryBiomorphPanel = new JPanel();
+	// private GridLayout tempBiomorphGrid = new GridLayout(4, 2); // 4 rows, 2
+	// columns
 
 	/**
 	 * Constructor to initialise the Renderer and create GUI (JFrame).
 	 * 
 	 * @param biomorph
 	 */
-	public GUI(Renderer biomorph, Renderer[] temp,
-			BiomorphCreator bioCreator) {
+	public GUI(Renderer biomorph, Renderer[] temp, BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
 		this.bioCreator = bioCreator;
 		this.tempBiomorphs = temp;
@@ -113,29 +118,27 @@ public class GUI extends JFrame implements Printable {
 
 	public void evolve() {
 
-     // TODO: working on to avoid aliasing	
+		// TODO: working on to avoid aliasing
 		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
 		int[] newGenes = new int[biomorph.getGenes().length];
-		for (int i = 0; i < biomorph.getGenes().length; i++){
-		newGenes[i] =  biomorph.getGenes()[i];
+		for (int i = 0; i < biomorph.getGenes().length; i++) {
+			newGenes[i] = biomorph.getGenes()[i];
 		}
-
 
 		// bioCreator.extendRandomBiomorph(new
 		// Biomorph(biomorphTwo.getGenes()));
-		 //biomorphTwo.setGenes(newGenes);
+		// biomorphTwo.setGenes(newGenes);
 		update();
 
-		//biomorphDisplay.add(biomorph);
-		
-		//test for the array aliasing
-//		for(int i = 0; i < newGenes.length;i++)
-//			newGenes[i] = 20;
-//		for(int print: newGenes)
-//			System.out.println("TEST"+print);
-		
-	}
+		// biomorphDisplay.add(biomorph);
 
+		// test for the array aliasing
+		// for(int i = 0; i < newGenes.length;i++)
+		// newGenes[i] = 20;
+		// for(int print: newGenes)
+		// System.out.println("TEST"+print);
+
+	}
 
 	private void update() {
 		validate();
@@ -146,24 +149,22 @@ public class GUI extends JFrame implements Printable {
 	 * Create GUI (JFrame)
 	 */
 	private void initUI() {
-		
-		//Create and adjust settings for main program window
+
+		// Create and adjust settings for main program window
 		main_frame = new JFrame();
 		main_frame.setPreferredSize(new Dimension(1024, 720));
 		main_frame.setResizable(false);
 		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main_frame.getContentPane().setLayout(null);
 		main_frame.setTitle("Evolutionary Art");
-		
+
 		menu = new JMenuBar();
-		
+
 		file = new JMenu("File");
 		file.setMnemonic('F');
-		menu.add(file);
 
-		//complexity = new JMenuItem("Complexity");
-		//complexity.setMnemonic(KeyEvent.VK_C);
-		//complexity.setActionCommand("Complexity");
+		system = new JMenu("System");
+		system.setMnemonic('S');
 
 		upload = new JMenuItem("Upload");
 		upload.setMnemonic(KeyEvent.VK_U);
@@ -178,30 +179,40 @@ public class GUI extends JFrame implements Printable {
 		exit = new JMenuItem("Exit");
 		exit.setActionCommand("Exit");
 
+		viewSysLog = new JMenuItem("System Log");
+		viewSysLog.setActionCommand("System Log");
+
 		file.add(upload);
 		file.add(save);
 		file.add(print);
 		file.add(exit);
-		
+
+		system.add(viewSysLog);
+
+		menu.add(file);
+
+		menu.add(system);
 		main_frame.setJMenuBar(menu);
-		
+
 		JPanel container = new JPanel();
 		container.setBounds(261, 70, 520, 587);
 		container.setOpaque(true);
 		main_frame.add(container);
-		
-		//container.setBackground(Color.BLACK);
-		
+
+		// container.setBackground(Color.BLACK);
+
 		JPanel main_biomorph = new JPanel();
-		main_biomorph.setBorder(new BevelBorder(BevelBorder.RAISED, UIManager.getColor("Button.highlight"), null, new Color(0, 0, 0), new Color(142, 142, 142)));
+		main_biomorph.setBorder(new BevelBorder(BevelBorder.RAISED, UIManager
+				.getColor("Button.highlight"), null, new Color(0, 0, 0),
+				new Color(142, 142, 142)));
 		main_biomorph.setBounds(58, 58, 400, 300);
 		main_biomorph.setPreferredSize(new Dimension(400, 300));
 		main_biomorph.setOpaque(true);
 		main_biomorph.setLayout(new BorderLayout());
-		//main_biomorph.setBackground(Color.BLACK);
-		//main_biomorph.setBackground(UIManager.getColor("Button.background"));
+		// main_biomorph.setBackground(Color.BLACK);
+		// main_biomorph.setBackground(UIManager.getColor("Button.background"));
 		container.add(main_biomorph);
-		
+
 		JPanel child_pane = new JPanel();
 		child_pane.setBounds(6, 365, 500, 200);
 		child_pane.setPreferredSize(new Dimension(500, 225));
@@ -209,138 +220,135 @@ public class GUI extends JFrame implements Printable {
 		container.add(child_pane);
 
 		JButton child_1 = new JButton();
-		child_1.setPreferredSize(new Dimension(100,100));
+		child_1.setPreferredSize(new Dimension(100, 100));
 		child_1.setLayout(new BorderLayout());
 		child_pane.add(child_1);
-		
+
 		JButton child_2 = new JButton("Child 2");
-		child_2.setPreferredSize(new Dimension(100,100));
+		child_2.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_2);
-		
+
 		JButton child_3 = new JButton("Child 2");
-		child_3.setPreferredSize(new Dimension(100,100));
+		child_3.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_3);
-		
+
 		JButton child_4 = new JButton("Child 4");
-		child_4.setPreferredSize(new Dimension(100,100));
+		child_4.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_4);
-		
+
 		JButton child_5 = new JButton("Child 5");
-		child_5.setPreferredSize(new Dimension(100,100));
+		child_5.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_5);
-		
+
 		JButton child_6 = new JButton("Child 6");
-		child_6.setPreferredSize(new Dimension(100,100));
+		child_6.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_6);
-		
+
 		JButton child_7 = new JButton("Child 7");
-		child_7.setPreferredSize(new Dimension(100,100));
+		child_7.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_7);
-		
+
 		JButton child_8 = new JButton("Child 8");
-		child_8.setPreferredSize(new Dimension(100,100));
+		child_8.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_8);
-		
+
 		JPanel save_panel = new JPanel();
 		save_panel.setBounds(33, 70, 216, 587);
 		main_frame.getContentPane().add(save_panel);
-		
+
 		JPanel save_1 = new JPanel();
-		save_1.setPreferredSize(new Dimension(100,100));
+		save_1.setPreferredSize(new Dimension(100, 100));
 		save_1.setOpaque(true);
 		save_1.setBackground(Color.BLACK);
 		save_panel.add(save_1);
-		
+
 		JPanel save_2 = new JPanel();
-		save_2.setPreferredSize(new Dimension(100,100));
+		save_2.setPreferredSize(new Dimension(100, 100));
 		save_2.setOpaque(true);
 		save_2.setBackground(Color.BLACK);
 		save_panel.add(save_2);
-		
+
 		JPanel save_3 = new JPanel();
-		save_3.setPreferredSize(new Dimension(100,100));
+		save_3.setPreferredSize(new Dimension(100, 100));
 		save_3.setOpaque(true);
 		save_3.setBackground(Color.BLACK);
 		save_panel.add(save_3);
-		
+
 		JPanel save_4 = new JPanel();
-		save_4.setPreferredSize(new Dimension(100,100));
+		save_4.setPreferredSize(new Dimension(100, 100));
 		save_4.setOpaque(true);
 		save_4.setBackground(Color.BLACK);
 		save_panel.add(save_4);
-		
+
 		JPanel save_5 = new JPanel();
 		save_5.setPreferredSize(new Dimension(100, 100));
 		save_5.setOpaque(true);
 		save_5.setBackground(Color.BLACK);
 		save_panel.add(save_5);
-		
+
 		JPanel save_6 = new JPanel();
 		save_6.setPreferredSize(new Dimension(100, 100));
 		save_6.setOpaque(true);
 		save_6.setBackground(Color.BLACK);
 		save_panel.add(save_6);
-		
+
 		JPanel save_7 = new JPanel();
 		save_7.setPreferredSize(new Dimension(100, 100));
 		save_7.setOpaque(true);
 		save_7.setBackground(Color.BLACK);
 		save_panel.add(save_7);
-		
+
 		JPanel save_8 = new JPanel();
 		save_8.setPreferredSize(new Dimension(100, 100));
 		save_8.setOpaque(true);
 		save_8.setBackground(Color.BLACK);
 		save_panel.add(save_8);
-		
+
 		JPanel hof_panel = new JPanel();
 		hof_panel.setBounds(793, 88, 216, 224);
 		main_frame.getContentPane().add(hof_panel);
-		
+
 		JPanel hof_1 = new JPanel();
-		hof_1.setPreferredSize(new Dimension(100,100));
+		hof_1.setPreferredSize(new Dimension(100, 100));
 		hof_1.setOpaque(true);
 		hof_1.setBackground(Color.BLACK);
 		hof_panel.add(hof_1);
-		
+
 		JPanel hof_2 = new JPanel();
-		hof_2.setPreferredSize(new Dimension(100,100));
+		hof_2.setPreferredSize(new Dimension(100, 100));
 		hof_2.setOpaque(true);
 		hof_2.setBackground(Color.BLACK);
 		hof_panel.add(hof_2);
-		
+
 		JPanel hof_3 = new JPanel();
-		hof_3.setPreferredSize(new Dimension(100,100));
+		hof_3.setPreferredSize(new Dimension(100, 100));
 		hof_3.setOpaque(true);
 		hof_3.setBackground(Color.BLACK);
 		hof_panel.add(hof_3);
-		
+
 		JPanel hof_4 = new JPanel();
-		hof_4.setPreferredSize(new Dimension(100,100));
+		hof_4.setPreferredSize(new Dimension(100, 100));
 		hof_4.setOpaque(true);
 		hof_4.setBackground(Color.BLACK);
 		hof_panel.add(hof_4);
 
-		//container.setLayout(new FlowLayout());
-		//frame = new JFrame();
-		//Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		//container.setBounds(0, 0, 1024, 720);
-		
+		// container.setLayout(new FlowLayout());
+		// frame = new JFrame();
+		// Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		// container.setBounds(0, 0, 1024, 720);
+
 		biomorph.setLayout(new FlowLayout(FlowLayout.LEFT));
-		// biomorphTwo 
+		// biomorphTwo
 
-
-		//temporaryBiomorphPanel.setLayout(tempBiomorphGrid);
+		// temporaryBiomorphPanel.setLayout(tempBiomorphGrid);
 		// for (int i = 0; i < tempBiomorphs.length; i++) {
 		// temporaryBiomorphPanel.add(tempBiomorphs[i]);
 		// }
 
-		//preferences.add(complexity);
+		// preferences.add(complexity);
 		main_biomorph.add(biomorph);
-		//child_1.add(biomorphTwo, BorderLayout.CENTER);
-		//child_2.add(biomorphTwo);
-		
-		
+		// child_1.add(biomorphTwo, BorderLayout.CENTER);
+		// child_2.add(biomorphTwo);
 
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -351,30 +359,33 @@ public class GUI extends JFrame implements Printable {
 		generate.add(evolve); // add the generate button to its own panel
 		generate.add(spinner);
 
-		//main_frame.add(menu, BorderLayout.NORTH);
-		//main_frame.add(generate, BorderLayout.PAGE_END);
-		//main_frame.add(container, BorderLayout.CENTER);
+		// main_frame.add(menu, BorderLayout.NORTH);
+		// main_frame.add(generate, BorderLayout.PAGE_END);
+		// main_frame.add(container, BorderLayout.CENTER);
 		// add(temporaryBiomorphPanel, BorderLayout.EAST);
 
 		main_frame.pack();
 		main_frame.setLocationRelativeTo(null);
 		main_frame.setVisible(true);
-		
-		child_1.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+
+		child_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				evolve();
 			}
-			
-		});	
-		
 
-		//complexity.addActionListener(new ActionListener() {
+		});
 
-			//public void actionPerformed(ActionEvent e) {
-				//complexitySlider();
+		viewSysLog.addActionListener(new ActionListener() {
 
-			//}
-		//});
+			public void actionPerformed(ActionEvent e) {
+				try {
+					JOptionPane.showMessageDialog(null, Controller.readSysLog());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 
 		print.addActionListener(new ActionListener() {
 
@@ -408,13 +419,13 @@ public class GUI extends JFrame implements Printable {
 			}
 		});
 
-		//exit.addActionListener(new ActionListener() {
+		// exit.addActionListener(new ActionListener() {
 
-			//public void actionPerformed(ActionEvent e) {
-				//System.exit(0);
+		// public void actionPerformed(ActionEvent e) {
+		// System.exit(0);
 
-			//}
-		//});
+		// }
+		// });
 
 		// shorcuts
 		save.setAccelerator(KeyStroke.getKeyStroke(
@@ -423,11 +434,10 @@ public class GUI extends JFrame implements Printable {
 		print.setAccelerator(KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
 
-		//complexity.setAccelerator(KeyStroke.getKeyStroke(
-				//java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
+		// complexity.setAccelerator(KeyStroke.getKeyStroke(
+		// java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
 
 	}
-
 
 	public int getSpinnerValue() {
 		return (Integer) spinner.getValue();
@@ -463,6 +473,5 @@ public class GUI extends JFrame implements Printable {
 		} else
 			return (NO_SUCH_PAGE);
 	}
-
 
 }
