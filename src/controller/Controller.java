@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -139,6 +140,7 @@ public class Controller {
 	public static void main(String[] args) {
 
 		Controller control = new Controller();
+		
 		sysLog = "System Log: " + getDateTime()
 				+ System.getProperty("line.separator");
 

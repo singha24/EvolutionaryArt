@@ -23,6 +23,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -119,11 +120,19 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	public void startSpeachRecognition() {
 		this.loading = new JFrame();
-
+		
 		ImageIcon loading = new ImageIcon("ajax-loader.gif");
 		this.loading.add(new JLabel("loading... ", loading, JLabel.CENTER));
-		this.loading.setSize(400, 300);
+		
+		this.loading.setPreferredSize((new Dimension(100,100)));
 		this.loading.setVisible(true);
+		
+		this.loading.removeNotify();
+		this.loading.setUndecorated(true);
+		this.loading.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+	
+		this.loading.pack();
+		this.loading.setLocationRelativeTo(null);
 		speaking = true;
 		speechThread = new Thread(this);
 		speechThread.start();
@@ -557,8 +566,7 @@ public void evolve() {
 								"Please connect a microphone to be able to use this feature.");
 			}
 
-			System.out
-					.println("Say: (Evolve | Stop | Save | Print) ( One | Two | Three | Four | Five | Six )");
+			System.out.println("Say: (Evolve | Stop | Save | Print) ( One | Two | Three | Four | Five | Six )");
 
 			// loop the recognition until the programm exits.
 			this.loading.dispose();
