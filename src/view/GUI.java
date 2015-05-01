@@ -463,8 +463,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 		print.setAccelerator(KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK));
 
-		// complexity.setAccelerator(KeyStroke.getKeyStroke(
-		// java.awt.event.KeyEvent.VK_C, java.awt.Event.ALT_MASK));
+		speech.setAccelerator(KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_P, java.awt.Event.ALT_MASK));
 
 	}
 
