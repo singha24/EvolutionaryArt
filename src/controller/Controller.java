@@ -51,9 +51,9 @@ public class Controller {
 		save = new Save();
 	}
 
-	public void generateParents() {
-		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
-		bioTwo = new Renderer(generateChild(bioOne.getGenes()));
+	public void generateParents(int x, int y) {
+		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y);
+		//bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 
 	}
 
@@ -72,6 +72,7 @@ public class Controller {
 	}
 	
 	public void createTempBiomorphs(){
+		bioTwo = new Renderer(generateChild(bioOne.getGenes()), 10,10);
 //		for(int i = 0; i < temp.length; i++){
 //			temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 //		}
@@ -95,7 +96,7 @@ public class Controller {
 	}
 
 	public void initGUI() {
-		gui = new GUI(bioOne, temp, bioCreate);
+		gui = new GUI(bioOne, temp, bioCreate, bioTwo);
 	}
 
 	public void generateTextFile(String filename, String text)
@@ -146,7 +147,7 @@ public class Controller {
 		control.initiliseHelpers();
 		sysLog += "Initilising helpers..."
 				+ System.getProperty("line.separator");
-		control.generateParents();
+		control.generateParents(175, 140);
 		sysLog += "Done." + System.getProperty("line.separator");
 		sysLog += "Generating biomorph..."
 				+ System.getProperty("line.separator");

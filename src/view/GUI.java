@@ -68,6 +68,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenu file;
 	private JMenu preferences;
 	private JMenu system;
+	
+	private JPanel main_biomorph = new JPanel();
 
 	// private JMenuItem complexity;
 	private JMenuItem save;
@@ -103,11 +105,11 @@ public class GUI extends JFrame implements Printable, Runnable {
 	 * 
 	 * @param biomorph
 	 */
-	public GUI(Renderer biomorph, Renderer[] temp, BiomorphCreator bioCreator) {
+	public GUI(Renderer biomorph, Renderer[] temp, BiomorphCreator bioCreator, Renderer biomorphTwo) {
 		this.biomorph = biomorph;
 
 		biomorph.setLocation(0, 100);
-		// this.biomorphTwo = biomorphTwo;
+		 this.biomorphTwo = biomorphTwo;
 
 		this.bioCreator = bioCreator;
 		this.tempBiomorphs = temp;
@@ -128,30 +130,63 @@ public class GUI extends JFrame implements Printable, Runnable {
 		
 	}
 
-	public void evolve() {
-
+//	public void evolve() {
+//
+//		// TODO: working on to avoid aliasing
+//		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+//		// int[] newGenes = new int[biomorph.getGenes().length];
+//		// for (int i = 0; i < biomorph.getGenes().length; i++){
+//		// newGenes[i] = biomorph.getGenes()[i];
+//		// }
+//
+//		int[] newGenes = new int[biomorph.getGenes().length];
+//		for (int i = 0; i < biomorph.getGenes().length; i++) {
+//			newGenes[i] = biomorph.getGenes()[i];
+//		}
+//
+//		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+//		// biomorphTwo.setGenes(newGenes);
+//
+//		update();
+//
+//	}
+//
+//	private void update() {
+//		validate();
+//		repaint();
+//	}
+	
+	
+public void evolve() {
+		
 		// TODO: working on to avoid aliasing
-		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-		// int[] newGenes = new int[biomorph.getGenes().length];
-		// for (int i = 0; i < biomorph.getGenes().length; i++){
-		// newGenes[i] = biomorph.getGenes()[i];
-		// }
+		//bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+		//int[] newGenes = new int[biomorph.getGenes().length];
+//		for (int i = 0; i < biomorph.getGenes().length; i++){
+//		newGenes[i] =  biomorph.getGenes()[i];
+//		}
 
-		int[] newGenes = new int[biomorph.getGenes().length];
-		for (int i = 0; i < biomorph.getGenes().length; i++) {
-			newGenes[i] = biomorph.getGenes()[i];
-		}
+//		int[] newGenes = new int[biomorph.getGenes().length];
+//		for (int i = 0; i < biomorph.getGenes().length; i++) {
+//			newGenes[i] = biomorph.getGenes()[i];
+//		}
 
-		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-		// biomorphTwo.setGenes(newGenes);
-
+		
+		 bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
+		//bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+		 //biomorph.setGenes(bio.getGenes());
+		 //biomorphTwo.setGenes(newGenes);
+		 biomorph.setGenes(biomorphTwo.getGenes());
+		 for (int i = 0; i < biomorph.getGenes().length; i++){
+				System.out.println("test: "+biomorph.getGenes()[i]);
+				}
 		update();
 
 	}
 
 	private void update() {
-		validate();
-		repaint();
+		main_biomorph.repaint();
+		
 	}
 
 	/**
@@ -214,7 +249,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		// container.setBackground(Color.BLACK);
 
-		JPanel main_biomorph = new JPanel();
+		
 		main_biomorph.setBorder(new BevelBorder(BevelBorder.RAISED, UIManager
 				.getColor("Button.highlight"), null, new Color(0, 0, 0),
 				new Color(142, 142, 142)));
@@ -236,6 +271,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_1.setPreferredSize(new Dimension(100, 100));
 		child_1.setLayout(new BorderLayout());
 		child_pane.add(child_1);
+		
 
 		JButton child_2 = new JButton("Child 2");
 		child_2.setPreferredSize(new Dimension(100, 100));
@@ -360,6 +396,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		// preferences.add(complexity);
 		main_biomorph.add(biomorph);
+		child_1.add(biomorphTwo);
 		// child_1.add(biomorphTwo, BorderLayout.CENTER);
 		// child_2.add(biomorphTwo);
 
