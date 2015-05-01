@@ -172,17 +172,17 @@ public void evolve() {
 //		newGenes[i] =  biomorph.getGenes()[i];
 //		}
 
-//		int[] newGenes = new int[biomorph.getGenes().length];
-//		for (int i = 0; i < biomorph.getGenes().length; i++) {
-//			newGenes[i] = biomorph.getGenes()[i];
-//		}
-
-		
+		int[] newGenes = new int[biomorph.getGenes().length];
+		for (int i = 0; i < biomorph.getGenes().length; i++) {
+			newGenes[i] = biomorph.getGenes()[i];
+		}
+		biomorph.setGenes(biomorphTwo.getGenes());
+		 biomorphTwo.setGenes(newGenes);
 		 bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
 		//bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
 		 //biomorph.setGenes(bio.getGenes());
 		 //biomorphTwo.setGenes(newGenes);
-		 biomorph.setGenes(biomorphTwo.getGenes());
+		 
 		 for (int i = 0; i < biomorph.getGenes().length; i++){
 				System.out.println("test: "+biomorph.getGenes()[i]);
 				}
