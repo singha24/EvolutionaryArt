@@ -2,59 +2,44 @@ package view;
 
 import java.awt.AWTException;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import model.Biomorph;
+import model.BiomorphCreator;
 import controller.Controller;
 import edu.cmu.sphinx.frontend.util.Microphone;
 import edu.cmu.sphinx.recognizer.Recognizer;
 import edu.cmu.sphinx.result.Result;
 import edu.cmu.sphinx.util.props.ConfigurationManager;
-import model.Biomorph;
-import model.BiomorphCreator;
 
 /**
  * GUI creates Graphical User interface by extending JFrame
@@ -94,6 +79,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	private Thread speechThread;
 	private boolean speaking; // used to start and stop thread
+	
+	private JFrame loading;
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -129,9 +116,16 @@ public class GUI extends JFrame implements Printable, Runnable {
 	}
 
 	public void startSpeachRecognition() {
+		this.loading = new JFrame();
+
+		ImageIcon loading = new ImageIcon("ajax-loader.gif");
+		this.loading.add(new JLabel("loading... ", loading, JLabel.CENTER));
+		this.loading.setSize(400, 300);
+		this.loading.setVisible(true);
 		speaking = true;
 		speechThread = new Thread(this);
 		speechThread.start();
+		
 	}
 
 	public void evolve() {
@@ -521,13 +515,16 @@ public class GUI extends JFrame implements Printable, Runnable {
 					System.exit(1);
 				}
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null,"Please connect a microphone to be able to use this feature.");
+				JOptionPane
+						.showMessageDialog(null,
+								"Please connect a microphone to be able to use this feature.");
 			}
 
 			System.out
 					.println("Say: (Evolve | Stop | Save | Print) ( One | Two | Three | Four | Five | Six )");
 
 			// loop the recognition until the programm exits.
+			this.loading.dispose();
 			while (speaking) {
 
 				Result result = recognizer.recognize();
