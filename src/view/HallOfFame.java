@@ -17,7 +17,7 @@ import model.Biomorph;
 public class HallOfFame {
 
 	/**
-	 * @param biomorph
+	 * @param biomorph -  
 	 * @param fileName
 	 * @return true if the Biomorph is successfully saved and false if an error
 	 * occurred.
@@ -87,6 +87,7 @@ public class HallOfFame {
 		boolean saved = h.saveHallOfFame(bio, "test");
 		System.out.println(saved);
 		Biomorph readBio = h.readHallOfFame("test");
+		
 		for (int gene : readBio.getGenes())
 			System.out.println("Test : " + gene);
 

@@ -53,13 +53,29 @@ public class Controller {
 
 	public void generateParents() {
 		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
+		bioTwo = new Renderer(generateChild(bioOne.getGenes()));
+
 	}
 
-	public void createTempBiomorphs() {
-		// for(int i = 0; i < temp.length; i++){
-		// temp[i] = new
-		// Renderer(bioCreate.generateRandomBiomorph().getGenes());
-		// }
+	
+	public int[] generateChild(int[] parent){
+		
+		int[] child = new int[parent.length];
+		
+		for(int i =0; i<parent.length; i++){
+			
+			child[i] = parent[i]; 
+	
+		}
+		return child;
+		
+	}
+	
+	public void createTempBiomorphs(){
+//		for(int i = 0; i < temp.length; i++){
+//			temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
+//		}
+
 	}
 
 	public Renderer[] getTempBiomorphs() {
@@ -142,6 +158,22 @@ public class Controller {
 		sysLog += "Done." + System.getProperty("line.separator");
 		elapsedTime = timerEnd - timerStart;
 
+		sysLog += "Time taken to boot application: " + elapsedTime
+				+ " milliseconds";
+		sysLog += "Initilising GUI..." + System.getProperty("line.separator");
+		timerEnd = System.currentTimeMillis();
+		sysLog += "Done." + System.getProperty("line.separator");
+		elapsedTime = timerEnd - timerStart;
+
+		try {
+			control.generateTextFile("SystemLog", sysLog);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sysLog += "Time taken to boot application: " + elapsedTime
 				+ " milliseconds";
 
