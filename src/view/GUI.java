@@ -2,6 +2,7 @@ package view;
 
 import java.awt.AWTException;
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -48,6 +49,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import controller.Controller;
+import edu.cmu.sphinx.frontend.util.Microphone;
+import edu.cmu.sphinx.recognizer.Recognizer;
+import edu.cmu.sphinx.result.Result;
+import edu.cmu.sphinx.util.props.ConfigurationManager;
 import model.Biomorph;
 import model.BiomorphCreator;
 
@@ -60,9 +65,9 @@ import model.BiomorphCreator;
  * @author Matthew Chambers, Assa Singh
  * @version 16 Dec 2014
  */
-public class GUI extends JFrame implements Printable {
+public class GUI extends JFrame implements Printable, Runnable  {
 
-	// Renderer variable to hold render object
+	
 	private JFrame main_frame;
 	// private JPanel container = new JPanel();
 	private Renderer biomorph;
@@ -86,6 +91,10 @@ public class GUI extends JFrame implements Printable {
 	private JMenuItem upload;
 	private JMenuItem exit;
 	private JMenuItem viewSysLog;
+	private JMenuItem speech;
+	
+	private Thread speechThread;
+	private boolean speaking; //used to start and stop thread
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -114,6 +123,12 @@ public class GUI extends JFrame implements Printable {
 		this.tempBiomorphs = temp;
 
 		initUI();
+		speechThread = new Thread(this);
+	}
+
+	public void startSpeachRecognition() {
+		speaking = true;
+		speechThread.start();
 	}
 
 	public void evolve() {
@@ -125,18 +140,7 @@ public class GUI extends JFrame implements Printable {
 			newGenes[i] = biomorph.getGenes()[i];
 		}
 
-		// bioCreator.extendRandomBiomorph(new
-		// Biomorph(biomorphTwo.getGenes()));
-		// biomorphTwo.setGenes(newGenes);
 		update();
-
-		// biomorphDisplay.add(biomorph);
-
-		// test for the array aliasing
-		// for(int i = 0; i < newGenes.length;i++)
-		// newGenes[i] = 20;
-		// for(int print: newGenes)
-		// System.out.println("TEST"+print);
 
 	}
 
@@ -181,6 +185,9 @@ public class GUI extends JFrame implements Printable {
 
 		viewSysLog = new JMenuItem("System Log");
 		viewSysLog.setActionCommand("System Log");
+		
+		speech = new JMenuItem("Speech Recognition");
+		speech.setActionCommand("Speech Recognition");
 
 		file.add(upload);
 		file.add(save);
@@ -188,6 +195,7 @@ public class GUI extends JFrame implements Printable {
 		file.add(exit);
 
 		system.add(viewSysLog);
+		system.add(speech);
 
 		menu.add(file);
 
@@ -251,7 +259,7 @@ public class GUI extends JFrame implements Printable {
 		JButton child_8 = new JButton("Child 8");
 		child_8.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_8);
-
+		
 		JPanel save_panel = new JPanel();
 		save_panel.setBounds(33, 70, 216, 587);
 		main_frame.getContentPane().add(save_panel);
@@ -374,6 +382,14 @@ public class GUI extends JFrame implements Printable {
 			}
 
 		});
+		
+		speech.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				startSpeachRecognition();
+				
+			}
+		});
 
 		viewSysLog.addActionListener(new ActionListener() {
 
@@ -472,6 +488,47 @@ public class GUI extends JFrame implements Printable {
 			return (PAGE_EXISTS);
 		} else
 			return (NO_SUCH_PAGE);
+	}
+
+	public void run() {
+		ConfigurationManager cm;
+
+		cm = new ConfigurationManager(GUI.class.getResource("hello.config.xml"));
+
+		Recognizer recognizer = (Recognizer) cm.lookup("recognizer");
+		recognizer.allocate();
+
+		// start the microphone or exit if the programm if this is not possible
+		Microphone microphone = (Microphone) cm.lookup("microphone");
+		if (!microphone.startRecording()) {
+			System.out.println("Cannot start microphone.");
+			recognizer.deallocate();
+			System.exit(1);
+		}
+
+		System.out
+				.println("Say: (Evolve) ( One | Two | Three | Four | Five | Six )");
+
+		// loop the recognition until the programm exits.
+		while (speaking) {
+
+			Result result = recognizer.recognize();
+
+			if (result != null) {
+				String resultText = result.getBestFinalResultNoFiller();
+
+				if (resultText.toLowerCase().contains("evolve")) {
+					evolve();
+					System.out.println("You said: " + resultText + '\n');
+				}
+				
+				if(resultText.toLowerCase().contains("stop")){
+					speaking = false;
+					JOptionPane.showMessageDialog(null, "Speech Recognition Turned Off.");
+				}
+			}
+		}
+		
 	}
 
 }
