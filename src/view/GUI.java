@@ -97,6 +97,7 @@ public class GUI extends JFrame implements Printable {
 	public GUI(Renderer biomorph, Renderer biomorphTwo, Renderer[] temp,
 			BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
+		biomorph.setLocation(0, 100); 
 		this.biomorphTwo = biomorphTwo;
 		this.bioCreator = bioCreator;
 		this.tempBiomorphs = temp;
@@ -108,15 +109,15 @@ public class GUI extends JFrame implements Printable {
 
      // TODO: working on to avoid aliasing	
 		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-		int[] newGenes = new int[biomorph.getGenes().length];
-		for (int i = 0; i < biomorph.getGenes().length; i++){
-		newGenes[i] =  biomorph.getGenes()[i];
-		}
+		//int[] newGenes = new int[biomorph.getGenes().length];
+//		for (int i = 0; i < biomorph.getGenes().length; i++){
+//		newGenes[i] =  biomorph.getGenes()[i];
+//		}
 
 
-		// bioCreator.extendRandomBiomorph(new
-		// Biomorph(biomorphTwo.getGenes()));
-		 biomorphTwo.setGenes(newGenes);
+		 bioCreator.extendRandomBiomorph(new
+		 Biomorph(biomorphTwo.getGenes()));
+		 //biomorphTwo.setGenes(newGenes);
 		update();
 
 		// biomorphDisplay.add(biomorph);

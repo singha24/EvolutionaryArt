@@ -24,7 +24,9 @@ public class Renderer extends JPanel {
 	private int[] genes;
 
 	public Renderer(int[] genes) {
+		
 		this.genes = genes;
+		
 		
 	}
 

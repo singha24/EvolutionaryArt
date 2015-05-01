@@ -41,9 +41,21 @@ public class Controller {
 	
 	public void generateParents(){
 		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
-		bioTwo = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
+		bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 	}
 	
+	public int[] generateChild(int[] parent){
+		
+		int[] child = new int[parent.length];
+		
+		for(int i =0; i<parent.length; i++){
+			
+			child[i] = parent[i]; 
+	
+		}
+		return child;
+		
+	}
 	
 	public void createTempBiomorphs(){
 //		for(int i = 0; i < temp.length; i++){

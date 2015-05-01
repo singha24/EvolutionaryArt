@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.AWTException;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -10,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -40,9 +38,13 @@ public class Export {
 		gui.paint(g);
 
 		if (!print) {
+			
 			save(gui, bi);
+			
 		} else {
+			
 			print(gui, g);
+			
 		}
 
 	}
@@ -53,10 +55,15 @@ public class Export {
 		printJob.setPrintable(gui);
 
 		if (printJob.printDialog()) {
+			
 			try {
+				
 				printJob.print();
+				
 			} catch (Exception PrintException) {
+				
 				PrintException.printStackTrace();
+				
 			}
 		}
 		Graphics bm = (Graphics2D) g;
@@ -72,12 +79,19 @@ public class Export {
 		f.showSaveDialog(null);
 
 		if (f.getSelectedFile() != null) {
+			
 			File outputfile = new File(f.getSelectedFile().getPath());
+			
 			try {
+				
 				ImageIO.write(bi, "PNG", outputfile);
+				
 			} catch (IOException e) {
+				
 				e.printStackTrace();
+				
 			}
+			
 			JOptionPane.showMessageDialog(gui,
 					"Biomorph successfully saved to:\n"
 							+ f.getSelectedFile().getPath());

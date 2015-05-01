@@ -16,7 +16,7 @@ public class BiomorphCreator {
 	 */
 	public int GENE_LIMIT;
 	
-	public static final int LIMIT_FOR_GENES = 30;
+	public static final int LINES_PLOTTING_LIMIT = 50;
 	
 	//variable to hold the geneLimit
 	private int geneLimit;
@@ -49,7 +49,7 @@ public class BiomorphCreator {
 		// Get random number and store it onto array
 		for(int i = 0; i < genes.length; i++){
 			if(i < genes.length-3){
-		genes[i] = rand.nextInt(LIMIT_FOR_GENES);
+		genes[i] = rand.nextInt(LINES_PLOTTING_LIMIT);
 			}
 			else{
 				genes[i] = rand.nextInt(255);
@@ -65,7 +65,7 @@ public class BiomorphCreator {
 	}
 	
 	public int initGeneLimit(){
-		return rand.nextInt(((LIMIT_FOR_GENES)*2 - (LIMIT_FOR_GENES)/2) + 1) + (LIMIT_FOR_GENES)/2;
+		return rand.nextInt(((LINES_PLOTTING_LIMIT)*2 - (LINES_PLOTTING_LIMIT)/2) + 1) + (LINES_PLOTTING_LIMIT)/2;
 		
 	}
 	

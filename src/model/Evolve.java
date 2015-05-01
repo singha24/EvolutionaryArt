@@ -71,7 +71,7 @@ public final class Evolve {
 				}
 			
 			
-			System.out.println("NEW VALUE: "+genesValue);
+			//System.out.println("NEW VALUE: "+genesValue);
 			
 		}
 		
