@@ -119,8 +119,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 	public GUI(Renderer biomorph, Renderer[] temp, BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
 
-		biomorph.setLocation(0, 100); 
-		//this.biomorphTwo = biomorphTwo;
+		biomorph.setLocation(0, 100);
+		// this.biomorphTwo = biomorphTwo;
 
 		this.bioCreator = bioCreator;
 		this.tempBiomorphs = temp;
@@ -138,20 +138,18 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		// TODO: working on to avoid aliasing
 		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-		//int[] newGenes = new int[biomorph.getGenes().length];
-//		for (int i = 0; i < biomorph.getGenes().length; i++){
-//		newGenes[i] =  biomorph.getGenes()[i];
-//		}
+		// int[] newGenes = new int[biomorph.getGenes().length];
+		// for (int i = 0; i < biomorph.getGenes().length; i++){
+		// newGenes[i] = biomorph.getGenes()[i];
+		// }
 
 		int[] newGenes = new int[biomorph.getGenes().length];
 		for (int i = 0; i < biomorph.getGenes().length; i++) {
 			newGenes[i] = biomorph.getGenes()[i];
 		}
 
-
-		 bioCreator.extendRandomBiomorph(new
-		 Biomorph(biomorph.getGenes()));
-		 //biomorphTwo.setGenes(newGenes);
+		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+		// biomorphTwo.setGenes(newGenes);
 
 		update();
 
@@ -515,11 +513,15 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 			// start the microphone or exit if the programm if this is not
 			// possible
-			Microphone microphone = (Microphone) cm.lookup("microphone");
-			if (!microphone.startRecording()) {
-				System.out.println("Cannot start microphone.");
-				recognizer.deallocate();
-				System.exit(1);
+			try {
+				Microphone microphone = (Microphone) cm.lookup("microphone");
+				if (!microphone.startRecording()) {
+					System.out.println("Cannot start microphone.");
+					recognizer.deallocate();
+					System.exit(1);
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,"Please connect a microphone to be able to use this feature.");
 			}
 
 			System.out
@@ -550,5 +552,4 @@ public class GUI extends JFrame implements Printable, Runnable {
 		}
 
 	}
-
 }
