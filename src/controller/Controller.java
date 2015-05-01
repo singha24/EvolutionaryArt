@@ -37,6 +37,7 @@ public class Controller {
 	private static long elapsedTime;
 
 	private static String sysLog;
+	private static String instructions;
 	private static boolean ready = false;
 
 	/**
@@ -112,9 +113,9 @@ public class Controller {
 		return date.toString();
 	}
 
-	public static String readSysLog() throws IOException {
+	public static String readSysFile(String fileName) throws IOException {
 		String temp = "";
-		BufferedReader br = new BufferedReader(new FileReader("SystemLog.txt"));
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		try {
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();

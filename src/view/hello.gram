@@ -6,4 +6,4 @@
 
 grammar hello;
 
-public <greet> = (Evolve | Stop) ( One | Two | Three | Four | Five | Six );
+public <greet> = (Evolve | Exit) ( One | Two | Three | Four | Five | Six );

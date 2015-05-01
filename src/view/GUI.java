@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -69,7 +70,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenu file;
 	private JMenu preferences;
 	private JMenu system;
-	
+	private JMenu help;
+
 	private JPanel main_biomorph = new JPanel();
 
 	// private JMenuItem complexity;
@@ -79,11 +81,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem exit;
 	private JMenuItem viewSysLog;
 	private JMenuItem speech;
+	private JMenuItem instructions;
 
 	private Thread speechThread;
 	private boolean speaking; // used to start and stop thread
-	
-	private JFrame loading;
+
+	private static JFrame loadingFrame;
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -91,8 +94,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 			100, // max
 			1);// step
 	private JSpinner spinner = new JSpinner(spinnerModel);
-
-	private final double INCH = 72;
 
 	private JButton evolve = new JButton("Evolve");
 
@@ -106,11 +107,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 	 * 
 	 * @param biomorph
 	 */
-	public GUI(Renderer biomorph, Renderer[] temp, BiomorphCreator bioCreator, Renderer biomorphTwo) {
+	public GUI(Renderer biomorph, Renderer[] temp, BiomorphCreator bioCreator,
+			Renderer biomorphTwo) {
 		this.biomorph = biomorph;
 
 		biomorph.setLocation(0, 100);
-		 this.biomorphTwo = biomorphTwo;
+		this.biomorphTwo = biomorphTwo;
 
 		this.bioCreator = bioCreator;
 		this.tempBiomorphs = temp;
@@ -118,87 +120,90 @@ public class GUI extends JFrame implements Printable, Runnable {
 		initUI();
 	}
 
-	public void startSpeachRecognition() {
-		this.loading = new JFrame();
-		
+	public static void loading() {
+		loadingFrame = new JFrame();
+
 		ImageIcon loading = new ImageIcon("ajax-loader.gif");
-		this.loading.add(new JLabel("loading... ", loading, JLabel.CENTER));
-		
-		this.loading.setPreferredSize((new Dimension(100,100)));
-		this.loading.setVisible(true);
-		
-		this.loading.removeNotify();
-		this.loading.setUndecorated(true);
-		this.loading.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-	
-		this.loading.pack();
-		this.loading.setLocationRelativeTo(null);
+		loadingFrame.add(new JLabel("loading... ", loading, JLabel.CENTER));
+
+		loadingFrame.setPreferredSize((new Dimension(100, 100)));
+		loadingFrame.setVisible(true);
+
+		loadingFrame.removeNotify();
+		loadingFrame.setUndecorated(true);
+		loadingFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+
+		loadingFrame.pack();
+		loadingFrame.setLocationRelativeTo(null);
+	}
+
+	public void startSpeachRecognition() {
+		loading();
 		speaking = true;
 		speechThread = new Thread(this);
 		speechThread.start();
-		
+
 	}
 
-//	public void evolve() {
-//
-//		// TODO: working on to avoid aliasing
-//		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-//		// int[] newGenes = new int[biomorph.getGenes().length];
-//		// for (int i = 0; i < biomorph.getGenes().length; i++){
-//		// newGenes[i] = biomorph.getGenes()[i];
-//		// }
-//
-//		int[] newGenes = new int[biomorph.getGenes().length];
-//		for (int i = 0; i < biomorph.getGenes().length; i++) {
-//			newGenes[i] = biomorph.getGenes()[i];
-//		}
-//
-//		bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-//		// biomorphTwo.setGenes(newGenes);
-//
-//		update();
-//
-//	}
-//
-//	private void update() {
-//		validate();
-//		repaint();
-//	}
-	
-	
-public void evolve() {
-		
+	// public void evolve() {
+	//
+	// // TODO: working on to avoid aliasing
+	// bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+	// // int[] newGenes = new int[biomorph.getGenes().length];
+	// // for (int i = 0; i < biomorph.getGenes().length; i++){
+	// // newGenes[i] = biomorph.getGenes()[i];
+	// // }
+	//
+	// int[] newGenes = new int[biomorph.getGenes().length];
+	// for (int i = 0; i < biomorph.getGenes().length; i++) {
+	// newGenes[i] = biomorph.getGenes()[i];
+	// }
+	//
+	// bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+	// // biomorphTwo.setGenes(newGenes);
+	//
+	// update();
+	//
+	// }
+	//
+	// private void update() {
+	// validate();
+	// repaint();
+	// }
+
+	public void evolve() {
+
 		// TODO: working on to avoid aliasing
-		//bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-		//int[] newGenes = new int[biomorph.getGenes().length];
-//		for (int i = 0; i < biomorph.getGenes().length; i++){
-//		newGenes[i] =  biomorph.getGenes()[i];
-//		}
-	biomorph.setGenes(biomorphTwo.getGenes());
+		// bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+		// int[] newGenes = new int[biomorph.getGenes().length];
+		// for (int i = 0; i < biomorph.getGenes().length; i++){
+		// newGenes[i] = biomorph.getGenes()[i];
+		// }
+		biomorph.setGenes(biomorphTwo.getGenes());
 		int[] newGenes = new int[biomorph.getGenes().length];
 		for (int i = 0; i < biomorph.getGenes().length; i++) {
 			newGenes[i] = biomorph.getGenes()[i];
 		}
-		
-		 biomorphTwo.setGenes(newGenes);
-		 bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
-		//bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
-		 //biomorph.setGenes(bio.getGenes());
-		 //biomorphTwo.setGenes(newGenes);
-		 
-		 for (int i = 0; i < biomorph.getGenes().length; i++){
-			 
-				System.out.println("test: "+biomorph.getGenes()[i]);
-				
-				}
-		 
-		 	update();
+
+		biomorphTwo.setGenes(newGenes);
+		bioCreator.extendRandomBiomorph(new Biomorph(biomorphTwo.getGenes()));
+		// bioCreator.extendRandomBiomorph(new Biomorph(biomorph.getGenes()));
+		// biomorph.setGenes(bio.getGenes());
+		// biomorphTwo.setGenes(newGenes);
+
+		for (int i = 0; i < biomorph.getGenes().length; i++) {
+
+			System.out.println("test: " + biomorph.getGenes()[i]);
+
+		}
+
+		update();
 
 	}
 
 	private void update() {
 		main_biomorph.repaint();
-		
+
 	}
 
 	/**
@@ -222,6 +227,9 @@ public void evolve() {
 		system = new JMenu("System");
 		system.setMnemonic('S');
 
+		help = new JMenu("Help");
+		help.setMnemonic('H');
+
 		upload = new JMenuItem("Upload");
 		upload.setMnemonic(KeyEvent.VK_U);
 		upload.setActionCommand("Upload");
@@ -238,6 +246,9 @@ public void evolve() {
 		viewSysLog = new JMenuItem("System Log");
 		viewSysLog.setActionCommand("System Log");
 
+		instructions = new JMenuItem("Documentation");
+		instructions.setActionCommand("Documentation");
+
 		speech = new JMenuItem("Speech Recognition");
 		speech.setActionCommand("Speech Recognition");
 
@@ -249,7 +260,10 @@ public void evolve() {
 		system.add(viewSysLog);
 		system.add(speech);
 
+		help.add(instructions);
+
 		menu.add(file);
+		menu.add(help);
 
 		menu.add(system);
 		main_frame.setJMenuBar(menu);
@@ -261,7 +275,6 @@ public void evolve() {
 
 		// container.setBackground(Color.BLACK);
 
-		
 		main_biomorph.setBorder(new BevelBorder(BevelBorder.RAISED, UIManager
 				.getColor("Button.highlight"), null, new Color(0, 0, 0),
 				new Color(142, 142, 142)));
@@ -283,7 +296,6 @@ public void evolve() {
 		child_1.setPreferredSize(new Dimension(100, 100));
 		child_1.setLayout(new BorderLayout());
 		child_pane.add(child_1);
-		
 
 		JButton child_2 = new JButton("Child 2");
 		child_2.setPreferredSize(new Dimension(100, 100));
@@ -412,6 +424,23 @@ public void evolve() {
 		// child_1.add(biomorphTwo, BorderLayout.CENTER);
 		// child_2.add(biomorphTwo);
 
+		instructions.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				try {
+					JOptionPane.showMessageDialog(null,
+							Controller.readSysFile("instructions.txt"));
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				System.out.println(spinner.getValue());
@@ -449,7 +478,8 @@ public void evolve() {
 
 			public void actionPerformed(ActionEvent e) {
 				try {
-					JOptionPane.showMessageDialog(null, Controller.readSysLog());
+					JOptionPane.showMessageDialog(null,
+							Controller.readSysFile("SystemLog.txt"));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -569,10 +599,11 @@ public void evolve() {
 								"Please connect a microphone to be able to use this feature.");
 			}
 
-			System.out.println("Say: (Evolve | Stop | Save | Print) ( One | Two | Three | Four | Five | Six )");
+			System.out
+					.println("Say: (Evolve | Stop | Save | Print) ( One | Two | Three | Four | Five | Six )");
 
 			// loop the recognition until the programm exits.
-			this.loading.dispose();
+			loadingFrame.dispose();
 			while (speaking) {
 
 				Result result = recognizer.recognize();
@@ -581,11 +612,13 @@ public void evolve() {
 					String resultText = result.getBestFinalResultNoFiller();
 
 					if (resultText.toLowerCase().contains("evolve")) {
-						evolve();
+						for (int i = 0; i < 10; i++) { //should be able to be changes by user
+							evolve();
+						}
 						System.out.println("You said: " + resultText + '\n');
 					}
 
-					if (resultText.toLowerCase().contains("stop")) {
+					if (resultText.toLowerCase().contains("exit")) {
 						speaking = false;
 						microphone.clear();
 						recognizer.resetMonitors();
