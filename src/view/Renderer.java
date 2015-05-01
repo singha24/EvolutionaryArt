@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -71,7 +68,7 @@ public class Renderer extends JPanel {
 
 	private void drawLines(Graphics g, int genes[]) {
 		//For positioning the biomorph
-		g.translate(50, 50);
+		//g.translate(13, 25);
 		//Color for the lines
 		Color color = new Color(genes[genes.length-3], genes[genes.length-2], genes[genes.length-1]);
 		// starting lines
