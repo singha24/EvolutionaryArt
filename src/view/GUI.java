@@ -150,7 +150,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 
 		 bioCreator.extendRandomBiomorph(new
-		 Biomorph(biomorphTwo.getGenes()));
+		 Biomorph(biomorph.getGenes()));
 		 //biomorphTwo.setGenes(newGenes);
 
 		update();
@@ -541,6 +541,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 					if (resultText.toLowerCase().contains("stop")) {
 						speaking = false;
 						recognizer.deallocate();
+						cm = null;
 						JOptionPane.showMessageDialog(null,
 								"Speech Recognition Turned Off.");
 					}
