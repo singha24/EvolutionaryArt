@@ -513,8 +513,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 			// start the microphone or exit if the programm if this is not
 			// possible
+			Microphone microphone = (Microphone) cm.lookup("microphone");
 			try {
-				Microphone microphone = (Microphone) cm.lookup("microphone");
 				if (!microphone.startRecording()) {
 					System.out.println("Cannot start microphone.");
 					recognizer.deallocate();
@@ -525,7 +525,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 
 			System.out
-					.println("Say: (Evolve) ( One | Two | Three | Four | Five | Six )");
+					.println("Say: (Evolve | Stop | Save | Print) ( One | Two | Three | Four | Five | Six )");
 
 			// loop the recognition until the programm exits.
 			while (speaking) {
@@ -542,7 +542,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 					if (resultText.toLowerCase().contains("stop")) {
 						speaking = false;
+						microphone.clear();
+						recognizer.resetMonitors();
 						recognizer.deallocate();
+						recognizer = null;
 						cm = null;
 						JOptionPane.showMessageDialog(null,
 								"Speech Recognition Turned Off.");
