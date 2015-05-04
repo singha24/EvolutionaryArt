@@ -111,6 +111,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 	
 	private ArrayList<Renderer> tempStorage = new ArrayList<Renderer>();
 	private ArrayList<Renderer> HOF = new ArrayList<Renderer>();
+	private HallOfFame hallOfFame;
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -134,7 +135,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 	 */
 	public GUI(Renderer biomorph, Renderer[] children, BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
-
+		hallOfFame = new HallOfFame();
 		biomorph.setLocation(0, 100);
 
 		this.bioCreator = bioCreator;
@@ -648,6 +649,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 			public void actionPerformed(ActionEvent saveHOF){
 				
 				//HallOfFame
+				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "first");
 				
 			}
 		});
@@ -676,7 +678,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 		saveToHOF.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				HOF.add(biomorph);				
+				//HOF.add(biomorph);
+				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "first");
 			}
 		});
 
