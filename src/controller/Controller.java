@@ -6,11 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JPanel;
 
 import model.BioWarehouse;
+import model.Biomorph;
 import model.BiomorphCreator;
 import view.GUI;
 import view.Renderer;
@@ -24,9 +26,9 @@ import view.Renderer;
 public class Controller {
 
 	private BiomorphCreator bioCreate;
-	private Renderer bioOne;
-	private Renderer bioTwo;
-	private Renderer[] temp = new Renderer[8];
+	private Renderer parent;
+	//private Renderer bioTwo;
+	private Renderer[] children = new Renderer[8];
 	private GUI gui;
 	private Save save;
 	private BioWarehouse warehouse;
@@ -56,21 +58,47 @@ public class Controller {
 		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x,
 				y);
 		// bioTwo = new Renderer(generateChild(bioOne.getGenes()));
+		parent = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y);
+		//bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 
 	}
 
 	public int[] generateChild(int[] parent) {
 
+	
+	private int[] generateChild(int[] parent){
+		return bioCreate.extendBiomorph(new Biomorph(parent));
+		
+//		int[] child = new int[parent.length];
+//		
+//		for(int i =0; i<parent.length; i++){
+//			
+//			child[i] = parent[i]; 
+//	
+//		}
+		
+		//return child;
+		
 		int[] child = new int[parent.length];
 
 		for (int i = 0; i < parent.length; i++) {
 
 			child[i] = parent[i];
 
+		
+		//bioTwo = new Renderer(generateChild(parent.getGenes()), 10,10);
+		//ArrayList<Renderer> children = new ArrayList<Renderer>();
+		//Renderer[] children = new Renderer[8];
+		Renderer child;
+		for(int i = 0; i < children.length; i++){
+			child = new Renderer(generateChild(parent.getGenes()), 0,0);
+			children[i] = child;
+				//temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
+			
 		}
-		return child;
 
 	}
+		return children;
 
 	public void createTempBiomorphs() {
 		bioTwo = new Renderer(generateChild(bioOne.getGenes()), 10, 10);
@@ -82,12 +110,12 @@ public class Controller {
 	}
 
 	public Renderer[] getTempBiomorphs() {
-		return temp;
+		return children;
 	}
 
 	public int getTempArraySize() {
 		int counter = 0;
-		for (int i = 0; i < temp.length; i++) {
+		for (int i = 0; i < children.length; i++) {
 			counter++;
 		}
 		return counter;
@@ -98,7 +126,7 @@ public class Controller {
 	}
 
 	public void initGUI() {
-		gui = new GUI(bioOne, temp, bioCreate, bioTwo);
+		gui = new GUI(parent, children, bioCreate);
 	}
 
 	public void generateTextFile(String filename, String text)
@@ -156,7 +184,7 @@ public class Controller {
 		sysLog += "Done." + System.getProperty("line.separator");
 		sysLog += "Generating biomorph..."
 				+ System.getProperty("line.separator");
-		control.createTempBiomorphs();
+		control.createChildren();
 		sysLog += "Done." + System.getProperty("line.separator");
 		control.initGUI();
 		sysLog += "Initilising GUI..." + System.getProperty("line.separator");
