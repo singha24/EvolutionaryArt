@@ -21,12 +21,16 @@ public class Renderer extends JPanel {
 	private int[] genes;
 	private int x;
 	private int y;
+	private int scaleX;
+	private int scaleY;
 
-	public Renderer(int[] genes, int x, int y) {
+	public Renderer(int[] genes, int x, int y, int scaleX, int scaleY) {
 		
 		this.genes = genes;
 		this.x = x;
 		this.y = y;
+		this.scaleX = scaleX;
+		this.scaleY = scaleY;
 		
 		
 	}
@@ -71,6 +75,7 @@ public class Renderer extends JPanel {
 	}
 
 	private void drawLines(Graphics g, int genes[]) {
+		((Graphics2D)g).scale(scaleX, scaleY);
 		//For positioning the biomorph
 		g.translate(x, y);
 		//Color for the lines

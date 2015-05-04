@@ -8,6 +8,7 @@ public class BioWarehouse {
 	private ArrayList<Biomorph> biomorphs;
 	private ArrayList<Graphics2D> g2d;
 	
+	
 	public BioWarehouse(){
 		this.biomorphs = new ArrayList<Biomorph>();
 		this.g2d = new ArrayList<Graphics2D>();
@@ -47,5 +48,6 @@ public class BioWarehouse {
 	public Graphics2D getG2D(int i){
 		return g2d.get(i);
 	}
+	
 
 }

@@ -36,7 +36,7 @@ public final class Evolve {
 			newGenes[i] = genes[i];
 		}
 		
-		for (int i = 0; i < genes.length; i +=  random.nextInt(5)){
+		for (int i = 0; i < genes.length; i ++){
 			
 				int rdm;
 				//int genesToMutate = random.nextInt(genes.length);

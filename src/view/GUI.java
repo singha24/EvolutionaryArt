@@ -81,6 +81,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JButton child_6 = new JButton();
 	private JButton child_7 = new JButton();
 	private JButton child_8 = new JButton();
+	private JButton saveButton = new JButton("Save");
 
 	// private JMenuItem complexity;
 	private JMenuItem save;
@@ -304,6 +305,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		main_biomorph.setPreferredSize(new Dimension(400, 300));
 		main_biomorph.setOpaque(true);
 		main_biomorph.setLayout(new BorderLayout());
+		
 		// main_biomorph.setBackground(Color.BLACK);
 		// main_biomorph.setBackground(UIManager.getColor("Button.background"));
 		container.add(main_biomorph);
@@ -313,6 +315,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_pane.setPreferredSize(new Dimension(500, 225));
 		child_pane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		container.add(child_pane);
+		
+		
 
 		child_1.setBorderPainted(false);
 		child_1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -324,8 +328,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_pane.add(child_1);
 		
 		child_2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		child_2.setBorderPainted(false);
-		child_2.setFocusPainted(false);
+		//child_2.setBorderPainted(false);
+		//child_2.setFocusPainted(false);
 		child_2.setContentAreaFilled(false);
 		child_2.setRolloverEnabled(false);
 		child_2.setPreferredSize(new Dimension(115, 115));
@@ -432,7 +436,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_8);
 
 		JPanel hof_panel = new JPanel();
-		hof_panel.setBounds(793, 88, 216, 224);
+		hof_panel.setBounds(793, 88, 216, 250);
 		main_frame.getContentPane().add(hof_panel);
 
 		JPanel hof_1 = new JPanel();
@@ -458,7 +462,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_4.setOpaque(true);
 		hof_4.setBackground(Color.BLACK);
 		hof_panel.add(hof_4);
-
+		hof_panel.add(saveButton);
+		
+		
 		// container.setLayout(new FlowLayout());
 		// frame = new JFrame();
 		// Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -603,6 +609,14 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 
+		saveButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent saveHOF){
+				
+				//HallOfFame
+				
+			}
+		});
+		
 		save.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent save) {

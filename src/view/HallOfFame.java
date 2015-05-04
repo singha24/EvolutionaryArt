@@ -22,8 +22,11 @@ public class HallOfFame {
 	 * @return true if the Biomorph is successfully saved and false if an error
 	 * occurred.
 	 */
+	
+	
 	public boolean saveHallOfFame(Biomorph biomorph, String fileName) {
-
+		
+		
 		try {
 			// Serialize data object to a file
 			ObjectOutputStream out = new ObjectOutputStream(
@@ -45,6 +48,7 @@ public class HallOfFame {
 			e.printStackTrace();
 			return false;
 		}
+		
 	}
 
 	/**

@@ -56,7 +56,7 @@ public class Controller {
 	}
 
 	public void generateParents(int x, int y) {
-		parent = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y);
+		parent = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y,2,2);
 		//bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 
 	}
@@ -84,7 +84,7 @@ public class Controller {
 		//Renderer[] children = new Renderer[8];
 		Renderer child;
 		for(int i = 0; i < children.length; i++){
-			child = new Renderer(generateChild(parent.getGenes()), 20,20);
+			child = new Renderer(generateChild(parent.getGenes()), 20,20,1,1);
 			children[i] = child;
 				//temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 			
@@ -163,7 +163,7 @@ public class Controller {
 		control.initiliseHelpers();
 		sysLog += "Initilising helpers..."
 				+ System.getProperty("line.separator");
-		control.generateParents(175, 140);
+		control.generateParents(50, 50);
 		sysLog += "Done." + System.getProperty("line.separator");
 		sysLog += "Generating biomorph..."
 				+ System.getProperty("line.separator");
