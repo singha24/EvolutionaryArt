@@ -30,6 +30,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JRootPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -97,11 +98,18 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem speech;
 	private JMenuItem instructions;
 	private JMenuItem videoRecording;
+	
+	private JMenuItem saveToTemp;
+	private JMenuItem saveToHOF;
 
 	private Thread speechThread;
 	private boolean speaking; // used to start and stop thread
-
+	
 	private static JFrame loadingFrame;
+	private JPopupMenu popupMenu = new JPopupMenu();
+	
+	private ArrayList<Renderer> tempStorage = new ArrayList<Renderer>();
+	private ArrayList<Renderer> HOF = new ArrayList<Renderer>();
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -287,6 +295,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		speech = new JMenuItem("Speech Recognition");
 		speech.setActionCommand("Speech Recognition");
+		
+		saveToTemp = new JMenuItem("Save to Temp Storage");
+		saveToHOF = new JMenuItem("Save to Hall of Fame");
 
 		file.add(upload);
 		file.add(save);
@@ -304,6 +315,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		menu.add(system);
 		main_frame.setJMenuBar(menu);
+		
+		popupMenu.add(saveToTemp);
+		popupMenu.add(saveToHOF);
 
 		JPanel container = new JPanel();
 		container.setBounds(261, 70, 520, 587);
@@ -319,6 +333,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		main_biomorph.setPreferredSize(new Dimension(400, 300));
 		main_biomorph.setOpaque(true);
 		main_biomorph.setLayout(new BorderLayout());
+		
 		// main_biomorph.setBackground(Color.BLACK);
 		// main_biomorph.setBackground(UIManager.getColor("Button.background"));
 		container.add(main_biomorph);
@@ -447,7 +462,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_8);
 
 		JPanel hof_panel = new JPanel();
-		hof_panel.setBounds(793, 88, 216, 224);
+		hof_panel.setBounds(793, 70, 216, 224);
 		main_frame.getContentPane().add(hof_panel);
 
 		JPanel hof_1 = new JPanel();
@@ -455,24 +470,28 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_1.setOpaque(true);
 		hof_1.setBackground(Color.BLACK);
 		hof_panel.add(hof_1);
+		hof_1.setComponentPopupMenu(popupMenu);
 
 		JPanel hof_2 = new JPanel();
 		hof_2.setPreferredSize(new Dimension(100, 100));
 		hof_2.setOpaque(true);
 		hof_2.setBackground(Color.BLACK);
 		hof_panel.add(hof_2);
-
+		hof_2.setComponentPopupMenu(popupMenu);
+		
 		JPanel hof_3 = new JPanel();
 		hof_3.setPreferredSize(new Dimension(100, 100));
 		hof_3.setOpaque(true);
 		hof_3.setBackground(Color.BLACK);
 		hof_panel.add(hof_3);
+		hof_3.setComponentPopupMenu(popupMenu);
 
 		JPanel hof_4 = new JPanel();
 		hof_4.setPreferredSize(new Dimension(100, 100));
 		hof_4.setOpaque(true);
 		hof_4.setBackground(Color.BLACK);
 		hof_panel.add(hof_4);
+		hof_4.setComponentPopupMenu(popupMenu);
 
 		// container.setLayout(new FlowLayout());
 		// frame = new JFrame();
@@ -629,14 +648,22 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 
-//		evolve.addActionListener(new ActionListener() {
-//
-//			public void actionPerformed(ActionEvent e) {
-//				for (int i = 0; i <= getSpinnerValue(); i++) {
-//					evolve();
-//				}
-//			}
-//		});
+		saveToTemp.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				tempStorage.add(biomorph);
+				for(int i=0; i<tempStorage.get(0).getGenes().length; i++){
+					System.out.println(tempStorage.get(0).getGenes()[i]);
+				}
+			}
+		});
+		
+		saveToHOF.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				HOF.add(biomorph);				
+			}
+		});
 
 		videoRecording.addActionListener(new ActionListener() {
 

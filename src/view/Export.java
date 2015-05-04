@@ -5,15 +5,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.print.PrinterJob;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.imageio.metadata.IIOMetadataNode;
@@ -21,18 +18,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.xuggle.mediatool.IMediaWriter;
-import com.xuggle.mediatool.ToolFactory;
-import com.xuggle.xuggler.IRational;
-
 import controller.ChangeImageResolution;
 
 public class Export {
 	public static ChangeImageResolution metaData;
 
 	public static String outputDestination;
-	private static IRational FRAME_RATE = IRational.make(3, 1);
-	private static final int SECONDS_TO_RUN_FOR = 15;
 
 	public static void saveAndPrint(JPanel biomorph, boolean print, GUI gui)
 			throws AWTException {
@@ -45,11 +36,11 @@ public class Export {
 		 * "png", outputfile); } catch (IOException e) { // catch block
 		 * e.printStackTrace(); }
 		 */
-		/*
-		 * int w = biomorph.getWidth(); int h = biomorph.getHeight();
-		 * BufferedImage bi = new BufferedImage(w, h,
-		 * BufferedImage.TYPE_INT_ARGB);
-		 */
+
+		/*int w = biomorph.getWidth();
+		int h = biomorph.getHeight();8
+		BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);*/
+
 		Graphics2D g = bi.createGraphics();
 		gui.paint(g);
 
@@ -156,42 +147,40 @@ public class Export {
 		 * outputDestination = output.toString();
 		 */
 
-		final ArrayList<JPanel> biomorphs = GUI.getBiomorphs();
-		String outFile = "output.mp4";
-		final IMediaWriter writer = ToolFactory.makeWriter(outFile);
-
-		for (int i = 0; i < biomorphs.size(); i++) {
-			try {
-				BufferedImage bi = convertJPanelToBI(biomorphs.get(i));
-				
-
-				final Rectangle screenBounds = new Rectangle(bi.getWidth(),
-						bi.getHeight());
-
-			
-
-				writer.addVideoStream(0, 0, FRAME_RATE, screenBounds.width,
-						screenBounds.height);
-
-				long startTime = System.nanoTime();
-
-				BufferedImage bgrScreen = convertToType(bi,
-						BufferedImage.TYPE_3BYTE_BGR);
-
-				writer.encodeVideo(0, bgrScreen, System.nanoTime() - startTime,
-						TimeUnit.NANOSECONDS);
-
-				System.out.println("encoded image: " + i);
-
-				Thread.sleep((long) (1000 / FRAME_RATE.getDouble()));
-				
-			} catch (Throwable e) {
-				System.err.println("an error occurred: " + e.getMessage());
-			}finally{
-				writer.close();
-			}
-
-		}
+		/*
+		 * final ArrayList<JPanel> biomorphs = GUI.getBiomorphs(); String
+		 * outFile = "output.mp4"; final IMediaWriter writer =
+		 * ToolFactory.makeWriter(outFile);
+		 * 
+		 * for (int i = 0; i < biomorphs.size(); i++) { try { BufferedImage bi =
+		 * convertJPanelToBI(biomorphs.get(i));
+		 * 
+		 * 
+		 * final Rectangle screenBounds = new Rectangle(bi.getWidth(),
+		 * bi.getHeight());
+		 * 
+		 * 
+		 * 
+		 * writer.addVideoStream(0, 0, FRAME_RATE, screenBounds.width,
+		 * screenBounds.height);
+		 * 
+		 * long startTime = System.nanoTime();
+		 * 
+		 * BufferedImage bgrScreen = convertToType(bi,
+		 * BufferedImage.TYPE_3BYTE_BGR);
+		 * 
+		 * writer.encodeVideo(0, bgrScreen, System.nanoTime() - startTime,
+		 * TimeUnit.NANOSECONDS);
+		 * 
+		 * System.out.println("encoded image: " + i);
+		 * 
+		 * Thread.sleep((long) (1000 / FRAME_RATE.getDouble()));
+		 * 
+		 * } catch (Throwable e) { System.err.println("an error occurred: " +
+		 * e.getMessage()); }finally{ writer.close(); }
+		 * 
+		 * }
+		 */
 	}
 
 	public static BufferedImage convertToType(BufferedImage sourceImage,
