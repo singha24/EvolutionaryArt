@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -328,14 +329,16 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_pane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		container.add(child_pane);
 
-		child_1.setBorderPainted(false);
+		//child_1.setBorderPainted(false);
+		child_1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_1.setFocusPainted(false);
 		child_1.setContentAreaFilled(false);
 		child_1.setRolloverEnabled(false);
 		child_1.setPreferredSize(new Dimension(100, 100));
 		child_1.setLayout(new BorderLayout());
 		child_pane.add(child_1);
-
+		
+		child_2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_2.setBorderPainted(false);
 		child_2.setFocusPainted(false);
 		child_2.setContentAreaFilled(false);
@@ -343,6 +346,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_2.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_2);
 
+		child_3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_3.setBorderPainted(false);
 		child_3.setFocusPainted(false);
 		child_3.setContentAreaFilled(false);
@@ -350,6 +354,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_3.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_3);
 
+		child_4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_4.setBorderPainted(false);
 		child_4.setFocusPainted(false);
 		child_4.setContentAreaFilled(false);
@@ -357,6 +362,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_4.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_4);
 
+		child_5.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_5.setBorderPainted(false);
 		child_5.setFocusPainted(false);
 		child_5.setContentAreaFilled(false);
@@ -364,6 +370,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_5.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_5);
 
+		child_6.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_6.setBorderPainted(false);
 		child_6.setFocusPainted(false);
 		child_6.setContentAreaFilled(false);
@@ -371,6 +378,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_6.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_6);
 
+		child_7.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_7.setBorderPainted(false);
 		child_7.setFocusPainted(false);
 		child_7.setContentAreaFilled(false);
@@ -378,6 +386,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_7.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_7);
 
+		child_8.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_8.setBorderPainted(false);
 		child_8.setFocusPainted(false);
 		child_8.setContentAreaFilled(false);

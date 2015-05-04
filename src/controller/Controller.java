@@ -91,7 +91,7 @@ public class Controller {
 		//Renderer[] children = new Renderer[8];
 		Renderer child;
 		for(int i = 0; i < children.length; i++){
-			child = new Renderer(generateChild(parent.getGenes()), 0,0);
+			child = new Renderer(generateChild(parent.getGenes()), 10,10);
 			children[i] = child;
 				//temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 			
