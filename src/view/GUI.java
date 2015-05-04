@@ -329,12 +329,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_pane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		container.add(child_pane);
 
-		//child_1.setBorderPainted(false);
+		child_1.setBorderPainted(false);
 		child_1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		child_1.setFocusPainted(false);
 		child_1.setContentAreaFilled(false);
 		child_1.setRolloverEnabled(false);
-		child_1.setPreferredSize(new Dimension(100, 100));
+		child_1.setPreferredSize(new Dimension(115, 115));
 		child_1.setLayout(new BorderLayout());
 		child_pane.add(child_1);
 		
@@ -343,7 +343,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_2.setFocusPainted(false);
 		child_2.setContentAreaFilled(false);
 		child_2.setRolloverEnabled(false);
-		child_2.setPreferredSize(new Dimension(100, 100));
+		child_2.setPreferredSize(new Dimension(115, 115));
 		child_pane.add(child_2);
 
 		child_3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -351,7 +351,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_3.setFocusPainted(false);
 		child_3.setContentAreaFilled(false);
 		child_3.setRolloverEnabled(false);
-		child_3.setPreferredSize(new Dimension(100, 100));
+		child_3.setPreferredSize(new Dimension(115, 115));
 		child_pane.add(child_3);
 
 		child_4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -359,7 +359,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_4.setFocusPainted(false);
 		child_4.setContentAreaFilled(false);
 		child_4.setRolloverEnabled(false);
-		child_4.setPreferredSize(new Dimension(100, 100));
+		child_4.setPreferredSize(new Dimension(115, 115));
 		child_pane.add(child_4);
 
 		child_5.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -367,7 +367,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_5.setFocusPainted(false);
 		child_5.setContentAreaFilled(false);
 		child_5.setRolloverEnabled(false);
-		child_5.setPreferredSize(new Dimension(100, 100));
+		child_5.setPreferredSize(new Dimension(115, 115));
 		child_pane.add(child_5);
 
 		child_6.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -375,7 +375,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_6.setFocusPainted(false);
 		child_6.setContentAreaFilled(false);
 		child_6.setRolloverEnabled(false);
-		child_6.setPreferredSize(new Dimension(100, 100));
+		child_6.setPreferredSize(new Dimension(115, 115));
 		child_pane.add(child_6);
 
 		child_7.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -383,7 +383,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_7.setFocusPainted(false);
 		child_7.setContentAreaFilled(false);
 		child_7.setRolloverEnabled(false);
-		child_7.setPreferredSize(new Dimension(100, 100));
+		child_7.setPreferredSize(new Dimension(115, 115));
 		child_pane.add(child_7);
 
 		child_8.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -391,7 +391,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_8.setFocusPainted(false);
 		child_8.setContentAreaFilled(false);
 		child_8.setRolloverEnabled(false);
-		child_8.setPreferredSize(new Dimension(100, 100));
+		child_8.setPreferredSize(new Dimension(115, 115));
 		child_pane.add(child_8);
 
 		JPanel save_panel = new JPanel();
