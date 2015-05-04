@@ -14,6 +14,11 @@ import java.awt.event.KeyEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -59,6 +64,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private Renderer biomorph;
 	private Renderer biomorphTwo;
 	private Renderer[] tempBiomorphs;
+	private static ArrayList<JPanel> toMovie = new ArrayList<JPanel>();
 	private BiomorphCreator bioCreator;
 	// private JPanel panel = new JPanel(); // panel for upload, save or print
 	private JPanel generate = new JPanel();
@@ -82,6 +88,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem viewSysLog;
 	private JMenuItem speech;
 	private JMenuItem instructions;
+	private JMenuItem videoRecording;
 
 	private Thread speechThread;
 	private boolean speaking; // used to start and stop thread
@@ -96,6 +103,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JSpinner spinner = new JSpinner(spinnerModel);
 
 	private JButton evolve = new JButton("Evolve");
+	
 
 	// Gridlayout for temp biomorphs
 	// private JPanel temporaryBiomorphPanel = new JPanel();
@@ -116,7 +124,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		this.bioCreator = bioCreator;
 		this.tempBiomorphs = temp;
-
 		initUI();
 	}
 
@@ -203,7 +210,11 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	private void update() {
 		main_biomorph.repaint();
-
+		toMovie.add(main_biomorph);
+	}
+	
+	public static ArrayList<JPanel> getBiomorphs(){
+		return toMovie;
 	}
 
 	/**
@@ -249,6 +260,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 		instructions = new JMenuItem("Documentation");
 		instructions.setActionCommand("Documentation");
 
+		videoRecording = new JMenuItem("Start Recording");
+		videoRecording.setActionCommand("R");
+
 		speech = new JMenuItem("Speech Recognition");
 		speech.setActionCommand("Speech Recognition");
 
@@ -259,6 +273,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		system.add(viewSysLog);
 		system.add(speech);
+		system.add(videoRecording);
 
 		help.add(instructions);
 
@@ -519,13 +534,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 
-		// exit.addActionListener(new ActionListener() {
+		videoRecording.addActionListener(new ActionListener() {
 
-		// public void actionPerformed(ActionEvent e) {
-		// System.exit(0);
-
-		// }
-		// });
+			public void actionPerformed(ActionEvent e) {
+				Export.createMovie(GUI.this);
+			}
+		});
 
 		// shorcuts
 		save.setAccelerator(KeyStroke.getKeyStroke(
@@ -612,7 +626,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 					String resultText = result.getBestFinalResultNoFiller();
 
 					if (resultText.toLowerCase().contains("evolve")) {
-						for (int i = 0; i < 10; i++) { //should be able to be changes by user
+						for (int i = 0; i < 10; i++) { // should be able to be
+														// changes by user
 							evolve();
 						}
 						System.out.println("You said: " + resultText + '\n');

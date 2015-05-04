@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -54,30 +53,31 @@ public class Controller {
 	}
 
 	public void generateParents(int x, int y) {
-		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y);
-		//bioTwo = new Renderer(generateChild(bioOne.getGenes()));
+		bioOne = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x,
+				y);
+		// bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 
 	}
 
-	
-	public int[] generateChild(int[] parent){
-		
+	public int[] generateChild(int[] parent) {
+
 		int[] child = new int[parent.length];
-		
-		for(int i =0; i<parent.length; i++){
-			
-			child[i] = parent[i]; 
-	
+
+		for (int i = 0; i < parent.length; i++) {
+
+			child[i] = parent[i];
+
 		}
 		return child;
-		
+
 	}
-	
-	public void createTempBiomorphs(){
-		bioTwo = new Renderer(generateChild(bioOne.getGenes()), 10,10);
-//		for(int i = 0; i < temp.length; i++){
-//			temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
-//		}
+
+	public void createTempBiomorphs() {
+		bioTwo = new Renderer(generateChild(bioOne.getGenes()), 10, 10);
+		// for(int i = 0; i < temp.length; i++){
+		// temp[i] = new
+		// Renderer(bioCreate.generateRandomBiomorph().getGenes());
+		// }
 
 	}
 
@@ -126,6 +126,8 @@ public class Controller {
 				line = br.readLine();
 			}
 			temp = sb.toString();
+		} catch (FileNotFoundException e) {
+			temp = "Unable to locate document";
 		} finally {
 			br.close();
 		}
@@ -141,7 +143,7 @@ public class Controller {
 	public static void main(String[] args) {
 
 		Controller control = new Controller();
-		
+
 		sysLog = "System Log: " + getDateTime()
 				+ System.getProperty("line.separator");
 
