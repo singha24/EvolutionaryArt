@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.swing.JPanel;
 
 import model.BioWarehouse;
+import model.Biomorph;
 import model.BiomorphCreator;
 import view.GUI;
 import view.Renderer;
@@ -27,7 +28,7 @@ public class Controller {
 
 	private BiomorphCreator bioCreate;
 	private Renderer parent;
-	private Renderer bioTwo;
+	//private Renderer bioTwo;
 	private Renderer[] children = new Renderer[8];
 	private GUI gui;
 	private Save save;
@@ -62,26 +63,28 @@ public class Controller {
 
 	
 	private int[] generateChild(int[] parent){
+		return bioCreate.extendBiomorph(new Biomorph(parent));
 		
-		int[] child = new int[parent.length];
+//		int[] child = new int[parent.length];
+//		
+//		for(int i =0; i<parent.length; i++){
+//			
+//			child[i] = parent[i]; 
+//	
+//		}
 		
-		for(int i =0; i<parent.length; i++){
-			
-			child[i] = parent[i]; 
-	
-		}
-		
-		return child;
+		//return child;
 		
 	}
 	
 	public Renderer[] createChildren(){
-		bioTwo = new Renderer(generateChild(parent.getGenes()), 10,10);
+		
+		//bioTwo = new Renderer(generateChild(parent.getGenes()), 10,10);
 		//ArrayList<Renderer> children = new ArrayList<Renderer>();
 		//Renderer[] children = new Renderer[8];
 		Renderer child;
 		for(int i = 0; i < children.length; i++){
-			child = new Renderer(generateChild(parent.getGenes()), 10,10);
+			child = new Renderer(generateChild(parent.getGenes()), 0,0);
 			children[i] = child;
 				//temp[i] = new Renderer(bioCreate.generateRandomBiomorph().getGenes());
 			
@@ -108,7 +111,7 @@ public class Controller {
 	}
 
 	public void initGUI() {
-		gui = new GUI(parent, children, bioCreate, bioTwo);
+		gui = new GUI(parent, children, bioCreate);
 	}
 
 	public void generateTextFile(String filename, String text)

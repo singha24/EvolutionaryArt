@@ -57,7 +57,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JFrame main_frame;
 	// private JPanel container = new JPanel();
 	private Renderer biomorph;
-	private Renderer biomorphTwo;
 	private Renderer[] children;
 	private BiomorphCreator bioCreator;
 	// private JPanel panel = new JPanel(); // panel for upload, save or print
@@ -115,12 +114,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 	 * 
 	 * @param biomorph
 	 */
-	public GUI(Renderer biomorph, Renderer[] children, BiomorphCreator bioCreator,
-			Renderer biomorphTwo) {
+	public GUI(Renderer biomorph, Renderer[] children, BiomorphCreator bioCreator) {
 		this.biomorph = biomorph;
 
 		biomorph.setLocation(0, 100);
-		this.biomorphTwo = biomorphTwo;
 
 		this.bioCreator = bioCreator;
 		this.children = children;
@@ -192,9 +189,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 		for(int i = 0; i < children.length; i++){
 			int[] newGenes = new int[biomorph.getGenes().length];
 			for (int j = 0; j < biomorph.getGenes().length; j++) {
-				System.out.println("Children" +biomorph.getGenes()[j]);
+				//System.out.println("Children" +biomorph.getGenes()[j]);
 				newGenes[j] = biomorph.getGenes()[j];
-				System.out.println("Children Genes" +newGenes[j]);
+				//System.out.println("Children Genes" +newGenes[j]);
 			}
 			children[i].setGenes(newGenes);
 		}
@@ -316,36 +313,60 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_pane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		container.add(child_pane);
 
-		
+		child_1.setBorderPainted(false);
+		child_1.setFocusPainted(false);
+		child_1.setContentAreaFilled(false);
+		child_1.setRolloverEnabled(false);
 		child_1.setPreferredSize(new Dimension(100, 100));
 		child_1.setLayout(new BorderLayout());
 		child_pane.add(child_1);
 
-		
+		child_2.setBorderPainted(false);
+		child_2.setFocusPainted(false);
+		child_2.setContentAreaFilled(false);
+		child_2.setRolloverEnabled(false);
 		child_2.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_2);
 
-		
+		child_3.setBorderPainted(false);
+		child_3.setFocusPainted(false);
+		child_3.setContentAreaFilled(false);
+		child_3.setRolloverEnabled(false);
 		child_3.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_3);
 
-		
+		child_4.setBorderPainted(false);
+		child_4.setFocusPainted(false);
+		child_4.setContentAreaFilled(false);
+		child_4.setRolloverEnabled(false);
 		child_4.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_4);
 
-		
+		child_5.setBorderPainted(false);
+		child_5.setFocusPainted(false);
+		child_5.setContentAreaFilled(false);
+		child_5.setRolloverEnabled(false);
 		child_5.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_5);
 
-		
+		child_6.setBorderPainted(false);
+		child_6.setFocusPainted(false);
+		child_6.setContentAreaFilled(false);
+		child_6.setRolloverEnabled(false);
 		child_6.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_6);
 
-		
+		child_7.setBorderPainted(false);
+		child_7.setFocusPainted(false);
+		child_7.setContentAreaFilled(false);
+		child_7.setRolloverEnabled(false);
 		child_7.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_7);
 
-		
+		child_8.setBorderPainted(false);
+		child_8.setFocusPainted(false);
+		child_8.setContentAreaFilled(false);
+		child_8.setRolloverEnabled(false);
 		child_8.setPreferredSize(new Dimension(100, 100));
 		child_pane.add(child_8);
 
