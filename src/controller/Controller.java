@@ -110,7 +110,7 @@ public class Controller {
 	}
 
 	public void initGUI() {
-		gui = new GUI(parent, children, bioCreate);
+		gui = new GUI(parent, children, bioCreate, warehouse);
 	}
 
 	public void generateTextFile(String filename, String text)
