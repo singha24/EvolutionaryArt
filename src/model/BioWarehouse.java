@@ -1,6 +1,5 @@
 package model;
 
-
 public class BioWarehouse {
 	
 	private Biomorph[] biomorphs;
@@ -55,5 +54,6 @@ public class BioWarehouse {
 		}
 		return false;
 	}
+
 	
 }

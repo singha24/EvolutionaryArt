@@ -19,10 +19,10 @@ public class Renderer extends JPanel  {
 	private int[] genes;
 	private int x;
 	private int y;
-	private int scaleX;
-	private int scaleY;
+	private double scaleX;
+	private double scaleY;
 
-	public Renderer(int[] genes, int x, int y, int scaleX, int scaleY) {
+	public Renderer(int[] genes, int x, int y, double scaleX, double scaleY) {
 		
 		this.genes = genes;
 		this.x = x;

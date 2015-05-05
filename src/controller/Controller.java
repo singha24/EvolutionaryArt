@@ -56,7 +56,8 @@ public class Controller {
 	}
 
 	public void generateParents(int x, int y) {
-		parent = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y,2,2);
+		parent = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x,
+				y, 2.9, 2.9);
 		//bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 
 	}
@@ -91,6 +92,10 @@ public class Controller {
 		
 		return children;
 
+	}
+	
+	public int getChildArraySize(){
+		return children.length;
 	}
 
 	public Renderer[] getTempBiomorphs() {
@@ -174,6 +179,9 @@ public class Controller {
 		sysLog += "Done." + System.getProperty("line.separator");
 		elapsedTime = timerEnd - timerStart;
 
+		sysLog += "*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*";
+		sysLog += System.getProperty("line.separator");
+		
 		sysLog += "Time taken to boot application: " + elapsedTime
 				+ " milliseconds";
 		sysLog += "Initilising GUI..." + System.getProperty("line.separator");

@@ -7,35 +7,38 @@ import java.io.Serializable;
  * 
  * Genes can be increased based on the genelimit specified in BiomorphCreator.
  * @author Manjit Bansal
- * @version  14 Dec 2014
+ * @version 14 Dec 2014
  */
 public class Biomorph implements Serializable {
-		
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private int[] genes;
+	private int[] genes;
 
-		/**
-		 * Constructor
-		 * @param array of int values
-		 */
-		public Biomorph(int[] genes){
-			this.genes = genes;
-		}
-		
-		/**
-		 * Method that returns the gene value.
-		 * @return an array of int which are the values used to generate image.
-		 */
-		public int[] getGenes(){
-			return genes;
-		}
-		
-		public int getGenesLength(){
-			
-			return genes.length;
-		}
-		
+	/**
+	 * Constructor
+	 * 
+	 * @param array
+	 *            of int values
+	 */
+	public Biomorph(int[] genes) {
+		this.genes = genes;
 	}
+
+	/**
+	 * Method that returns the gene value.
+	 * 
+	 * @return an array of int which are the values used to generate image.
+	 */
+	public int[] getGenes() {
+		return genes;
+	}
+
+	public int getGenesLenth() {
+
+		return genes.length;
+	}
+
+}
