@@ -56,7 +56,7 @@ public class Controller {
 	}
 
 	public void generateParents(int x, int y) {
-		parent = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y,2,2);
+		parent = new Renderer(bioCreate.generateRandomBiomorph().getGenes(), x, y,2.9,2.9);
 		//bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 
 	}
