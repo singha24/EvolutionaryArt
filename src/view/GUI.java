@@ -104,6 +104,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem saveToHOF2;
 	private JMenuItem saveToHOF3;
 	private JMenuItem saveToHOF4;
+	private JMenuItem clearFromHOF1;
+	private JMenuItem clearFromHOF2;
+	private JMenuItem clearFromHOF3;
+	private JMenuItem clearFromHOF4;
 
 	private Thread speechThread;
 	private boolean speaking; // used to start and stop thread
@@ -278,25 +282,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 		//toMovie.add(main_biomorph);
 	}
 	
-	private void emptyHallOfFame(){
-		if(hall_of_fame_1 == null) {
-		hall_of_fame_1 = new Renderer(new int[2], 5,5,1,1);
-		hof_1.add(hall_of_fame_1);
-		}
-		if(hall_of_fame_2 == null){
-		hall_of_fame_2 = new Renderer(new int[2], 5,5,1,1);
-		hof_2.add(hall_of_fame_2);
-		}
-		if(hall_of_fame_3 == null){
-		hall_of_fame_3 = new Renderer(new int[2], 5,5,1,1);
-		hof_3.add(hall_of_fame_3);
-		}
-		if(hall_of_fame_4 == null){
-		hall_of_fame_4 = new Renderer(new int[2], 5,5,1,1);
-		hof_4.add(hall_of_fame_4);
-		}		
-	}
-	
 	
 	
 	public static ArrayList<JPanel> getBiomorphs(){
@@ -357,6 +342,11 @@ public class GUI extends JFrame implements Printable, Runnable {
 		saveToHOF2 = new JMenuItem("Save to Hall of Fame");
 		saveToHOF3 = new JMenuItem("Save to Hall of Fame");
 		saveToHOF4 = new JMenuItem("Save to Hall of Fame");
+		
+		clearFromHOF1 = new JMenuItem("Remove from Hall Of Fame");
+		clearFromHOF2 = new JMenuItem("Remove from Hall Of Fame");
+		clearFromHOF3 = new JMenuItem("Remove from Hall Of Fame");
+		clearFromHOF4 = new JMenuItem("Remove from Hall Of Fame");
 
 		file.add(upload);
 		file.add(save);
@@ -376,9 +366,15 @@ public class GUI extends JFrame implements Printable, Runnable {
 		main_frame.setJMenuBar(menu);
 		
 		popupMenu1.add(saveToHOF1);
+		popupMenu1.add(clearFromHOF1);
 		popupMenu2.add(saveToHOF2);
+		popupMenu2.add(clearFromHOF2);
 		popupMenu3.add(saveToHOF3);
+		popupMenu3.add(clearFromHOF3);
 		popupMenu4.add(saveToHOF4);
+		popupMenu4.add(clearFromHOF4);
+		
+		
 
 		JPanel container = new JPanel();
 		container.setBounds(261, 70, 520, 587);
@@ -792,6 +788,53 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 		
+		clearFromHOF1.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("first");
+				hall_of_fame[0] = hallOfFame.readHallOfFame("first");
+				hall_of_fame_1.setGenes(hall_of_fame[0].getGenes());
+				hof_1.repaint();
+				
+			}
+		});
+		
+		clearFromHOF2.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("second");
+				hall_of_fame[1] = hallOfFame.readHallOfFame("second");
+				hall_of_fame_2.setGenes(hall_of_fame[1].getGenes());
+				hof_2.repaint();
+				
+			}
+		});
+		
+		clearFromHOF3.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("third");
+				hall_of_fame[2] = hallOfFame.readHallOfFame("third");
+				hall_of_fame_3.setGenes(hall_of_fame[2].getGenes());
+				hof_3.repaint();
+				
+			}
+		});
+		
+		clearFromHOF4.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("fourth");
+				hall_of_fame[3] = hallOfFame.readHallOfFame("fourth");
+				hall_of_fame_4.setGenes(hall_of_fame[3].getGenes());
+				hof_4.repaint();
+				
+			}
+		});
 		saveToHOF2.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
