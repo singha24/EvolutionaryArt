@@ -29,9 +29,9 @@ public class BioWarehouse {
 	}
 	
 	public void saveBioMorph(Biomorph bio){
-		int[] copyGenes = new int[bio.getGenesLenth()];
+		int[] copyGenes = new int[bio.getGenesLength()];
 		
-		for(int i = 0; i < bio.getGenesLenth(); i++){
+		for(int i = 0; i < bio.getGenesLength(); i++){
 			
 			copyGenes[i] = bio.getGenes()[i];
 			

@@ -114,11 +114,19 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JPopupMenu popupMenu2 = new JPopupMenu();
 	private JPopupMenu popupMenu3 = new JPopupMenu();
 	private JPopupMenu popupMenu4 = new JPopupMenu();
+	private JButton hof_1 = new JButton();
+	private JButton hof_2 = new JButton();
+	private JButton hof_3 = new JButton();
+	private JButton hof_4 = new JButton();
 	
 	private ArrayList<Renderer> tempStorage = new ArrayList<Renderer>();
 	private ArrayList<Renderer> HOF = new ArrayList<Renderer>();
 	private HallOfFame hallOfFame;
 	private Biomorph[] hall_of_fame;
+	private Renderer hall_of_fame_1;
+	private Renderer hall_of_fame_2;
+	private Renderer hall_of_fame_3;
+	private Renderer hall_of_fame_4;
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -162,6 +170,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 			hall_of_fame[1] = hallOfFame.readHallOfFame("second");
 			hall_of_fame[2] = hallOfFame.readHallOfFame("third");
 			hall_of_fame[3] = hallOfFame.readHallOfFame("fourth");
+			
+			
 			
 		//}
 		
@@ -253,7 +263,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		update();
 
-	}
+	} 
 
 	private void update() {
 		main_biomorph.repaint();
@@ -266,8 +276,29 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_7.repaint();
 		child_8.repaint();
 		
-		toMovie.add(main_biomorph);
+		//toMovie.add(main_biomorph);
 	}
+	
+	private void emptyHallOfFame(){
+		if(hall_of_fame_1 == null) {
+		hall_of_fame_1 = new Renderer(new int[2], 5,5,1,1);
+		hof_1.add(hall_of_fame_1);
+		}
+		if(hall_of_fame_2 == null){
+		hall_of_fame_2 = new Renderer(new int[2], 5,5,1,1);
+		hof_2.add(hall_of_fame_2);
+		}
+		if(hall_of_fame_3 == null){
+		hall_of_fame_3 = new Renderer(new int[2], 5,5,1,1);
+		hof_3.add(hall_of_fame_3);
+		}
+		if(hall_of_fame_4 == null){
+		hall_of_fame_4 = new Renderer(new int[2], 5,5,1,1);
+		hof_4.add(hall_of_fame_4);
+		}		
+	}
+	
+	
 	
 	public static ArrayList<JPanel> getBiomorphs(){
 		return toMovie;
@@ -335,7 +366,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		system.add(viewSysLog);
 		system.add(speech);
-		system.add(videoRecording);
+		//system.add(videoRecording);
 
 		help.add(instructions);
 
@@ -498,36 +529,70 @@ public class GUI extends JFrame implements Printable, Runnable {
 		//hof_panel.setBounds(793, 88, 216, 250);
 		hof_panel.setBounds(793, 70, 216, 224);
 		main_frame.getContentPane().add(hof_panel);
-
-		JPanel hof_1 = new JPanel();
-		System.out.println("ddddddddddddddddddd"+hall_of_fame[0].getGenesLenth());
+		
 		// TODO: 
-		if(hall_of_fame[0] != null)
-			main_biomorph.add(new Renderer(hall_of_fame[0].getGenes(), 1,1,1,1));
+		
+		if(hall_of_fame[0] != null){
+			hall_of_fame_1 = new Renderer(hall_of_fame[0].getGenes(), 5,5,1,1);
+			hof_1.add(hall_of_fame_1);
+			}
+		//hof_1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		//hof_1.setBorderPainted(false);
+		hof_1.setFocusPainted(false);
+		hof_1.setContentAreaFilled(false);
+		hof_1.setRolloverEnabled(false);
+		hof_1.setEnabled(false);
 		hof_1.setPreferredSize(new Dimension(100, 100));
 		hof_1.setOpaque(true);
 		//hof_1.setBackground(Color.BLACK);
 		hof_panel.add(hof_1);
 		hof_1.setComponentPopupMenu(popupMenu1);
 
-		JPanel hof_2 = new JPanel();
+		
+		if(hall_of_fame[1] != null){
+			hall_of_fame_2 = new Renderer(hall_of_fame[1].getGenes(), 5,5,1,1);
+			hof_2.add(hall_of_fame_2);
+			}
+		hof_2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		hof_2.setBorderPainted(false);
+		hof_2.setFocusPainted(false);
+		hof_2.setContentAreaFilled(false);
+		hof_2.setRolloverEnabled(false);
+		hof_2.setEnabled(false);
 		hof_2.setPreferredSize(new Dimension(100, 100));
 		hof_2.setOpaque(true);
-		hof_2.setBackground(Color.BLACK);
 		hof_panel.add(hof_2);
 		hof_2.setComponentPopupMenu(popupMenu2);
 		
-		JPanel hof_3 = new JPanel();
+		
+		if(hall_of_fame[2] != null){
+			hall_of_fame_3 = new Renderer(hall_of_fame[2].getGenes(), 5,5,1,1);
+			hof_3.add(hall_of_fame_3);
+			}
+		hof_3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		hof_3.setBorderPainted(false);
+		hof_3.setFocusPainted(false);
+		hof_3.setContentAreaFilled(false);
+		hof_3.setRolloverEnabled(false);
+		hof_3.setEnabled(false);
 		hof_3.setPreferredSize(new Dimension(100, 100));
 		hof_3.setOpaque(true);
-		hof_3.setBackground(Color.BLACK);
 		hof_panel.add(hof_3);
 		hof_3.setComponentPopupMenu(popupMenu3);
 
-		JPanel hof_4 = new JPanel();
+		
+		if(hall_of_fame[3] != null){
+			hall_of_fame_4 = new Renderer(hall_of_fame[3].getGenes(), 5,5,1,1);
+			hof_4.add(hall_of_fame_4);
+			}
+		hof_4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		hof_4.setBorderPainted(false);
+		hof_4.setFocusPainted(false);
+		hof_4.setContentAreaFilled(false);
+		hof_4.setRolloverEnabled(false);
+		hof_4.setEnabled(false);
 		hof_4.setPreferredSize(new Dimension(100, 100));
 		hof_4.setOpaque(true);
-		hof_4.setBackground(Color.BLACK);
 		hof_panel.add(hof_4);
 		hof_4.setComponentPopupMenu(popupMenu4);
 		hof_panel.add(saveButton);
@@ -677,14 +742,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 
-		saveButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent saveHOF){
-				
-				//HallOfFame
-				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "first");
-				
-			}
-		});
 		
 		save.addActionListener(new ActionListener() {
 
@@ -707,11 +764,26 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 		
+		
+		
 		saveToHOF1.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				//HOF.add(biomorph);
+				
 				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "first");
+				hall_of_fame[0] = hallOfFame.readHallOfFame("first");
+				//refreshHOF();
+				//emptyHallOfFame();
+				
+				if(hall_of_fame_1 == null) {
+					hall_of_fame_1 = new Renderer(hall_of_fame[0].getGenes(), 5,5,1,1);
+					hof_1.add(hall_of_fame_1);
+					}else
+				hall_of_fame_1.setGenes(hall_of_fame[0].getGenes());
+				//hof_1.add(hall_of_fame_1);
+				//System.out.println("ggggggggggggggggg"+hall_of_fame_1.getGenes().length);
+				hof_1.repaint();
 				
 			}
 		});
@@ -721,6 +793,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 			public void actionPerformed(ActionEvent e) {
 				//HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "second");
+				hall_of_fame[1] = hallOfFame.readHallOfFame("second");
+				hall_of_fame_2.setGenes(hall_of_fame[1].getGenes());
+				hof_2.repaint();
 			}
 		});
 		
@@ -729,6 +804,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 			public void actionPerformed(ActionEvent e) {
 				//HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "third");
+				hall_of_fame[2] = hallOfFame.readHallOfFame("third");
+				hall_of_fame_3.setGenes(hall_of_fame[2].getGenes());
+				hof_3.repaint();
 			}
 		});
 
@@ -737,6 +815,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 			public void actionPerformed(ActionEvent e) {
 				//HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "fourth");
+				hall_of_fame[3] = hallOfFame.readHallOfFame("fourth");
+				System.out.println("HHHHHHHHHHHHHHHH"+hall_of_fame[3].getGenesLength());
+				hall_of_fame_4.setGenes(hall_of_fame[3].getGenes());
+				hof_4.repaint();
 			}
 		});
 
@@ -853,5 +935,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		}
 
+	}
+	private void refreshHOF(){
+		
+		hall_of_fame_1 = new Renderer(hall_of_fame[0].getGenes(), 5,5,1,1);
 	}
 }
