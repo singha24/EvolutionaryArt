@@ -88,7 +88,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JButton child_6 = new JButton();
 	private JButton child_7 = new JButton();
 	private JButton child_8 = new JButton();
-	private JButton saveButton = new JButton("Save");
 
 	// private JMenuItem complexity;
 	private JMenuItem save;
@@ -535,8 +534,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 		if(hall_of_fame[0] != null){
 			hall_of_fame_1 = new Renderer(hall_of_fame[0].getGenes(), 5,5,1,1);
 			hof_1.add(hall_of_fame_1);
+			}else{
+				int[] emptyGenes = {0,0,0,0,0,0,0,0,0};
+				hall_of_fame_1 = new Renderer(emptyGenes, 5,5,1,1);
+				hof_1.add(hall_of_fame_1);
 			}
-		//hof_1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		//hof_1.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		//hof_1.setBorderPainted(false);
 		hof_1.setFocusPainted(false);
 		hof_1.setContentAreaFilled(false);
@@ -552,9 +555,13 @@ public class GUI extends JFrame implements Printable, Runnable {
 		if(hall_of_fame[1] != null){
 			hall_of_fame_2 = new Renderer(hall_of_fame[1].getGenes(), 5,5,1,1);
 			hof_2.add(hall_of_fame_2);
+			}else{
+				int[] emptyGenes = {0,0,0,0,0,0,0,0,0};
+				hall_of_fame_2 = new Renderer(emptyGenes, 5,5,1,1);
+				hof_2.add(hall_of_fame_2);
 			}
-		hof_2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		hof_2.setBorderPainted(false);
+		//hof_2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		//hof_2.setBorderPainted(false);
 		hof_2.setFocusPainted(false);
 		hof_2.setContentAreaFilled(false);
 		hof_2.setRolloverEnabled(false);
@@ -568,9 +575,13 @@ public class GUI extends JFrame implements Printable, Runnable {
 		if(hall_of_fame[2] != null){
 			hall_of_fame_3 = new Renderer(hall_of_fame[2].getGenes(), 5,5,1,1);
 			hof_3.add(hall_of_fame_3);
+			}else{
+				int[] emptyGenes = {0,0,0,0,0,0,0,0,0};
+				hall_of_fame_3 = new Renderer(emptyGenes, 5,5,1,1);
+				hof_3.add(hall_of_fame_3);
 			}
-		hof_3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		hof_3.setBorderPainted(false);
+		//hof_3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		//hof_3.setBorderPainted(false);
 		hof_3.setFocusPainted(false);
 		hof_3.setContentAreaFilled(false);
 		hof_3.setRolloverEnabled(false);
@@ -584,9 +595,13 @@ public class GUI extends JFrame implements Printable, Runnable {
 		if(hall_of_fame[3] != null){
 			hall_of_fame_4 = new Renderer(hall_of_fame[3].getGenes(), 5,5,1,1);
 			hof_4.add(hall_of_fame_4);
+			}else{
+				int[] emptyGenes = {0,0,0,0,0,0,0,0,0};
+				hall_of_fame_4 = new Renderer(emptyGenes, 5,5,1,1);
+				hof_4.add(hall_of_fame_4);
 			}
-		hof_4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		hof_4.setBorderPainted(false);
+		//hof_4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		//hof_4.setBorderPainted(false);
 		hof_4.setFocusPainted(false);
 		hof_4.setContentAreaFilled(false);
 		hof_4.setRolloverEnabled(false);
@@ -595,7 +610,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_4.setOpaque(true);
 		hof_panel.add(hof_4);
 		hof_4.setComponentPopupMenu(popupMenu4);
-		hof_panel.add(saveButton);
 		
 		
 		// container.setLayout(new FlowLayout());
@@ -769,20 +783,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 		saveToHOF1.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				//HOF.add(biomorph);
 				
 				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "first");
 				hall_of_fame[0] = hallOfFame.readHallOfFame("first");
-				//refreshHOF();
-				//emptyHallOfFame();
-				
-				if(hall_of_fame_1 == null) {
-					hall_of_fame_1 = new Renderer(hall_of_fame[0].getGenes(), 5,5,1,1);
-					hof_1.add(hall_of_fame_1);
-					}else
 				hall_of_fame_1.setGenes(hall_of_fame[0].getGenes());
-				//hof_1.add(hall_of_fame_1);
-				//System.out.println("ggggggggggggggggg"+hall_of_fame_1.getGenes().length);
 				hof_1.repaint();
 				
 			}
@@ -816,7 +820,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 				//HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "fourth");
 				hall_of_fame[3] = hallOfFame.readHallOfFame("fourth");
-				System.out.println("HHHHHHHHHHHHHHHH"+hall_of_fame[3].getGenesLength());
 				hall_of_fame_4.setGenes(hall_of_fame[3].getGenes());
 				hof_4.repaint();
 			}
