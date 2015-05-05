@@ -27,17 +27,25 @@ public class HallOfFame {
 	public boolean saveHallOfFame(Biomorph biomorph, String fileName) {
 		
 		
+		int savingGenes[] = new int[biomorph.getGenesLength()];
+		for (int i = 0; i < biomorph.getGenesLength(); i++){
+			
+			savingGenes[i] = biomorph.getGenes()[i];
+			
+		}
+		Biomorph saving = new Biomorph(savingGenes);
+		
 		try {
 			// Serialize data object to a file
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream(fileName + ".bio"));
-			out.writeObject(biomorph);
+			out.writeObject(saving);
 			out.close();
 
 			// Serialize data object to a byte array
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			out = new ObjectOutputStream(bos);
-			out.writeObject(biomorph);
+			out.writeObject(saving);
 			out.close();
 
 			// Get the bytes of the serialized object

@@ -6,7 +6,6 @@ import java.io.Serializable;
  * A Biomorph has genes which are used to render an image.
  * 
  * Genes can be increased based on the genelimit specified in BiomorphCreator.
- * 
  * @author Manjit Bansal
  * @version 14 Dec 2014
  */

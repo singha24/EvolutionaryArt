@@ -60,7 +60,6 @@ public class Controller {
 		//bioTwo = new Renderer(generateChild(bioOne.getGenes()));
 
 	}
-
 	
 	private int[] generateChild(int[] parent){
 		return bioCreate.extendBiomorph(new Biomorph(parent));

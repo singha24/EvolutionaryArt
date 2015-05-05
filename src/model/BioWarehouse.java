@@ -1,53 +1,41 @@
 package model;
 
-import java.awt.Graphics2D;
-import java.util.ArrayList;
 
 public class BioWarehouse {
 	
-	private ArrayList<Biomorph> biomorphs;
-	private ArrayList<Graphics2D> g2d;
-	
+	private Biomorph[] biomorphs;
+
 	
 	public BioWarehouse(){
-		this.biomorphs = new ArrayList<Biomorph>();
-		this.g2d = new ArrayList<Graphics2D>();
+		this.biomorphs = new Biomorph[8];
 	}
 	
 	public Biomorph getBiomorph(int i){
 		
-			return biomorphs.get(i);
+			return biomorphs[i];
 		
 	}
 	
-	public int getArraySize(){
-		int counter = 0;
-		for(int i =0; i<biomorphs.size();i++){
-			counter++;
-		}
-		return counter;
-	}
-	
-	public void saveBioMorph(Biomorph bio){
-		int[] copyGenes = new int[bio.getGenesLenth()];
+	public void saveBioMorph(int[] genes){
 		
-		for(int i = 0; i < bio.getGenesLenth(); i++){
-			
-			copyGenes[i] = bio.getGenes()[i];
-			
+		Biomorph tempBiomorph = new Biomorph(genes);
+		
+		for(int i = 0; i < biomorphs.length; i++){
+			if(biomorphs[i] == null){
+				biomorphs[i] = tempBiomorph;
+				break;
+			}	
 		}
-		Biomorph biomorph = new Biomorph(copyGenes);
-		biomorphs.add(biomorph);
+
 	}
 	
-	
-	public void storeG2D(Graphics2D g2d){
-		this.g2d.add(g2d);
+	public void deleteBiomorph(int i){
+		biomorphs[i] = null;
 	}
 	
-	public Graphics2D getG2D(int i){
-		return g2d.get(i);
+	public int getStoreLength(){
+		return biomorphs.length;
 	}
-	
+
 
 }
