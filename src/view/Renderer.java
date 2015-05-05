@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  * @author Satpal Singh, Mathew Chambers, Assa Singh
  * @version 16 Dec 2014
  */
-public class Renderer extends JPanel {
+public class Renderer extends JPanel  {
 
 	private Graphics2D g2d;
 	private int[] genes;

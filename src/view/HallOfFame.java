@@ -80,21 +80,11 @@ public class HallOfFame {
 
 		}
 
-		return null;
+			return null;
 	}
 
-	public static void main(String[] args) {
-
-		HallOfFame h = new HallOfFame();
-		int[] genes = { 4, 5, 4, 3, 2, 54, 43, 24 };
-		Biomorph bio = new Biomorph(genes);
-		boolean saved = h.saveHallOfFame(bio, "test");
-		System.out.println(saved);
-		Biomorph readBio = h.readHallOfFame("test");
-		
-		for (int gene : readBio.getGenes())
-			System.out.println("Test : " + gene);
-
-	}
+//	public static void main(String[] args) {
+//
+//	}
 
 }
