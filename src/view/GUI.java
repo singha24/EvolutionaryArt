@@ -101,17 +101,24 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem videoRecording;
 	
 	private JMenuItem saveToTemp;
-	private JMenuItem saveToHOF;
+	private JMenuItem saveToHOF1;
+	private JMenuItem saveToHOF2;
+	private JMenuItem saveToHOF3;
+	private JMenuItem saveToHOF4;
 
 	private Thread speechThread;
 	private boolean speaking; // used to start and stop thread
 	
 	private static JFrame loadingFrame;
-	private JPopupMenu popupMenu = new JPopupMenu();
+	private JPopupMenu popupMenu1 = new JPopupMenu();
+	private JPopupMenu popupMenu2 = new JPopupMenu();
+	private JPopupMenu popupMenu3 = new JPopupMenu();
+	private JPopupMenu popupMenu4 = new JPopupMenu();
 	
 	private ArrayList<Renderer> tempStorage = new ArrayList<Renderer>();
 	private ArrayList<Renderer> HOF = new ArrayList<Renderer>();
 	private HallOfFame hallOfFame;
+	private Biomorph[] hall_of_fame;
 
 	private SpinnerModel spinnerModel = new SpinnerNumberModel(10, // initial
 																	// value
@@ -140,10 +147,26 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		this.bioCreator = bioCreator;
 		this.children = children;
-
+		getHallOfFames();
 		initUI();
+		
 	}
 
+	private void getHallOfFames(){
+		
+		hall_of_fame = new Biomorph[4];
+		
+	//	for(int i =0; i < hall_of_fame.length; i++){
+			hall_of_fame[0] = hallOfFame.readHallOfFame("first");
+			
+			hall_of_fame[1] = hallOfFame.readHallOfFame("second");
+			hall_of_fame[2] = hallOfFame.readHallOfFame("third");
+			hall_of_fame[3] = hallOfFame.readHallOfFame("fourth");
+			
+		//}
+		
+	}
+	
 	public static void loading() {
 		loadingFrame = new JFrame();
 
@@ -300,7 +323,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 		speech.setActionCommand("Speech Recognition");
 		
 		saveToTemp = new JMenuItem("Save to Temp Storage");
-		saveToHOF = new JMenuItem("Save to Hall of Fame");
+		saveToHOF1 = new JMenuItem("Save to Hall of Fame");
+		saveToHOF2 = new JMenuItem("Save to Hall of Fame");
+		saveToHOF3 = new JMenuItem("Save to Hall of Fame");
+		saveToHOF4 = new JMenuItem("Save to Hall of Fame");
 
 		file.add(upload);
 		file.add(save);
@@ -319,8 +345,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 		menu.add(system);
 		main_frame.setJMenuBar(menu);
 		
-		popupMenu.add(saveToTemp);
-		popupMenu.add(saveToHOF);
+		popupMenu1.add(saveToHOF1);
+		popupMenu2.add(saveToHOF2);
+		popupMenu3.add(saveToHOF3);
+		popupMenu4.add(saveToHOF4);
 
 		JPanel container = new JPanel();
 		container.setBounds(261, 70, 520, 587);
@@ -472,32 +500,36 @@ public class GUI extends JFrame implements Printable, Runnable {
 		main_frame.getContentPane().add(hof_panel);
 
 		JPanel hof_1 = new JPanel();
+		System.out.println("ddddddddddddddddddd"+hall_of_fame[0].getGenesLenth());
+		// TODO: 
+		if(hall_of_fame[0] != null)
+			main_biomorph.add(new Renderer(hall_of_fame[0].getGenes(), 1,1,1,1));
 		hof_1.setPreferredSize(new Dimension(100, 100));
 		hof_1.setOpaque(true);
-		hof_1.setBackground(Color.BLACK);
+		//hof_1.setBackground(Color.BLACK);
 		hof_panel.add(hof_1);
-		hof_1.setComponentPopupMenu(popupMenu);
+		hof_1.setComponentPopupMenu(popupMenu1);
 
 		JPanel hof_2 = new JPanel();
 		hof_2.setPreferredSize(new Dimension(100, 100));
 		hof_2.setOpaque(true);
 		hof_2.setBackground(Color.BLACK);
 		hof_panel.add(hof_2);
-		hof_2.setComponentPopupMenu(popupMenu);
+		hof_2.setComponentPopupMenu(popupMenu2);
 		
 		JPanel hof_3 = new JPanel();
 		hof_3.setPreferredSize(new Dimension(100, 100));
 		hof_3.setOpaque(true);
 		hof_3.setBackground(Color.BLACK);
 		hof_panel.add(hof_3);
-		hof_3.setComponentPopupMenu(popupMenu);
+		hof_3.setComponentPopupMenu(popupMenu3);
 
 		JPanel hof_4 = new JPanel();
 		hof_4.setPreferredSize(new Dimension(100, 100));
 		hof_4.setOpaque(true);
 		hof_4.setBackground(Color.BLACK);
 		hof_panel.add(hof_4);
-		hof_4.setComponentPopupMenu(popupMenu);
+		hof_4.setComponentPopupMenu(popupMenu4);
 		hof_panel.add(saveButton);
 		
 		
@@ -675,11 +707,36 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 		
-		saveToHOF.addActionListener(new ActionListener() {
+		saveToHOF1.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				//HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "first");
+				
+			}
+		});
+		
+		saveToHOF2.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				//HOF.add(biomorph);
+				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "second");
+			}
+		});
+		
+		saveToHOF3.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				//HOF.add(biomorph);
+				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "third");
+			}
+		});
+
+		saveToHOF4.addActionListener(new ActionListener() {
+	
+			public void actionPerformed(ActionEvent e) {
+				//HOF.add(biomorph);
+				hallOfFame.saveHallOfFame(new Biomorph (biomorph.getGenes()), "fourth");
 			}
 		});
 
