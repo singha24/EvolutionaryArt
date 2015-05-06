@@ -1,0 +1,22 @@
+BBBBB    iii                                                     hh            
+BB   B         oooo    mm mm mmmm     oooo    rr rr    pp pp     hh         sss  
+BBBBBB   iii  oo  oo   mmm  mm  mm   oo  oo   rrr  r   ppp  pp   hhhhhh    s     
+BB   BB  iii  oo  oo   mmm  mm  mm   oo  oo   rr       pppppp    hh   hh    sss  
+BBBBBB   iii   oooo    mmm  mm  mm    oooo    rr       pp        hh   hh       s 
+                                                       pp                   sss  
+````````````````````````````````````````````````````````````````````````````````````````````````````
+Welcome to Group 14's Biomorph Generator.
+
+To use this software you can choose to either use Voice Recognition to start the evolutionary process by using the following command: 
+	EVOLVE followed by a number between 1 and 8: which represents which child you would like to use.
+The alternative is to use the evolve button to step one generation at a time to evolve the Biomorphs to your choosing. 
+
+Our software makes it easier for you to navigate around the UI by using shortcuts.
+
+CTRL + P = Print
+CTRL + S = Save as image
+ALT + P = Voice Recognition.
+
+Known Issues:
+Currently if you try to run voice recognition more than once after stopping the first instance you microphone will not be detected. 
+If this happens: You will need to close the application and restart it if you wish to use voice recognition. 

@@ -22,12 +22,6 @@ import javax.imageio.metadata.IIOMetadataFormatImpl;
 import javax.imageio.metadata.IIOMetadataNode;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
-
-import ar.com.hjg.pngj.PngReader;
-import ar.com.hjg.pngj.chunks.ChunkHelper;
-import ar.com.hjg.pngj.chunks.PngChunk;
-import ar.com.hjg.pngj.chunks.PngChunkTextVar;
-
 public class ChangeImageResolution {
 	private static String getFileExtension(File file) {
 		String fileName = file.getName();
