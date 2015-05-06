@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  * image and returns a Jpanel.
  * 
  * @author Satpal Singh, Mathew Chambers, Assa Singh
- * @version 16 Dec 2014
+ * @version 06/05/2015
  */
 public class Renderer extends JPanel  {
 
@@ -22,6 +22,15 @@ public class Renderer extends JPanel  {
 	private double scaleX;
 	private double scaleY;
 
+	
+	/**
+	 * Constructor for the JPanel to render the Biomorph as an Image.
+	 * @param genes Genes are an array of Integers of different lengths. 
+	 * @param x X Position on Screen
+	 * @param y Y Position on screen
+	 * @param scaleX The scaleX value of the biomorph
+	 * @param scaleY The ScaleY value of the biomorph
+	 */
 	public Renderer(int[] genes, int x, int y, double scaleX, double scaleY) {
 		
 		this.genes = genes;
@@ -36,18 +45,12 @@ public class Renderer extends JPanel  {
 	/**
 	 * Method to create lines based on the parameters passed on
 	 * 
-	 * @param g
-	 *            - Graphic object used to draw
-	 * @param a
-	 *            - used to draw lines
-	 * @param b
-	 *            - used to draw lines
-	 * @param c
-	 *            - used to draw lines
-	 * @param d
-	 *            - used to draw lines
-	 * @param color
-	 *            - used for color
+	 * @param g - Graphic g object used to draw
+	 * @param a - a: used to draw lines
+	 * @param b - b: used to draw lines
+	 * @param c - c: used to draw lines
+	 * @param d - d: used to draw lines
+	 * @param color- colour of the lines
 	 */
 	public void displayBiomorph(Graphics g, int x1, int y1, int x2, int y2,
 			Color color) {
@@ -62,16 +65,27 @@ public class Renderer extends JPanel  {
 		//g2d = (Graphics2D) g;
 	}
 	
+	/**
+	 * @return Returns an array of genes
+	 */
 	public int[] getGenes(){
-		
 		return genes;
 	}
 	
+	/**
+	 * @param genes
+	 * Sets the genes of the biomorph to the provided one.
+	 */
 	public void setGenes(int[] genes){
 		
 		this.genes = genes;
 	}
 
+	/**
+	 * @param g Graphic g - Part of the Graphics2D library
+	 * @param genes Genes int[]
+	 * A method to draw lines based upon the gene values
+	 */
 	private void drawLines(Graphics g, int genes[]) {
 		((Graphics2D)g).scale(scaleX, scaleY);
 		//For positioning the biomorph

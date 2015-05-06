@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import view.GUI;
 import view.Renderer;
-import view.Save;
 import model.BioWarehouse;
 import model.Biomorph;
 import model.BiomorphCreator;
@@ -32,7 +31,6 @@ public class Controller {
 	//private Renderer bioTwo;
 	private Renderer[] children = new Renderer[8];
 	private GUI gui;
-	private Save save;
 	private BioWarehouse warehouse;
 
 	private static long timerStart;
@@ -53,7 +51,6 @@ public class Controller {
 	public void initiliseHelpers() {
 		warehouse = new BioWarehouse();
 		bioCreate = new BiomorphCreator();
-		save = new Save();
 	}
 
 	public void generateParents(int x, int y) {
@@ -109,10 +106,6 @@ public class Controller {
 			counter++;
 		}
 		return counter;
-	}
-
-	public void export(JPanel biomorph) {
-		save.convertToImage(biomorph);
 	}
 
 	public void initGUI() {
