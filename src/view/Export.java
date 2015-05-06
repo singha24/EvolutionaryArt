@@ -125,21 +125,18 @@ public class Export {
 
 			File outputfile = new File(f.getSelectedFile().getPath() + png);
 			try {
-				// metaData.writeImage(outputfile, bi, createNode());
 				byte[] temp = ChangeImageResolution.writeCustomData(bi, "Assa",
 						"Singh");
 				InputStream in = new ByteArrayInputStream(temp);
 				BufferedImage bImageFromConvert = ImageIO.read(in);
 
 				ImageIO.write(bImageFromConvert, "PNG", outputfile);
-				// ChangeImageResolution.writeMime(outputfile);
 
 			} catch (IOException e) {
 
 				e.printStackTrace();
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * BioWarehouse - Class that stores, accesses, modifies temporary Biomorphs stored
+ * @author Matthew Chambers, Amy Wood
+ * @version May 06 2015
+ */
 public class BioWarehouse {
 	
 	private Biomorph[] biomorphs;

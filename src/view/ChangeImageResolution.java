@@ -162,29 +162,4 @@ public class ChangeImageResolution {
 	}
 	
 
-	public void readPNG(File outputfile){
-		/*PngReader pngr = FileHelper.createPngReader(outputfile);
-		pngr.readSkippingAllRows();
-		for (PngChunk c : pngr.getChunksList().getChunks()) {
-		      if (!ChunkHelper.isText(c))   continue;
-		      PngChunkTextVar ct = (PngChunkTextVar) c;
-		      String key = ct.getKey();
-		      String val = ct.getVal();
-		      // ... 
-		}*/
-	}
-
-	/*
-	 * public static void main(String[] args) { if (args.length != 3) {
-	 * System.out
-	 * .println("Usage: ChangeImageResolution inputFile newResolutionDPI outputFile"
-	 * ); return; }
-	 * 
-	 * try { File inputFile = new File(args[0]); double resolutionDPI =
-	 * Double.parseDouble(args[1]); File outputFile = new File(args[2]);
-	 * 
-	 * BufferedImage image = readImage(inputFile); IIOMetadataNode newMetadata =
-	 * createResolutionMetadata(resolutionDPI); writeImage(outputFile, image,
-	 * newMetadata); } catch (Exception e) { e.printStackTrace(); } }
-	 */
 }

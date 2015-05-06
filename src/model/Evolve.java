@@ -3,31 +3,19 @@ package model;
 import java.util.Random;
 
 /**
- * @author singhs23
- *
+ * Evolve class - Evolves the Biomorph genes by adding/subtracting values to the genes.
+ * @author Satpal Singh
+ * @version April 30 2015
  */
 public final class Evolve {
 
-	
 	/**
-	 * 
-	 * @param biomorph
+	 * Static method which evolves the genes by adding and subtracting to each genes value.
+	 * @param genes - an array which is used to evolve 
+	 * @return int array - an evolve genes values.
 	 * 
 	 */
-	public static int[] evolve(Biomorph biomorph){
-		
-		return algorithm(biomorph.getGenes());
-		
-	}
-	
-	/**
-	 * 
-	 * @param genes
-	 * @return
-	 * 
-	 */
-	public static int[] algorithm(int genes[]){
-		//TODO: algorithm for the evolution
+	public static int[] evolve(int genes[]){
 
 		Random random = new Random();
 		
@@ -36,11 +24,9 @@ public final class Evolve {
 			newGenes[i] = genes[i];
 		}
 		
-		for (int i = 0; i < genes.length; i ++){
+		for (int i = 0; i < genes.length; i++){
 			
 				int rdm;
-				//int genesToMutate = random.nextInt(genes.length);
-				//System.out.println(rdm);
 				int genesValue;
 			
 			if(i<genes.length-3){
@@ -71,25 +57,10 @@ public final class Evolve {
 				}
 			
 			
-			//System.out.println("NEW VALUE: "+genesValue);
-			
 		}
 		
 		return newGenes;
 		
 	}
-	
-//	public static void main(String[] args) {
-//
-//		Evolve ev = new Evolve();
-//		Random ran = new Random();
-//		int genes[] = new int[21];
-//		for(int i = 0; i < 21; i++){
-//		genes[i]=ran.nextInt(50);
-//		System.out.println("OLD VALUE: "+genes[i]);
-//		}
-//		ev.algorithm(genes);
-//
-//	}
 	
 }

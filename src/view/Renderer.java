@@ -57,12 +57,8 @@ public class Renderer extends JPanel  {
 
 		
 		g2d = (Graphics2D) g;
-		// g2d.rotate(Math.toRadians(20));
 		g2d.setColor(color);
-		// Can be used for the thickness of the lines
-		// g2d.setStroke(new BasicStroke(2));
 		g2d.drawLine(x1, y1, x2, y2);
-		//g2d = (Graphics2D) g;
 	}
 	
 	/**

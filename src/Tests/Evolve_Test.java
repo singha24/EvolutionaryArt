@@ -18,7 +18,6 @@ import org.junit.Test;
 public class Evolve_Test {
 	
 
-	private Evolve e;
 	private Biomorph b;
 	private BiomorphCreator bc;
 	
@@ -28,7 +27,7 @@ public class Evolve_Test {
 		b = new Biomorph(bc.generateRandomBiomorph().getGenes());
 		int[] original = b.getGenes();
 		
-		int[] modified = e.evolve(b);
+		int[] modified = Evolve.evolve(b.getGenes());
 		
 		assertArrayEquals(original, modified); //assert not equals - expected failure.
 		

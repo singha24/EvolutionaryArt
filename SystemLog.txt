@@ -1,11 +1,9 @@
-System Log: Wed May 06 16:08:46 BST 2015
+System Log: Wed May 06 17:00:00 BST 2015
 Initilising helpers...
 Done.
 Generating biomorph...
 Done.
 Initilising GUI...
 Done.
-*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*
-Time taken to boot application: 234 millisecondsInitilising GUI...
-Done.
-Time taken to boot application: 234 milliseconds
+
+Time taken to boot application: 1117 milliseconds

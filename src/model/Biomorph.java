@@ -9,16 +9,18 @@ import java.io.Serializable;
  * @author Manjit Bansal
  * @version 14 Dec 2014
  */
+
 public class Biomorph implements Serializable {
 
 	/**
-	 * 
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = 1L;
+	// Genes 
 	private int[] genes;
 
 	/**
-	 * Constructor
+	 * Constructor - construct the Biomorph object
 	 * 
 	 * @param array
 	 *            of int values
@@ -36,6 +38,9 @@ public class Biomorph implements Serializable {
 		return genes;
 	}
 
+	/**
+	 * @return int as The Gene length of genes
+	 */
 	public int getGenesLength() {
 
 		return genes.length;

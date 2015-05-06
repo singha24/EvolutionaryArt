@@ -50,7 +50,6 @@ public class HallOfFame {
 			byte[] buf = bos.toByteArray();
 			return true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -85,7 +84,6 @@ public class HallOfFame {
 			byte[] buf = bos.toByteArray();
 			return true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
