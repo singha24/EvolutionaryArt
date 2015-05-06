@@ -299,25 +299,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 		return toMovie;
 	}
 
-	private void emptyHallOfFame() {
-		if (hall_of_fame_1 == null) {
-			hall_of_fame_1 = new Renderer(new int[2], 5, 5, 1, 1);
-			hof_1.add(hall_of_fame_1);
-		}
-		if (hall_of_fame_2 == null) {
-			hall_of_fame_2 = new Renderer(new int[2], 5, 5, 1, 1);
-			hof_2.add(hall_of_fame_2);
-		}
-		if (hall_of_fame_3 == null) {
-			hall_of_fame_3 = new Renderer(new int[2], 5, 5, 1, 1);
-			hof_3.add(hall_of_fame_3);
-		}
-		if (hall_of_fame_4 == null) {
-			hall_of_fame_4 = new Renderer(new int[2], 5, 5, 1, 1);
-			hof_4.add(hall_of_fame_4);
-		}
-	}
-
 	/**
 	 * Create GUI (JFrame)
 	 */
@@ -325,7 +306,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		// Create and adjust settings for main program window
 		main_frame = new JFrame();
-		main_frame.setPreferredSize(new Dimension(1024, 720));
+		main_frame.setPreferredSize(new Dimension(1050, 720));
 		main_frame.setResizable(false);
 		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main_frame.getContentPane().setLayout(null);
@@ -497,11 +478,11 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_pane.add(child_8);
 
 		JPanel save_panel = new JPanel();
-		save_panel.setBounds(33, 70, 216, 600);
+		save_panel.setBounds(5, 80, 270, 600);
 		main_frame.getContentPane().add(save_panel);
 		
 		save_1 = new JButton();
-		save_1.setPreferredSize(new Dimension(100, 100));
+		save_1.setPreferredSize(new Dimension(115, 115));
 		save_1.setFocusPainted(false);
 		save_1.setContentAreaFilled(false);
 		save_1.setRolloverEnabled(false);
@@ -510,7 +491,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_1);
 
 		save_2 = new JButton();
-		save_2.setPreferredSize(new Dimension(100, 100));
+		save_2.setPreferredSize(new Dimension(115, 115));
 		save_2.setFocusPainted(false);
 		save_2.setContentAreaFilled(false);
 		save_2.setRolloverEnabled(false);
@@ -519,7 +500,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_2);
 
 		save_3 = new JButton();
-		save_3.setPreferredSize(new Dimension(100, 100));
+		save_3.setPreferredSize(new Dimension(115, 115));
 		save_3.setFocusPainted(false);
 		save_3.setContentAreaFilled(false);
 		save_3.setRolloverEnabled(false);
@@ -528,7 +509,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_3);
 
 		save_4 = new JButton();
-		save_4.setPreferredSize(new Dimension(100, 100));
+		save_4.setPreferredSize(new Dimension(115, 115));
 		save_4.setFocusPainted(false);
 		save_4.setContentAreaFilled(false);
 		save_4.setRolloverEnabled(false);
@@ -537,7 +518,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_4);
 
 		save_5 = new JButton();
-		save_5.setPreferredSize(new Dimension(100, 100));
+		save_5.setPreferredSize(new Dimension(115, 115));
 		save_5.setFocusPainted(false);
 		save_5.setContentAreaFilled(false);
 		save_5.setRolloverEnabled(false);
@@ -546,7 +527,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_5);
 
 		save_6 = new JButton();
-		save_6.setPreferredSize(new Dimension(100, 100));
+		save_6.setPreferredSize(new Dimension(115, 115));
 		save_6.setFocusPainted(false);
 		save_6.setContentAreaFilled(false);
 		save_6.setRolloverEnabled(false);
@@ -555,7 +536,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_6);
 
 		save_7 = new JButton();
-		save_7.setPreferredSize(new Dimension(100, 100));
+		save_7.setPreferredSize(new Dimension(115, 115));
 		save_7.setFocusPainted(false);
 		save_7.setContentAreaFilled(false);
 		save_7.setRolloverEnabled(false);
@@ -564,7 +545,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_7);
 
 		save_8 = new JButton();
-		save_8.setPreferredSize(new Dimension(100, 100));
+		save_8.setPreferredSize(new Dimension(115, 115));
 		save_8.setFocusPainted(false);
 		save_8.setContentAreaFilled(false);
 		save_8.setRolloverEnabled(false);
@@ -577,7 +558,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		JPanel hof_panel = new JPanel();
 		//hof_panel.setBounds(793, 88, 216, 250);
-		hof_panel.setBounds(793, 70, 216, 224);
+		hof_panel.setBounds(765, 70, 270, 300);
 		main_frame.getContentPane().add(hof_panel);
 		
 		// TODO: 
@@ -596,7 +577,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_1.setContentAreaFilled(false);
 		hof_1.setRolloverEnabled(false);
 		hof_1.setEnabled(false);
-		hof_1.setPreferredSize(new Dimension(100, 100));
+		hof_1.setPreferredSize(new Dimension(115, 115));
 		hof_1.setOpaque(true);
 		//hof_1.setBackground(Color.BLACK);
 		hof_panel.add(hof_1);
@@ -617,7 +598,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_2.setContentAreaFilled(false);
 		hof_2.setRolloverEnabled(false);
 		hof_2.setEnabled(false);
-		hof_2.setPreferredSize(new Dimension(100, 100));
+		hof_2.setPreferredSize(new Dimension(115, 115));
 		hof_2.setOpaque(true);
 		hof_panel.add(hof_2);
 		hof_2.setComponentPopupMenu(popupMenu2);
@@ -637,7 +618,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_3.setContentAreaFilled(false);
 		hof_3.setRolloverEnabled(false);
 		hof_3.setEnabled(false);
-		hof_3.setPreferredSize(new Dimension(100, 100));
+		hof_3.setPreferredSize(new Dimension(115, 115));
 		hof_3.setOpaque(true);
 		hof_panel.add(hof_3);
 		hof_3.setComponentPopupMenu(popupMenu3);
@@ -657,7 +638,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_4.setContentAreaFilled(false);
 		hof_4.setRolloverEnabled(false);
 		hof_4.setEnabled(false);
-		hof_4.setPreferredSize(new Dimension(100, 100));
+		hof_4.setPreferredSize(new Dimension(115, 115));
 		hof_4.setOpaque(true);
 		hof_panel.add(hof_4);
 		hof_4.setComponentPopupMenu(popupMenu4);
