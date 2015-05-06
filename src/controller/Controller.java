@@ -53,6 +53,7 @@ public class Controller {
 		warehouse = new BioWarehouse();
 		bioCreate = new BiomorphCreator();
 		children = new Renderer[8];
+
 	}
 
 	/**
@@ -98,8 +99,27 @@ public class Controller {
 	public int getChildArraySize(){
 		return children.length;
 	}
-
 	
+	/**
+	 * Initialises the GUI for the program passing the appropriate variables 
+	 * @return Array of Renderer objects
+	 */
+	public Renderer[] getTempBiomorphs() {
+		return children;
+	}
+
+	/**
+	 * Initialises the GUI for the program passing the appropriate variables 
+	 * @return int - size of the temporary childred
+	 */
+	public int getTempArraySize() {
+		int counter = 0;
+		for (int i = 0; i < children.length; i++) {
+			counter++;
+		}
+		return counter;
+	}
+
 	/**
 	 * Initialises the GUI for the program passing the appropriate variables 
 	 */
@@ -173,9 +193,8 @@ public class Controller {
 		
 		sysLog += "Initilising helpers..."
 				+ System.getProperty("line.separator");
-		
-		control.generateParents(50, 50);
-		
+	
+		control.generateParents(40, 40);
 		sysLog += "Done." + System.getProperty("line.separator");
 		
 		sysLog += "Generating biomorph..." 

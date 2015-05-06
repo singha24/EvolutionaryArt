@@ -7,9 +7,17 @@ import model.Evolve;
 
 import org.junit.Test;
 
+/**
+ * @author Assa Singh
+ * @category Test
+ * @see Evolve
+ * A Test class to assert that the genes of the original biomorph are not equal to the mutated version. This test is expected to fail-
+ * due to assertArrayEquals() which returns true if the two array are equal. 
+ *
+ */
 public class Evolve_Test {
+	
 
-	private Evolve e;
 	private Biomorph b;
 	private BiomorphCreator bc;
 	
@@ -19,7 +27,7 @@ public class Evolve_Test {
 		b = new Biomorph(bc.generateRandomBiomorph().getGenes());
 		int[] original = b.getGenes();
 		
-		int[] modified = e.evolve(b);
+		int[] modified = Evolve.evolve(b.getGenes());
 		
 		assertArrayEquals(original, modified); //assert not equals - expected failure.
 		

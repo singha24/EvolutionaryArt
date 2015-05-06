@@ -10,7 +10,17 @@ import controller.Controller;
 import view.GUI;
 import view.Renderer;
 
+/**
+ * @author Assa Singh
+ * @category Test
+ * @see Controller
+ * A test class to verify the system log is being generated every time on application boot. 
+ * Check whether the application can read in the instructions file. 
+ * Check if the child array size is equal to 8.
+ *
+ */
 public class Controller_Test {
+	
 	
 	private Controller c;
 	

@@ -20,6 +20,13 @@ import org.junit.Test;
 
 import view.Export;
 
+/**
+ * @author Assa Test
+ *@category Test
+ *@see Export
+ *
+ *A Test class to check whether a JPanel has been converted to a BufferedImage.
+ */
 public class Export_Test {
 	
 	private JPanel p;
