@@ -35,7 +35,7 @@ public class BioWarehouse {
 		
 		Biomorph tempBiomorph = new Biomorph(genes);
 		
-		if(checkFreeSpace() == true){
+		if(checkFreeSpace()){
 			for(int i = 0; i < biomorphs.length; i++){
 				if(biomorphs[i] == null){
 					biomorphs[i] = tempBiomorph;
