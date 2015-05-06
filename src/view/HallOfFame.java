@@ -58,6 +58,33 @@ public class HallOfFame {
 		}
 		
 	}
+	
+	public boolean removeHallOfFame(String fileName) {
+			int[] emptyGenes = {0,0,0,0,0,0};
+			Biomorph saving = new Biomorph(emptyGenes);
+			try {
+				// Serialize data object to a file
+				ObjectOutputStream out = new ObjectOutputStream(
+						new FileOutputStream(fileName + ".bio"));
+				out.writeObject(saving);
+				out.close();
+	
+				// Serialize data object to a byte array
+				ByteArrayOutputStream bos = new ByteArrayOutputStream();
+				out = new ObjectOutputStream(bos);
+				out.writeObject(saving);
+				out.close();
+	
+				// Get the bytes of the serialized object
+				byte[] buf = bos.toByteArray();
+				return true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
+		}
 
 	/**
 	 * @param fileName

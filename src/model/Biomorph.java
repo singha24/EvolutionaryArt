@@ -36,7 +36,7 @@ public class Biomorph implements Serializable {
 		return genes;
 	}
 
-	public int getGenesLenth() {
+	public int getGenesLength() {
 
 		return genes.length;
 	}

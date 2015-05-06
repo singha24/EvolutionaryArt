@@ -127,6 +127,10 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem saveToHOF2;
 	private JMenuItem saveToHOF3;
 	private JMenuItem saveToHOF4;
+	private JMenuItem clearFromHOF1;
+	private JMenuItem clearFromHOF2;
+	private JMenuItem clearFromHOF3;
+	private JMenuItem clearFromHOF4;
 	private JMenuItem previous;
 
 	private Thread speechThread;
@@ -317,7 +321,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		// Create and adjust settings for main program window
 		main_frame = new JFrame();
-		main_frame.setPreferredSize(new Dimension(1024, 720));
+		main_frame.setPreferredSize(new Dimension(1050, 720));
 		main_frame.setResizable(false);
 		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main_frame.getContentPane().setLayout(null);
@@ -365,6 +369,11 @@ public class GUI extends JFrame implements Printable, Runnable {
 		saveToHOF3 = new JMenuItem("Save to Hall of Fame");
 		saveToHOF4 = new JMenuItem("Save to Hall of Fame");
 		
+		clearFromHOF1 = new JMenuItem("Remove from Hall Of Fame");
+		clearFromHOF2 = new JMenuItem("Remove from Hall Of Fame");
+		clearFromHOF3 = new JMenuItem("Remove from Hall Of Fame");
+		clearFromHOF4 = new JMenuItem("Remove from Hall Of Fame");
+		
 		JPopupMenu popupMenu5 = new JPopupMenu();
 		JPopupMenu popupMenu6 = new JPopupMenu();
 		JPopupMenu popupMenu7 = new JPopupMenu();
@@ -410,9 +419,15 @@ public class GUI extends JFrame implements Printable, Runnable {
 		main_frame.setJMenuBar(menu);
 		
 		popupMenu1.add(saveToHOF1);
+		popupMenu1.add(clearFromHOF1);
 		popupMenu2.add(saveToHOF2);
+		popupMenu2.add(clearFromHOF2);
 		popupMenu3.add(saveToHOF3);
+		popupMenu3.add(clearFromHOF3);
 		popupMenu4.add(saveToHOF4);
+		popupMenu4.add(clearFromHOF4);
+		
+		
 		
 		popupMenu5.add(deleteTemp1);
 		popupMenu6.add(deleteTemp2);
@@ -523,11 +538,11 @@ public class GUI extends JFrame implements Printable, Runnable {
 		child_pane.add(child_8);
 
 		JPanel save_panel = new JPanel();
-		save_panel.setBounds(33, 70, 216, 600);
+		save_panel.setBounds(5, 80, 270, 600);
 		main_frame.getContentPane().add(save_panel);
 		
 		save_1 = new JButton();
-		save_1.setPreferredSize(new Dimension(100, 100));
+		save_1.setPreferredSize(new Dimension(115, 115));
 		save_1.setFocusPainted(false);
 		save_1.setContentAreaFilled(false);
 		save_1.setRolloverEnabled(false);
@@ -537,7 +552,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_1);
 
 		save_2 = new JButton();
-		save_2.setPreferredSize(new Dimension(100, 100));
+		save_2.setPreferredSize(new Dimension(115, 115));
 		save_2.setFocusPainted(false);
 		save_2.setContentAreaFilled(false);
 		save_2.setRolloverEnabled(false);
@@ -547,7 +562,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_2);
 
 		save_3 = new JButton();
-		save_3.setPreferredSize(new Dimension(100, 100));
+		save_3.setPreferredSize(new Dimension(115, 115));
 		save_3.setFocusPainted(false);
 		save_3.setContentAreaFilled(false);
 		save_3.setRolloverEnabled(false);
@@ -557,7 +572,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_3);
 
 		save_4 = new JButton();
-		save_4.setPreferredSize(new Dimension(100, 100));
+		save_4.setPreferredSize(new Dimension(115, 115));
 		save_4.setFocusPainted(false);
 		save_4.setContentAreaFilled(false);
 		save_4.setRolloverEnabled(false);
@@ -567,7 +582,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_4);
 
 		save_5 = new JButton();
-		save_5.setPreferredSize(new Dimension(100, 100));
+		save_5.setPreferredSize(new Dimension(115, 115));
 		save_5.setFocusPainted(false);
 		save_5.setContentAreaFilled(false);
 		save_5.setRolloverEnabled(false);
@@ -577,7 +592,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_5);
 
 		save_6 = new JButton();
-		save_6.setPreferredSize(new Dimension(100, 100));
+		save_6.setPreferredSize(new Dimension(115, 115));
 		save_6.setFocusPainted(false);
 		save_6.setContentAreaFilled(false);
 		save_6.setRolloverEnabled(false);
@@ -587,7 +602,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_6);
 
 		save_7 = new JButton();
-		save_7.setPreferredSize(new Dimension(100, 100));
+		save_7.setPreferredSize(new Dimension(115, 115));
 		save_7.setFocusPainted(false);
 		save_7.setContentAreaFilled(false);
 		save_7.setRolloverEnabled(false);
@@ -597,7 +612,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(save_7);
 
 		save_8 = new JButton();
-		save_8.setPreferredSize(new Dimension(100, 100));
+		save_8.setPreferredSize(new Dimension(115, 115));
 		save_8.setFocusPainted(false);
 		save_8.setContentAreaFilled(false);
 		save_8.setRolloverEnabled(false);
@@ -611,7 +626,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		JPanel hof_panel = new JPanel();
 		//hof_panel.setBounds(793, 88, 216, 250);
-		hof_panel.setBounds(793, 70, 216, 224);
+		hof_panel.setBounds(765, 70, 270, 300);
 		main_frame.getContentPane().add(hof_panel);
 		
 		// TODO: 
@@ -630,7 +645,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_1.setContentAreaFilled(false);
 		hof_1.setRolloverEnabled(false);
 		hof_1.setEnabled(false);
-		hof_1.setPreferredSize(new Dimension(100, 100));
+		hof_1.setPreferredSize(new Dimension(115, 115));
 		hof_1.setOpaque(true);
 		//hof_1.setBackground(Color.BLACK);
 		hof_panel.add(hof_1);
@@ -651,7 +666,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_2.setContentAreaFilled(false);
 		hof_2.setRolloverEnabled(false);
 		hof_2.setEnabled(false);
-		hof_2.setPreferredSize(new Dimension(100, 100));
+		hof_2.setPreferredSize(new Dimension(115, 115));
 		hof_2.setOpaque(true);
 		hof_panel.add(hof_2);
 		hof_2.setComponentPopupMenu(popupMenu2);
@@ -671,7 +686,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_3.setContentAreaFilled(false);
 		hof_3.setRolloverEnabled(false);
 		hof_3.setEnabled(false);
-		hof_3.setPreferredSize(new Dimension(100, 100));
+		hof_3.setPreferredSize(new Dimension(115, 115));
 		hof_3.setOpaque(true);
 		hof_panel.add(hof_3);
 		hof_3.setComponentPopupMenu(popupMenu3);
@@ -691,7 +706,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_4.setContentAreaFilled(false);
 		hof_4.setRolloverEnabled(false);
 		hof_4.setEnabled(false);
-		hof_4.setPreferredSize(new Dimension(100, 100));
+		hof_4.setPreferredSize(new Dimension(115, 115));
 		hof_4.setOpaque(true);
 		hof_panel.add(hof_4);
 		hof_4.setComponentPopupMenu(popupMenu4);
@@ -860,6 +875,53 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 		
+		clearFromHOF1.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("first");
+				hall_of_fame[0] = hallOfFame.readHallOfFame("first");
+				hall_of_fame_1.setGenes(hall_of_fame[0].getGenes());
+				hof_1.repaint();
+				
+			}
+		});
+		
+		clearFromHOF2.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("second");
+				hall_of_fame[1] = hallOfFame.readHallOfFame("second");
+				hall_of_fame_2.setGenes(hall_of_fame[1].getGenes());
+				hof_2.repaint();
+				
+			}
+		});
+		
+		clearFromHOF3.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("third");
+				hall_of_fame[2] = hallOfFame.readHallOfFame("third");
+				hall_of_fame_3.setGenes(hall_of_fame[2].getGenes());
+				hof_3.repaint();
+				
+			}
+		});
+		
+		clearFromHOF4.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				hallOfFame.removeHallOfFame("fourth");
+				hall_of_fame[3] = hallOfFame.readHallOfFame("fourth");
+				hall_of_fame_4.setGenes(hall_of_fame[3].getGenes());
+				hof_4.repaint();
+				
+			}
+		});
 		saveToHOF2.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
