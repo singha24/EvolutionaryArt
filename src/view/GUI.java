@@ -52,7 +52,7 @@ import edu.cmu.sphinx.util.props.ConfigurationManager;
  * gene values.
  * 
  * @author Matthew Chambers, Assa Singh, Satpal Singh, Manjit Singh, Amy Wood
- * @version 16 Dec 2014
+ * @version 06 May 2015
  */
 public class GUI extends JFrame implements Printable, Runnable {
 
@@ -273,6 +273,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 			children[i].setGenes(newGenes);
 		}
+		
 		for (int i = 0; i < children.length; i++) {
 			bioCreator
 					.extendBiomorph(new Biomorph(children[i].getGenes()));
@@ -983,56 +984,56 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		moveToMain1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(0)) {
+				if (!emptyTemp(0)) {
 					evolveFromTemp(0);
 				}
 			}
 		});
 		moveToMain2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(1)) {
+				if (!emptyTemp(1)) {
 					evolveFromTemp(1);
 				}
 			}
 		});
 		moveToMain3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(2)) {
+				if (!emptyTemp(2)) {
 					evolveFromTemp(2);
 				}
 			}
 		});
 		moveToMain4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(3)) {
+				if (!emptyTemp(3)) {
 					evolveFromTemp(3);
 				}
 			}
 		});
 		moveToMain5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(4)) {
+				if (!emptyTemp(4)) {
 					evolveFromTemp(4);
 				}
 			}
 		});
 		moveToMain6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(5)) {
+				if (!emptyTemp(5)) {
 					evolveFromTemp(5);
 				}
 			}
 		});
 		moveToMain7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(6)) {
+				if (!emptyTemp(6)) {
 					evolveFromTemp(6);
 				}
 			}
 		});
 		moveToMain8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (emptyTemp(7)) {
+				if (!emptyTemp(7)) {
 					evolveFromTemp(7);
 				}
 			}

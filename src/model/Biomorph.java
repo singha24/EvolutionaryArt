@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * Genes can be increased based on the genelimit specified in BiomorphCreator.
  * @author Manjit Bansal
- * @version 14 Dec 2014
+ * @version 06 May 2015
  */
 
 public class Biomorph implements Serializable {

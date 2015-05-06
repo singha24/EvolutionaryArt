@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  * image and returns a Jpanel.
  * 
  * @author Satpal Singh, Mathew Chambers, Assa Singh
- * @version 06/05/2015
+ * @version 06 May 2015
  */
 public class Renderer extends JPanel  {
 

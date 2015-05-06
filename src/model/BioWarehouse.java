@@ -35,7 +35,7 @@ public class BioWarehouse {
 		
 		Biomorph tempBiomorph = new Biomorph(genes);
 		
-		if(checkFreeSpace()){
+		if(checkFreeSpace() == true){
 			for(int i = 0; i < biomorphs.length; i++){
 				if(biomorphs[i] == null){
 					biomorphs[i] = tempBiomorph;
@@ -56,7 +56,7 @@ public class BioWarehouse {
 	
 	/**
 	 * Returns the Biomorph storage length
-	 * @return int - lenght of storage length
+	 * @return int - length of storage
 	 */
 	public int getStoreLength(){
 		return biomorphs.length;

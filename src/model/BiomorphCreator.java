@@ -10,8 +10,8 @@ import java.util.Random;
  * @version 15 Dec 2014
  */
 /**
- * @author singhs23
- *
+ * @author Satpal Singh, Assa Singh, Matthew Chambers
+ *@version 06 May 2015
  */
 public class BiomorphCreator {
 	
