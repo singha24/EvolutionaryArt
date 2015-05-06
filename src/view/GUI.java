@@ -264,7 +264,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 	}
 
 	public void evolveFromTemp(int tempSaveChild) {
-
+		
+		
 		biomorph.setGenes(tempSave[tempSaveChild].getGenes());
 		// int[] newGenes = new int[biomorph.getGenes().length];
 		for (int i = 0; i < children.length; i++) {
@@ -1024,42 +1025,58 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		moveToMain1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evolveFromTemp(0);
+				if(emptyTemp(0)){
+					evolveFromTemp(0);
+				}
 			}
 		});
 		moveToMain2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evolveFromTemp(1);
+				if(emptyTemp(1)){
+					evolveFromTemp(1);
+				}
 			}
 		});
 		moveToMain3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evolveFromTemp(2);
+				if(emptyTemp(2)){
+					evolveFromTemp(2);
+				}
 			}
 		});
 		moveToMain4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evolveFromTemp(3);
+				if(emptyTemp(3)){
+					evolveFromTemp(3);
+				}
 			}
 		});
 		moveToMain5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evolveFromTemp(4);
+				if(emptyTemp(4)){
+					evolveFromTemp(4);
+				}
 			}
 		});
 		moveToMain6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evolveFromTemp(5);
+				if(emptyTemp(5)){
+					evolveFromTemp(5);
+				}
 			}
 		});
 		moveToMain7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evolveFromTemp(6);
+				if(emptyTemp(6)){
+					evolveFromTemp(6);
+				}
 			}
 		});
 		moveToMain8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(emptyTemp(7)){
 				evolveFromTemp(7);
+				}
 			}
 		});
 
@@ -1242,5 +1259,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 		warehouse.deleteBiomorph(i);
 		tempSave[i].setGenes(empty);
 		update();
+	}
+	
+	private Boolean emptyTemp(int i){
+		if(tempSave[i] == null){
+			return true;
+		}
+	return false;
 	}
 }
