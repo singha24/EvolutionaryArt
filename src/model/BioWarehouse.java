@@ -27,13 +27,6 @@ public class BioWarehouse {
 					break;
 				}
 			}	
-		}else{
-			biomorphs[n] = tempBiomorph;
-				if(n == biomorphs.length - 1){
-					n = 0;
-				}else{
-					n++;
-				}
 		}
 
 	}
