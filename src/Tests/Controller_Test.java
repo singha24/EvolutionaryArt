@@ -6,9 +6,9 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import controller.Controller;
 import view.GUI;
 import view.Renderer;
-import controller.Controller;
 
 public class Controller_Test {
 	

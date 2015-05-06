@@ -18,8 +18,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import controller.ChangeImageResolution;
-
 public class Export {
 	
 	private final static String png = ".png";
