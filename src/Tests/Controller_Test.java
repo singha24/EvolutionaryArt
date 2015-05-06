@@ -11,7 +11,7 @@ import view.GUI;
 import view.Renderer;
 
 /**
- * @author Assa
+ * @author Assa Singh
  * @category Test
  * @see Controller
  * A test class to verify the system log is being generated every time on application boot. 

@@ -58,7 +58,7 @@ import edu.cmu.sphinx.util.props.ConfigurationManager;
  * This class has Renderer which is used as JPanel to display image based on the
  * gene values.
  * 
- * @author Matthew Chambers, Assa Singh, Satpal Singh
+ * @author Matthew Chambers, Assa Singh, Satpal Singh, Manjit Singh, Amy Wood
  * @version 16 Dec 2014
  */
 public class GUI extends JFrame implements Printable, Runnable {

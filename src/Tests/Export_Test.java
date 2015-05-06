@@ -21,7 +21,7 @@ import org.junit.Test;
 import view.Export;
 
 /**
- * @author Assa
+ * @author Assa Test
  *@category Test
  *@see Export
  *

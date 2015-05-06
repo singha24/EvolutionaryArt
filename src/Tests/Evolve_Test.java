@@ -8,7 +8,7 @@ import model.Evolve;
 import org.junit.Test;
 
 /**
- * @author Assa
+ * @author Assa Singh
  * @category Test
  * @see Evolve
  * A Test class to assert that the genes of the original biomorph are not equal to the mutated version. This test is expected to fail-

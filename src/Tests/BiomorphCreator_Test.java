@@ -7,7 +7,7 @@ import model.BiomorphCreator;
 import org.junit.Test;
 
 /**
- * @author Assa
+ * @author Assa Singh
  * @category Test
  * @see BiomorphCreator
  * A Test class to verify Biomorph genes and check GENE limit.

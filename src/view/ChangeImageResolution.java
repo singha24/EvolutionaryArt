@@ -23,6 +23,7 @@ import javax.imageio.metadata.IIOMetadataNode;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
 public class ChangeImageResolution {
+	
 	private static String getFileExtension(File file) {
 		String fileName = file.getName();
 		int lastDot = fileName.lastIndexOf('.');
