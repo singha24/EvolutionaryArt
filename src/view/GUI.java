@@ -249,7 +249,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		// biomorphTwo.setGenes(newGenes);
 		for (int i = 0; i < children.length; i++) {
 			bioCreator
-					.extendRandomBiomorph(new Biomorph(children[i].getGenes()));
+					.extendBiomorph(new Biomorph(children[i].getGenes()));
 		}
 
 		for (int i = 0; i < biomorph.getGenes().length; i++) {
@@ -280,7 +280,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		// biomorphTwo.setGenes(newGenes);
 		for (int i = 0; i < children.length; i++) {
 			bioCreator
-					.extendRandomBiomorph(new Biomorph(children[i].getGenes()));
+					.extendBiomorph(new Biomorph(children[i].getGenes()));
 		}
 
 		for (int i = 0; i < biomorph.getGenes().length; i++) {

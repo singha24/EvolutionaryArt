@@ -1,26 +1,41 @@
 package model;
 
+/**
+ * BioWarehouse - Class that stores, accesses, modifies temporary Biomorphs stored
+ * @author Matthew Chambers, Amy Wood
+ * @version May 06 2015
+ */
 public class BioWarehouse {
-	
+	// Class variable
 	private Biomorph[] biomorphs;
-	private int n = 0;
 
-	
+	/**
+	 * Constructor - creates BioWarehouse, initialises array of biomorphs
+	 */
 	public BioWarehouse(){
 		this.biomorphs = new Biomorph[8];
 	}
 	
-	public Biomorph getBiomorph(int i){
+	/**
+	 * Gets the Biomorphs from the Biomorph storage
+	 * @param index - used as index for biomorph to be returned.
+	 * @return Biomorph - the stored Biomorph.
+	 */
+	public Biomorph getBiomorph(int index){
 		
-			return biomorphs[i];
+			return biomorphs[index];
 		
 	}
 	
+	/**
+	 * Saves the Biomorph in Biomorph array, takes in array of int 
+	 * @param genes - array of int which is used to construct Biomorph and stores in Biomorph storage
+	 */
 	public void saveBioMorph(int[] genes){
 		
 		Biomorph tempBiomorph = new Biomorph(genes);
 		
-		if(checkFreeSpace() == true){
+		if(checkFreeSpace()){
 			for(int i = 0; i < biomorphs.length; i++){
 				if(biomorphs[i] == null){
 					biomorphs[i] = tempBiomorph;
@@ -31,14 +46,26 @@ public class BioWarehouse {
 
 	}
 	
-	public void deleteBiomorph(int i){
-		biomorphs[i] = null;
+	/**
+	 * Deletes Biomorph from the storage based on the index provided
+	 * @param index - Index used to delete Biomorph from storage.
+	 */
+	public void deleteBiomorph(int index){
+		biomorphs[index] = null;
 	}
 	
+	/**
+	 * Returns the Biomorph storage length
+	 * @return int - lenght of storage length
+	 */
 	public int getStoreLength(){
 		return biomorphs.length;
 	}
 	
+	/**
+	 * Checks the next or a free space in Biomorph storage.
+	 * @return Boolean - return true if there is free space available and false the is not.
+	 */
 	private Boolean checkFreeSpace(){
 		for(int i = 0; i < biomorphs.length; i++){
 			if(biomorphs[i] == null){

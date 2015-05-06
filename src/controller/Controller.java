@@ -168,7 +168,7 @@ public class Controller {
 		control.initiliseHelpers();
 		sysLog += "Initilising helpers..."
 				+ System.getProperty("line.separator");
-		control.generateParents(50, 50);
+		control.generateParents(40, 40);
 		sysLog += "Done." + System.getProperty("line.separator");
 		sysLog += "Generating biomorph..."
 				+ System.getProperty("line.separator");
