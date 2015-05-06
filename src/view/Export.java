@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import controller.ChangeImageResolution;
 
 public class Export {
+	
+	private final static String png = ".png";
 	public static ChangeImageResolution metaData;
 
 	public static String outputDestination;
@@ -104,7 +106,7 @@ public class Export {
 
 		if (f.getSelectedFile() != null) {
 
-			File outputfile = new File(f.getSelectedFile().getPath());
+			File outputfile = new File(f.getSelectedFile().getPath()+png);
 			try {
 				// metaData.writeImage(outputfile, bi, createNode());
 				byte[] temp = ChangeImageResolution.writeCustomData(bi, "Assa",
@@ -126,7 +128,7 @@ public class Export {
 
 			JOptionPane.showMessageDialog(gui,
 					"Biomorph successfully saved to:\n"
-							+ f.getSelectedFile().getPath());
+							+ f.getSelectedFile().getPath()+png);
 		}
 
 	}
