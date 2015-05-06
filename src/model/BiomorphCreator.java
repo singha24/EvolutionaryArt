@@ -116,10 +116,6 @@ public class BiomorphCreator {
 		for(int i = 0; i<genes.length; i++){
 				}
 		 int[] newGenes = Evolve.evolve(genes);
-			
-		for(int i = 0; i<genes.length; i++){
-			System.out.println("saved GENES: "+newGenes[i]);
-		}
 		
 		return newGenes;
 		

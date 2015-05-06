@@ -14,14 +14,8 @@ import java.awt.event.KeyEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,7 +36,6 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import controller.Controller;
 import model.BioWarehouse;
 import model.Biomorph;
@@ -58,7 +51,7 @@ import edu.cmu.sphinx.util.props.ConfigurationManager;
  * This class has Renderer which is used as JPanel to display image based on the
  * gene values.
  * 
- * @author Matthew Chambers, Assa Singh
+ * @author Matthew Chambers, Assa Singh, Satpal Singh, Manjit Singh, Amy Wood
  * @version 16 Dec 2014
  */
 public class GUI extends JFrame implements Printable, Runnable {
@@ -67,8 +60,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private Renderer biomorph;
 	private Renderer[] children;
 	private Renderer[] tempSave;
-
-	private static ArrayList<JPanel> toMovie = new ArrayList<JPanel>();
 
 	private BiomorphCreator bioCreator;
 	private BioWarehouse warehouse;
@@ -101,7 +92,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem viewSysLog;
 	private JMenuItem speech;
 	private JMenuItem instructions;
-	private JMenuItem videoRecording;
 
 	private JMenuItem deleteTemp1;
 	private JMenuItem deleteTemp2;
@@ -121,7 +111,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 	private JMenuItem moveToMain7;
 	private JMenuItem moveToMain8;
 
-	private JMenuItem saveToTemp;
 	private JMenuItem saveToHOF1;
 	private JMenuItem saveToHOF2;
 	private JMenuItem saveToHOF3;
@@ -196,11 +185,13 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
+	/**
+	 * Returns the Biomorphs from the associated .bio files
+	 */
 	private void getHallOfFames() {
 
 		hall_of_fame = new Biomorph[4];
 
-		// for(int i =0; i < hall_of_fame.length; i++){
 		hall_of_fame[0] = hallOfFame.readHallOfFame("first");
 
 		hall_of_fame[1] = hallOfFame.readHallOfFame("second");
@@ -209,6 +200,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
+	/**
+	 * Static method which creating a loading screen.
+	 */
 	public static void loading() {
 		loadingFrame = new JFrame();
 
@@ -225,6 +219,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 		loadingFrame.setLocationRelativeTo(null);
 	}
 
+	/**
+	 * Starts speech recognition
+	 */
 	public void startSpeachRecognition() {
 		loading();
 		speaking = true;
@@ -233,29 +230,26 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
+	/**
+	 * Evolves the Parent Biomorph according to the specified location of the
+	 * child in the array
+	 * 
+	 * @param childIndex
+	 *            Location of child in the Array
+	 */
 	public void evolve(int childIndex) {
 
 		biomorph.setGenes(children[childIndex].getGenes());
-		// int[] newGenes = new int[biomorph.getGenes().length];
 		for (int i = 0; i < children.length; i++) {
 			int[] newGenes = new int[biomorph.getGenes().length];
 			for (int j = 0; j < biomorph.getGenes().length; j++) {
-				// System.out.println("Children" +biomorph.getGenes()[j]);
 				newGenes[j] = biomorph.getGenes()[j];
-				// System.out.println("Children Genes" +newGenes[j]);
 			}
 			children[i].setGenes(newGenes);
 		}
-		// biomorphTwo.setGenes(newGenes);
 		for (int i = 0; i < children.length; i++) {
 			bioCreator
 					.extendBiomorph(new Biomorph(children[i].getGenes()));
-		}
-
-		for (int i = 0; i < biomorph.getGenes().length; i++) {
-
-			System.out.println("test: " + biomorph.getGenes()[i]);
-
 		}
 		back.add(biomorph);
 
@@ -263,30 +257,25 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
+	/**
+	 * @param tempSaveChild
+	 *            Location of temp biomorph in SavedImages. Method which evolves
+	 *            the Parent according which Biomorph you specify from the
+	 *            TempSave Array.
+	 */
 	public void evolveFromTemp(int tempSaveChild) {
-		
-		
+
 		biomorph.setGenes(tempSave[tempSaveChild].getGenes());
-		// int[] newGenes = new int[biomorph.getGenes().length];
 		for (int i = 0; i < children.length; i++) {
 			int[] newGenes = new int[biomorph.getGenes().length];
 			for (int j = 0; j < biomorph.getGenes().length; j++) {
-				// System.out.println("Children" +biomorph.getGenes()[j]);
 				newGenes[j] = biomorph.getGenes()[j];
-				// System.out.println("Children Genes" +newGenes[j]);
 			}
 			children[i].setGenes(newGenes);
 		}
-		// biomorphTwo.setGenes(newGenes);
 		for (int i = 0; i < children.length; i++) {
 			bioCreator
 					.extendBiomorph(new Biomorph(children[i].getGenes()));
-		}
-
-		for (int i = 0; i < biomorph.getGenes().length; i++) {
-
-			System.out.println("test: " + biomorph.getGenes()[i]);
-
 		}
 		back.add(biomorph);
 
@@ -294,6 +283,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
+	/**
+	 * @see Graphics2D repaint() Updates evolved biomorph on Jpanel.
+	 */
 	private void update() {
 		main_biomorph.repaint();
 		child_1.repaint();
@@ -315,7 +307,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 	}
 
 	/**
-	 * Create GUI (JFrame)
+	 * Create GUI (JFrame) Initilise GUI elements.
 	 */
 	private void initUI() {
 
@@ -365,13 +357,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 		instructions = new JMenuItem("Documentation");
 		instructions.setActionCommand("Documentation");
 
-		videoRecording = new JMenuItem("Start Recording");
-		videoRecording.setActionCommand("R");
-
 		speech = new JMenuItem("Speech Recognition");
 		speech.setActionCommand("Speech Recognition");
 
-		saveToTemp = new JMenuItem("Save to Temp Storage");
 		saveToHOF1 = new JMenuItem("Save to Hall of Fame");
 		saveToHOF2 = new JMenuItem("Save to Hall of Fame");
 		saveToHOF3 = new JMenuItem("Save to Hall of Fame");
@@ -409,14 +397,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 		moveToMain7 = new JMenuItem("Make Main Biomorph");
 		moveToMain8 = new JMenuItem("Make Main Biomorph");
 
-		//file.add(upload);
 		file.add(save);
 		file.add(print);
 		file.add(exit);
 
 		system.add(viewSysLog);
 		system.add(speech);
-		// system.add(videoRecording);
 
 		help.add(instructions);
 
@@ -636,11 +622,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 		save_panel.add(tempSaveBtn);
 
 		JPanel hof_panel = new JPanel();
-		// hof_panel.setBounds(793, 88, 216, 250);
 		hof_panel.setBounds(765, 70, 270, 300);
 		main_frame.getContentPane().add(hof_panel);
-
-		// TODO:
 
 		if (hall_of_fame[0] != null) {
 			hall_of_fame_1 = new Renderer(hall_of_fame[0].getGenes(), 5, 5, 1,
@@ -651,15 +634,12 @@ public class GUI extends JFrame implements Printable, Runnable {
 			hall_of_fame_1 = new Renderer(emptyGenes, 5, 5, 1, 1);
 			hof_1.add(hall_of_fame_1);
 		}
-		// hof_1.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-		// hof_1.setBorderPainted(false);
 		hof_1.setFocusPainted(false);
 		hof_1.setContentAreaFilled(false);
 		hof_1.setRolloverEnabled(false);
 		hof_1.setEnabled(false);
 		hof_1.setPreferredSize(new Dimension(115, 115));
 		hof_1.setOpaque(true);
-		// hof_1.setBackground(Color.BLACK);
 		hof_panel.add(hof_1);
 		hof_1.setComponentPopupMenu(popupMenu1);
 
@@ -672,8 +652,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 			hall_of_fame_2 = new Renderer(emptyGenes, 5, 5, 1, 1);
 			hof_2.add(hall_of_fame_2);
 		}
-		// hof_2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		// hof_2.setBorderPainted(false);
 		hof_2.setFocusPainted(false);
 		hof_2.setContentAreaFilled(false);
 		hof_2.setRolloverEnabled(false);
@@ -692,8 +670,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 			hall_of_fame_3 = new Renderer(emptyGenes, 5, 5, 1, 1);
 			hof_3.add(hall_of_fame_3);
 		}
-		// hof_3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		// hof_3.setBorderPainted(false);
 		hof_3.setFocusPainted(false);
 		hof_3.setContentAreaFilled(false);
 		hof_3.setRolloverEnabled(false);
@@ -712,8 +688,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 			hall_of_fame_4 = new Renderer(emptyGenes, 5, 5, 1, 1);
 			hof_4.add(hall_of_fame_4);
 		}
-		// hof_4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		// hof_4.setBorderPainted(false);
+
 		hof_4.setFocusPainted(false);
 		hof_4.setContentAreaFilled(false);
 		hof_4.setRolloverEnabled(false);
@@ -724,9 +699,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 		hof_4.setComponentPopupMenu(popupMenu4);
 
 		biomorph.setLayout(new FlowLayout(FlowLayout.LEFT));
-		// biomorphTwo
 
-		// preferences.add(complexity);
 		main_biomorph.add(biomorph);
 		child_1.add(children[0]);
 		child_2.add(children[1]);
@@ -744,10 +717,8 @@ public class GUI extends JFrame implements Printable, Runnable {
 					JOptionPane.showMessageDialog(null,
 							Controller.readSysFile("instructions.txt"));
 				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -839,7 +810,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 					JOptionPane.showMessageDialog(null,
 							Controller.readSysFile("SystemLog.txt"));
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -868,15 +838,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 
-		saveToTemp.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				tempStorage.add(biomorph);
-				for (int i = 0; i < tempStorage.get(0).getGenes().length; i++) {
-					System.out.println(tempStorage.get(0).getGenes()[i]);
-				}
-			}
-		});
 
 		saveToHOF1.addActionListener(new ActionListener() {
 
@@ -941,7 +902,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 		saveToHOF2.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph(biomorph.getGenes()),
 						"second");
 				hall_of_fame[1] = hallOfFame.readHallOfFame("second");
@@ -954,7 +914,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 			public void actionPerformed(ActionEvent e) {
 				HOF.add(biomorph);
-				// HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph(biomorph.getGenes()),
 						"third");
 				hall_of_fame[2] = hallOfFame.readHallOfFame("third");
@@ -966,7 +925,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 		saveToHOF4.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// HOF.add(biomorph);
 				hallOfFame.saveHallOfFame(new Biomorph(biomorph.getGenes()),
 						"fourth");
 				hall_of_fame[3] = hallOfFame.readHallOfFame("fourth");
@@ -1025,65 +983,58 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 		moveToMain1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(0)){
+				if (emptyTemp(0)) {
 					evolveFromTemp(0);
 				}
 			}
 		});
 		moveToMain2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(1)){
+				if (emptyTemp(1)) {
 					evolveFromTemp(1);
 				}
 			}
 		});
 		moveToMain3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(2)){
+				if (emptyTemp(2)) {
 					evolveFromTemp(2);
 				}
 			}
 		});
 		moveToMain4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(3)){
+				if (emptyTemp(3)) {
 					evolveFromTemp(3);
 				}
 			}
 		});
 		moveToMain5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(4)){
+				if (emptyTemp(4)) {
 					evolveFromTemp(4);
 				}
 			}
 		});
 		moveToMain6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(5)){
+				if (emptyTemp(5)) {
 					evolveFromTemp(5);
 				}
 			}
 		});
 		moveToMain7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(6)){
+				if (emptyTemp(6)) {
 					evolveFromTemp(6);
 				}
 			}
 		});
 		moveToMain8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(emptyTemp(7)){
-				evolveFromTemp(7);
+				if (emptyTemp(7)) {
+					evolveFromTemp(7);
 				}
-			}
-		});
-
-		videoRecording.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				Export.createMovie(GUI.this);
 			}
 		});
 
@@ -1101,13 +1052,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 			}
 		});
 
-		/*
-		 * previous.addActionListener(new ActionListener(){ public void
-		 * actionPerformed(ActionEvent e) { Renderer b = back.get(0);
-		 * biomorph.setGenes(b.getGenes()); main_biomorph.repaint(); } });
-		 */// will just have to wait for tomorrow then , yanudp. sweet dreams:)
-			// haha nnight
-
 		// shorcuts
 		save.setAccelerator(KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK));
@@ -1120,41 +1064,34 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
-	public int getSpinnerValue() {
-		return (Integer) spinner.getValue();
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.print.Printable#print(java.awt.Graphics,
+	 * java.awt.print.PageFormat, int)
+	 */
 	public int print(Graphics g, PageFormat pageFormat, int page) {
 
 		Graphics2D g2d = (Graphics2D) g;
 
-		// --- Validate the page number, we only print the first page
-		if (page == 0) { // --- Create a graphic2D object a set the default
-							// parameters
+		if (page == 0) {
 			g2d = (Graphics2D) g;
-			// g.setColor(Color.black);
 
-			// --- Translate the origin to be (0,0)
 			g2d.translate(pageFormat.getImageableX(),
 					pageFormat.getImageableY());
 
 			paint(g2d);
-
-			// --- Print the vertical lines
-			/*
-			 * for (i = 0; i < pageFormat.getWidth(); i += INCH / 2) {
-			 * line.setLine(i, 0, i, pageFormat.getHeight()); g2d.draw(line); }
-			 * 
-			 * // --- Print the horizontal lines for (i = 0; i <
-			 * pageFormat.getHeight(); i += INCH / 2) { line.setLine(0, i,
-			 * pageFormat.getWidth(), i); g2d.draw(line); }
-			 */
 
 			return (PAGE_EXISTS);
 		} else
 			return (NO_SUCH_PAGE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run() Second Thread to run Speech Recognition
+	 */
 	public void run() {
 		if (speaking) {
 			ConfigurationManager cm;
@@ -1170,7 +1107,7 @@ public class GUI extends JFrame implements Printable, Runnable {
 			Microphone microphone = (Microphone) cm.lookup("microphone");
 			try {
 				if (!microphone.startRecording()) {
-					System.out.println("Cannot start microphone.");
+
 					recognizer.deallocate();
 					System.exit(1);
 				}
@@ -1179,9 +1116,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 						.showMessageDialog(null,
 								"Please connect a microphone to be able to use this feature.");
 			}
-
-			System.out
-					.println("Say: (Evolve | Exit) ( One | Two | Three | Four | Five | Six | Seven | Eight)");
 
 			// loop the recognition until the programm exits.
 			loadingFrame.dispose();
@@ -1235,8 +1169,6 @@ public class GUI extends JFrame implements Printable, Runnable {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-						System.out.println("You said: " + split[0] + ": " + num
-								+ '\n');
 					}
 				}
 			}
@@ -1244,6 +1176,9 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
+	/**
+	 * Helper class to initialize the saved images array.
+	 */
 	private void initialiseSave() {
 		tempSave = new Renderer[8];
 		int[] empty = { 0, 0, 0, 0, 0, 0 };
@@ -1254,17 +1189,26 @@ public class GUI extends JFrame implements Printable, Runnable {
 
 	}
 
+	/**
+	 * Helper class to delete biomorph in specified location in array
+	 * @param i Location of biomorph in Array.
+	 */
 	private void deleteTemp(int i) {
 		int[] empty = { 0, 0, 0, 0, 0, 0, 0 };
 		warehouse.deleteBiomorph(i);
 		tempSave[i].setGenes(empty);
 		update();
 	}
-	
-	private Boolean emptyTemp(int i){
-		if(tempSave[i] == null){
+
+	/**
+	 * Method to empty Biomorph in specified location.
+	 * @param i Clear Biomorph in specified location.
+	 * @return True if cleared
+	 */
+	private Boolean emptyTemp(int i) {
+		if (tempSave[i] == null) {
 			return true;
 		}
-	return false;
+		return false;
 	}
 }
